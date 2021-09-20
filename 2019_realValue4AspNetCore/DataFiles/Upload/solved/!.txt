@@ -1,0 +1,7 @@
+RunCmd START: 02.04.2021 10:54:57
+Process beforeSTARTED: 02.04.2021 10:54:57
+Process STARTED: 02.04.2021 10:54:57
+02.04.2021 11:07:57 Killing process since file result.xls was written at 02.04.2021 11:07:55
+02.04.2021 11:07:57 Process killed...
+Process ENDED: 02.04.2021 11:07:57
+RunCmd END

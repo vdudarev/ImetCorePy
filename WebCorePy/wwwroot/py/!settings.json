@@ -1,0 +1,21 @@
+{
+    "folderPath": "D:\\MyProjects\\Python\\2019_realValue4AspNetCore\\DataFiles",
+    "fileTrain": "TrainingSet.xls",
+    "filePredict": "Prediction.xls",
+    "timeout4Method": 0,
+    "algorithms": [
+        {"name": "LinearRegression", "mode": "predictONLY", "class": "linear_model.LinearRegression()", "settings": {}},
+        {"name": "Ridge", "mode": "predictONLY", "class": "linear_model.Ridge()", "settings": {"random_state": 15}},
+        {"name": "Lasso", "mode": "predictONLY", "class": "linear_model.Lasso()", "settings": {"random_state": 15}},
+        {"name": "ElasticNet", "mode": "predictONLY", "class": "linear_model.ElasticNet()", "settings": {"random_state": 15, "max_iter": 10000}},
+        {"name": "LassoLars", "mode": "predictONLY", "class": "linear_model.LassoLars()", "settings": {}},
+        {"name": "OrthogonalMatchingPursuit", "mode": "predictONLY", "class": "linear_model.OrthogonalMatchingPursuit()", "settings": {}},
+        {"name": "BayesianRidge", "mode": "predictONLY", "class": "linear_model.BayesianRidge()", "settings": {}},
+        {"name": "HuberRegressor", "mode": "predictONLY", "class": "linear_model.HuberRegressor()", "settings": {}},
+        {"name": "TheilSenRegressor", "mode": "predictONLY", "class": "linear_model.TheilSenRegressor()", "settings": {}},
+        {"name": "KernelRidge", "mode": "predictONLY", "class": "KernelRidge()", "settings": {}},
+        {"name": "ARDRegression", "mode": "predictONLY", "class": "linear_model.ARDRegression()", "settings": {}},
+        {"name": "SAND_SimpleSyndromeRegressor", "mode": "predictONLY", "class": "sand.SimpleSyndromeRegressor()", "settings": {}},
+        {"name": "FRAGMENT_regressor", "mode": "predictONLY", "class": "fragment.FragmentRegressor()", "settings": {"path": "#ROOTRightSlash#\\Upload\\FragmOneAgainstAll.exe"}}
+    ]
+}

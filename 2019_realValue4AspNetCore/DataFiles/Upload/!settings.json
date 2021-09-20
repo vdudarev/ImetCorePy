@@ -1,0 +1,11 @@
+{
+    "folderPath": "D:\\MyProjects\\Python\\2019_realValue4AspNetCore\\DataFiles",
+    "fileTrain": "learn_bin_A3BHal6_inf-2.xls",
+    "filePredict": "exam_bin_A3BHal6_inf-2.xls",
+    "timeout4Method": 0,
+    "algorithms": [
+        {"name": "LinearRegression", "mode": "predictONLY", "class": "linear_model.LinearRegression()", "settings": {}},
+        {"name": "Ridge", "mode": "predictONLY", "class": "linear_model.Ridge()", "settings": {"random_state": 15}},
+        {"name": "Lasso", "mode": "predictONLY", "class": "linear_model.Lasso()", "settings": {"random_state": 15}}
+    ]
+}

@@ -1,0 +1,51 @@
+BEGIN =================================================================
+0. timeout == 0
+1. Читаем данные из файла learn_bin_A3BHal6_inf-2.xls для обучения
+1b. Читаем данные из файла exam_bin_A3BHal6_inf-2.xls для прогнозирования
+2. Чтение выполнено за 0.82 сек. Обучаемся на объектах: 444 с 255 атрибутами. Прогнозируем объектов: 444
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.60 сек.
+   12:42:04 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.963, time=0.22) CrossValid(explained_variance): mean: -23733439122577645568.00 (std() * 2: +/- 79332025923976495104.00); CrossValid(neg_mean_absolute_error): mean: -259776995942.12 (std() * 2: +/- 738895231580.77); CrossValid(neg_mean_squared_error): mean: -1047826651986131909869568.00 (std() * 2: +/- 3595874317053370503790592.00)
+   12:42:04 Start evaluateRegressor(timeout=0) Ridge...
+Ridge (r2score=0.939, time=0.08) CrossValid(explained_variance): mean: 0.66 (std() * 2: +/- 0.14); CrossValid(neg_mean_absolute_error): mean: -76.20 (std() * 2: +/- 21.23); CrossValid(neg_mean_squared_error): mean: -11927.01 (std() * 2: +/- 6793.12)
+   12:42:04 Start evaluateRegressor(timeout=0) Lasso...
+Lasso (r2score=0.874, time=0.97) CrossValid(explained_variance): mean: 0.65 (std() * 2: +/- 0.14); CrossValid(neg_mean_absolute_error): mean: -79.50 (std() * 2: +/- 27.36); CrossValid(neg_mean_squared_error): mean: -12480.92 (std() * 2: +/- 7514.51)
+   12:42:05 Start evaluateRegressor(timeout=0) ElasticNet...
+ElasticNet (r2score=0.818, time=1.02) CrossValid(explained_variance): mean: 0.70 (std() * 2: +/- 0.15); CrossValid(neg_mean_absolute_error): mean: -73.37 (std() * 2: +/- 28.85); CrossValid(neg_mean_squared_error): mean: -10368.28 (std() * 2: +/- 7066.21)
+   12:42:06 Start evaluateRegressor(timeout=0) LassoLars...
+LassoLars (r2score=0.760, time=0.20) CrossValid(explained_variance): mean: 0.70 (std() * 2: +/- 0.15); CrossValid(neg_mean_absolute_error): mean: -77.84 (std() * 2: +/- 34.24); CrossValid(neg_mean_squared_error): mean: -10847.50 (std() * 2: +/- 7189.97)
+   12:42:07 Start evaluateRegressor(timeout=0) OrthogonalMatchingPursuit...
+OrthogonalMatchingPursuit (r2score=0.866, time=0.14) CrossValid(explained_variance): mean: 0.57 (std() * 2: +/- 0.20); CrossValid(neg_mean_absolute_error): mean: -87.98 (std() * 2: +/- 29.72); CrossValid(neg_mean_squared_error): mean: -15608.55 (std() * 2: +/- 10201.35)
+   12:42:07 Start evaluateRegressor(timeout=0) BayesianRidge...
+BayesianRidge (r2score=0.933, time=0.89) CrossValid(explained_variance): mean: 0.66 (std() * 2: +/- 0.15); CrossValid(neg_mean_absolute_error): mean: -76.89 (std() * 2: +/- 23.12); CrossValid(neg_mean_squared_error): mean: -12043.63 (std() * 2: +/- 7227.01)
+   12:42:08 Start evaluateRegressor(timeout=0) HuberRegressor...
+HuberRegressor (r2score=0.914, time=1.19) CrossValid(explained_variance): mean: 0.68 (std() * 2: +/- 0.25); CrossValid(neg_mean_absolute_error): mean: -70.52 (std() * 2: +/- 35.18); CrossValid(neg_mean_squared_error): mean: -11214.72 (std() * 2: +/- 10594.66)
+   12:42:09 Start evaluateRegressor(timeout=0) KernelRidge...
+KernelRidge (r2score=-27.783, time=0.15) CrossValid(explained_variance): mean: -218.92 (std() * 2: +/- 380.51); CrossValid(neg_mean_absolute_error): mean: -2745.82 (std() * 2: +/- 1497.64); CrossValid(neg_mean_squared_error): mean: -15474413.41 (std() * 2: +/- 21781480.36)
+   12:42:09 Start evaluateRegressor(timeout=0) ARDRegression...
+ARDRegression (r2score=0.924, time=57.20) CrossValid(explained_variance): mean: 0.50 (std() * 2: +/- 0.19); CrossValid(neg_mean_absolute_error): mean: -91.55 (std() * 2: +/- 21.65); CrossValid(neg_mean_squared_error): mean: -17338.89 (std() * 2: +/- 5719.45)
+   12:43:06 Start evaluateRegressor(timeout=0) SAND_SimpleSyndromeRegressor...
+SAND_SimpleSyndromeRegressor (r2score=0.961, time=720.79) CrossValid(explained_variance): mean: 0.71 (std() * 2: +/- 0.24); CrossValid(neg_mean_absolute_error): mean: -74.75 (std() * 2: +/- 28.63); CrossValid(neg_mean_squared_error): mean: -10709.40 (std() * 2: +/- 9549.31)
+   12:55:07 Start evaluateRegressor(timeout=0) FRAGMENT_regressor...
+ERROR: FRAGMENT_regressor Input contains NaN, infinity or a value too large for dtype('float64'). Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\WWWRelease\wwwroot\py\regressor.py", line 210, in evaluateRegressor
+    evaluateRegressor_FitScore(classifier, X_train, y_train)
+  File "D:\WWW\IMET\IMETCorePy\WWWRelease\wwwroot\py\regressor.py", line 185, in evaluateRegressor_FitScore
+    r2score = classifier.score(X_train, y_train)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sklearn\base.py", line 552, in score
+    return r2_score(y, y_pred, sample_weight=sample_weight)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sklearn\utils\validation.py", line 72, in inner_f
+    return f(**kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sklearn\metrics\_regression.py", line 588, in r2_score
+    y_type, y_true, y_pred, multioutput = _check_reg_targets(
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sklearn\metrics\_regression.py", line 86, in _check_reg_targets
+    y_pred = check_array(y_pred, ensure_2d=False, dtype=dtype)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sklearn\utils\validation.py", line 72, in inner_f
+    return f(**kwargs)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sklearn\utils\validation.py", line 644, in check_array
+    _assert_all_finite(array,
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sklearn\utils\validation.py", line 96, in _assert_all_finite
+    raise ValueError(
+ValueError: Input contains NaN, infinity or a value too large for dtype('float64').
+
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls

@@ -1,0 +1,1 @@
+        {"name": "TheilSenRegressor", "mode": "predictONLY", "class": "linear_model.TheilSenRegressor()", "settings": {}},

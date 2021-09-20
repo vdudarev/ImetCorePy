@@ -1,0 +1,27 @@
+BEGIN =================================================================
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.29 сек. Обучаемся на объектах: 283 с 89 атрибутами. Прогнозируем объектов: 283
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.68 сек.
+LinearRegression (r2score=0.811, time=0.06) CrossValid(explained_variance): mean: -28085329810463298076803072.00 (std() * 2: +/- 112337891852290681267552256.00); CrossValid(neg_mean_absolute_error): mean: -542124451487.71 (std() * 2: +/- 2155044399040.80); CrossValid(neg_mean_squared_error): mean: -82932285312393701452939264.00 (std() * 2: +/- 331718967526763570386698240.00)
+Ridge (r2score=0.801, time=0.05) CrossValid(explained_variance): mean: 0.46 (std() * 2: +/- 0.18); CrossValid(neg_mean_absolute_error): mean: -1.18 (std() * 2: +/- 0.56); CrossValid(neg_mean_squared_error): mean: -2.40 (std() * 2: +/- 2.10)
+Lasso (r2score=0.054, time=0.06) CrossValid(explained_variance): mean: 0.04 (std() * 2: +/- 0.05); CrossValid(neg_mean_absolute_error): mean: -2.18 (std() * 2: +/- 1.15); CrossValid(neg_mean_squared_error): mean: -6.68 (std() * 2: +/- 6.30)
+ElasticNet (r2score=0.369, time=0.07) CrossValid(explained_variance): mean: 0.21 (std() * 2: +/- 0.13); CrossValid(neg_mean_absolute_error): mean: -1.93 (std() * 2: +/- 1.15); CrossValid(neg_mean_squared_error): mean: -5.54 (std() * 2: +/- 6.50)
+OrthogonalMatchingPursuit (r2score=0.698, time=0.05) CrossValid(explained_variance): mean: 0.24 (std() * 2: +/- 0.69); CrossValid(neg_mean_absolute_error): mean: -1.41 (std() * 2: +/- 0.78); CrossValid(neg_mean_squared_error): mean: -3.54 (std() * 2: +/- 3.20)
+BayesianRidge (r2score=0.795, time=0.15) CrossValid(explained_variance): mean: 0.44 (std() * 2: +/- 0.19); CrossValid(neg_mean_absolute_error): mean: -1.20 (std() * 2: +/- 0.56); CrossValid(neg_mean_squared_error): mean: -2.52 (std() * 2: +/- 2.05)
+HuberRegressor (r2score=0.794, time=0.95) CrossValid(explained_variance): mean: 0.44 (std() * 2: +/- 0.33); CrossValid(neg_mean_absolute_error): mean: -1.19 (std() * 2: +/- 0.67); CrossValid(neg_mean_squared_error): mean: -2.57 (std() * 2: +/- 2.80)
+TheilSenRegressor (r2score=0.788, time=573.98) CrossValid(explained_variance): mean: 0.29 (std() * 2: +/- 0.65); CrossValid(neg_mean_absolute_error): mean: -1.26 (std() * 2: +/- 0.59); CrossValid(neg_mean_squared_error): mean: -2.82 (std() * 2: +/- 2.56)
+KernelRidge (r2score=-12.115, time=0.08) CrossValid(explained_variance): mean: -12.59 (std() * 2: +/- 16.97); CrossValid(neg_mean_absolute_error): mean: -14.20 (std() * 2: +/- 2.38); CrossValid(neg_mean_squared_error): mean: -247.94 (std() * 2: +/- 84.26)
+ARDRegression (r2score=0.789, time=3.84) CrossValid(explained_variance): mean: 0.40 (std() * 2: +/- 0.21); CrossValid(neg_mean_absolute_error): mean: -1.23 (std() * 2: +/- 0.51); CrossValid(neg_mean_squared_error): mean: -2.62 (std() * 2: +/- 1.88)
+TheilSenRegressor (r2score=0.789, time=581.21) CrossValid(explained_variance): mean: 0.29 (std() * 2: +/- 0.64); CrossValid(neg_mean_absolute_error): mean: -1.27 (std() * 2: +/- 0.59); CrossValid(neg_mean_squared_error): mean: -2.82 (std() * 2: +/- 2.54)
+KernelRidge (r2score=-12.115, time=0.08) CrossValid(explained_variance): mean: -12.59 (std() * 2: +/- 16.97); CrossValid(neg_mean_absolute_error): mean: -14.20 (std() * 2: +/- 2.38); CrossValid(neg_mean_squared_error): mean: -247.94 (std() * 2: +/- 84.26)
+ARDRegression (r2score=0.789, time=3.61) CrossValid(explained_variance): mean: 0.40 (std() * 2: +/- 0.21); CrossValid(neg_mean_absolute_error): mean: -1.23 (std() * 2: +/- 0.51); CrossValid(neg_mean_squared_error): mean: -2.62 (std() * 2: +/- 1.88)
+SAND_SimpleSyndromeRegressor (r2score=0.922, time=201.46) CrossValid(explained_variance): mean: 0.25 (std() * 2: +/- 0.31); CrossValid(neg_mean_absolute_error): mean: -1.35 (std() * 2: +/- 0.65); CrossValid(neg_mean_squared_error): mean: -3.32 (std() * 2: +/- 3.00)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+SAND_SimpleSyndromeRegressor (r2score=0.922, time=192.92) CrossValid(explained_variance): mean: 0.25 (std() * 2: +/- 0.31); CrossValid(neg_mean_absolute_error): mean: -1.35 (std() * 2: +/- 0.65); CrossValid(neg_mean_squared_error): mean: -3.32 (std() * 2: +/- 3.00)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================

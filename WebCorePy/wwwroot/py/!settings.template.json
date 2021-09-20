@@ -1,0 +1,9 @@
+{
+    "folderPath": "#ROOT#",
+    "fileTrain": "#fileTrain#",
+    "filePredict": "#filePredict#",
+    "timeout4Method": #TIMEOUT#,
+    "algorithms": [
+#ALGORITHMS#
+    ]
+}

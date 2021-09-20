@@ -1,0 +1,2 @@
+        {"name": "TheilSenRegressor", "mode": "predictONLY", "class": "linear_model.TheilSenRegressor()", "settings": {}},
+        {"name": "FRAGMENT_regressor", "mode": "predictONLY", "class": "fragment.FragmentRegressor(path='D:/MyProjects/Python/2019_realValue4AspNetCore/DataFiles/Upload')", "settings": {}}
