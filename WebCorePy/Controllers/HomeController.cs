@@ -385,13 +385,13 @@ call %root%\Scripts\deactivate.bat"
             DateTime dt = DateTime.Now.AddSeconds(-10);
             for (int i = 0; i < ext.Length; i++)
             {
-                string path = WebRootPath + @"\Upload\result." + ext[i];
+                string path = WebRootPath + @"\Upload\resultScore." + ext[i];
                 DateTime fdt;
                 if (System.IO.File.Exists(path) && (fdt = System.IO.File.GetLastWriteTime(path)) < dt)
                 {
                     timer?.Dispose();
                     timer = null;
-                    Log($"{DateTime.Now} Killing process since file result.{ext[i]} was written at {fdt}");
+                    Log($"{DateTime.Now} Killing process since file resultScore.{ext[i]} was written at {fdt}");
                     process?.Kill();
                     process = null;
                     Log($"{DateTime.Now} Process killed...");

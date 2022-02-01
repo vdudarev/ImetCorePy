@@ -11,10 +11,12 @@
         {"name": "LassoLars", "mode": "predictONLY", "class": "linear_model.LassoLars()", "settings": {}},
         {"name": "OrthogonalMatchingPursuit", "mode": "predictONLY", "class": "linear_model.OrthogonalMatchingPursuit()", "settings": {}},
         {"name": "BayesianRidge", "mode": "predictONLY", "class": "linear_model.BayesianRidge()", "settings": {}},
+        {"name": "ARDRegression", "mode": "predictONLY", "class": "linear_model.ARDRegression()", "settings": {}},
+        {"name": "+LogisticRegression", "mode": "predictONLY", "class": "linear_model.LogisticRegression()", "settings": {"random_state": 15}},
+
         {"name": "HuberRegressor", "mode": "predictONLY", "class": "linear_model.HuberRegressor()", "settings": {}},
         {"name": "TheilSenRegressor", "mode": "predictONLY", "class": "linear_model.TheilSenRegressor()", "settings": {}},
         {"name": "KernelRidge", "mode": "predictONLY", "class": "KernelRidge()", "settings": {}},
-        {"name": "ARDRegression", "mode": "predictONLY", "class": "linear_model.ARDRegression()", "settings": {}},
         {"name": "SAND_SimpleSyndromeRegressor", "mode": "predictONLY", "class": "sand.SimpleSyndromeRegressor()", "settings": {}},
         {"name": "FRAGMENT_regressor", "mode": "predictONLY", "class": "fragment.FragmentRegressor()", "settings": {"path": "#ROOTRightSlash#\\Upload\\FragmOneAgainstAll.exe"}}
     ]

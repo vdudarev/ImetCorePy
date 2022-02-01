@@ -59,11 +59,11 @@ namespace CSharpRunner4Python {
             DateTime dt = DateTime.Now.AddSeconds(-2);
             for (int i = 0; i < ext.Length; i++)
             {
-                string path = $@"{WebRootPath}\Upload\result.{ext[i]}";
+                string path = $@"{WebRootPath}\Upload\resultScore.{ext[i]}";
                 DateTime fdt;
                 if (File.Exists(path) && (fdt=File.GetLastWriteTime(path)) < dt) {
                     timer.Dispose();
-                    Log($"{DateTime.Now} Killing process since file result.{ext[i]} was written at {fdt}{Environment.NewLine}");
+                    Log($"{DateTime.Now} Killing process since file resultScore.{ext[i]} was written at {fdt}{Environment.NewLine}");
                     process.Kill();
                     Log($"{DateTime.Now} Process killed...{Environment.NewLine}");
                     break;

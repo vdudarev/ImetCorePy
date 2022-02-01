@@ -204,7 +204,7 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
     start_time = time.time()    # засекли время начала
     # Fit the classifier
     repString = ""
-
+    write("   " + time.strftime("%H:%M:%S", time.localtime()) + " Start evaluateRegressor(timeout=" + str(timeout4Method) + ") " + classifierName + "...")
     try:
         if timeout4Method<1:    # INPROCESS - Без защиты!
             evaluateRegressor_FitScore(classifier, X_train, y_train)
@@ -217,16 +217,16 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
             if p.is_alive():
                 write(classifierName + " is still running... let's kill it...")
                 # Terminate - may not work if process is stuck for good
-                # p.terminate()
+                p.terminate()
                 # OR Kill - will work for sure, no chance for process to finish nicely however
-                p.kill()
+                # p.kill()
                 p.join()
                 raise NameError(classifierName + " was killed, since took more than {0:.3f} seconds".format(timeout4Method))
             #else:
                 #p.terminate()
 
 
-        evaluateRegressor_FitScore(classifier, X_train, y_train)
+        #evaluateRegressor_FitScore(classifier, X_train, y_train)
         #https://scikit-learn.org/stable/modules/model_evaluation.html
         CVscMode = 'explained_variance' #ARDRegression - лидер
         #CVscMode = 'r2'     # чуть хуже (ниже), чем 'explained_variance'
@@ -282,7 +282,6 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
 # =====================================================================
 # проверка классификатора
 def procRegressor(classifier, classifierName, classifierMode, X_learn, X_predict, y_learn, y_predict, results):
-    #write("procRegressor = " + classifierName)
     repString, scoreAcc, scoreAUC = evaluateRegressor(classifier, classifierName, classifierMode, X_train=X_learn, X_test=X_predict, y_train=y_learn, y_testEMPTY=y_predict)
     results.append((repString, scoreAcc, scoreAUC))
 
@@ -341,22 +340,51 @@ def readArgsJson():
     #write("6. filePathSANDMethodParam = {}".format(filePathSANDMethodParam))
 
 
-
+# https://scikit-learn.org/stable/supervised_learning.html#supervised-learning
 def GetClassifierList(X_learn):
     global json_object
-    
+    # 1.1.1. Ordinary Least Squares
+    # 1.1.2. Ridge regression and classification
+    # 1.1.3. Lasso
+    # - 1.1.4. Multi-task Lasso = MultiTaskLasso - # ValueError: For mono-task outputs, use ElasticNet
+    # 1.1.5. Elastic-Net
+    # - 1.1.6. Multi-task Elastic-Net = MultiTaskElasticNet - # ValueError: For mono-task outputs, use ElasticNet
+    # + 1.1.7. Least Angle Regression   # куча варнингов и бред в результатах # classifierList.append((linear_model.Lars(), "linear_model.Lars", "predictONLY"))    # ConvergenceWarning: Regressors in active set degenerate. Dropping a regressor, after 3 iterations, i.e. alpha=1.662e-02, with an active set of 3 regressors, and the smallest cholesky pivot element being 2.220e-16. Reduce max_iter or increase eps parameters.
+    # 1.1.8. LARS Lasso
+    # 1.1.9. Orthogonal Matching Pursuit (OMP)
+    # 1.1.10.1. Bayesian Ridge Regression
+    # 1.1.10.2. Automatic Relevance Determination - ARD
+    # + 1.1.11. Logistic regression    # classifierList.append((linear_model.LogisticRegression(random_state=RND_init), "linear_model.LogisticRegression", "predict_proba")) # ValueError: Unknown label type: 'continuous'
+    # + 1.1.12. Generalized Linear Regression - TweedieRegressor # на тест
+    # + 1.1.13. Stochastic Gradient Descent - SGD - SGDRegressor # на тест # ValueError: Unknown label type:
+    # + 1.1.14. Perceptron # на тест # ValueError: Unknown label type:
+    # + 1.1.15. Passive Aggressive Algorithms # на тест 
+    # + 1.1.16.2. RANSAC: RANdom SAmple Consensus# ValueError: min_samples may not be larger than number of samples X.shape[0].
+    # 1.1.16.3. Theil-Sen estimator: generalized-median-based estimator
+    # 1.1.16.4. Huber Regression
+    # + 1.1.17. Quantile Regression
     from sklearn import linear_model
     from sklearn import discriminant_analysis
+    # 1.3. Kernel ridge regression
     from sklearn.kernel_ridge import KernelRidge
-    from sklearn.gaussian_process import GaussianProcessClassifier
-    from sklearn.svm import LinearSVC
-    from sklearn.svm import NuSVC
-    from sklearn.neighbors import KNeighborsClassifier
-    from sklearn import ensemble
-    from sklearn.cross_decomposition import PLSCanonical
+    # + 1.4.2. Regression (1.4. Support Vector Machines): SVR, NuSVR and LinearSVR
+    from sklearn import svm  #svm.SVR, svm.NuSVR, svm.LinearSVR
+    # 1.5. Stochastic Gradient Descent => 1.1.13. Stochastic Gradient Descent
+    # + 1.6.3. Nearest Neighbors Regression
+    from sklearn import neighbors
+    # + 1.7.1. Gaussian Process Regression (GPR)
+    from sklearn.gaussian_process import GaussianProcessRegressor
+    # + 1.8.3. PLSRegression
     from sklearn.cross_decomposition import PLSRegression
-    from sklearn.naive_bayes import GaussianNB
+    # + 1.10. Decision Trees => 1.10.2. Regression
     from sklearn import tree
+    # + 1.11.2.2. Extremely Randomized Trees
+    # + 1.11.4. Gradient Tree Boosting
+    # +++ПОДУМАТЬ 1.11.7. Voting Regressor
+    from sklearn import ensemble
+    # +++ПОДУМАТЬ 1.15. Isotonic regression
+    from sklearn.cross_decomposition import PLSCanonical
+    # 1.17.3. Neural network models (supervised) => Regression
     from sklearn import neural_network
     import sand3_09 as sand
     import fragment_r_03 as fragment
@@ -473,4 +501,4 @@ def procTask():
 
 if __name__ == '__main__':
     procTask()
-
+    quit()
