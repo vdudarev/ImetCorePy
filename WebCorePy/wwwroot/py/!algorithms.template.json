@@ -12,7 +12,7 @@
 {"name": "+ SGDRegressor", "mode": "predictONLY", "class": "linear_model.SGDRegressor()", "settings": {"random_state": 15}}
 {"name": "+- Perceptron", "mode": "predictONLY", "class": "linear_model.Perceptron()", "settings": {"random_state": 15}}
 {"name": "+ PassiveAggressiveRegressor", "mode": "predictONLY", "class": "linear_model.PassiveAggressiveRegressor()", "settings": {"random_state": 15}}
-{"name": "+ RANSACRegressor", "mode": "predictONLY", "class": "linear_model.PassiveAggressiveRegressor()", "settings": {"random_state": 15}}
+{"name": "+- RANSACRegressor", "mode": "predictONLY", "class": "linear_model.RANSACRegressor()", "settings": {"random_state": 15}}
 {"name": "TheilSenRegressor", "mode": "predictONLY", "class": "linear_model.TheilSenRegressor()", "settings": {}}
 {"name": "HuberRegressor", "mode": "predictONLY", "class": "linear_model.HuberRegressor()", "settings": {}}
 {"name": "+- QuantileRegressor (ver1)", "mode": "predictONLY", "class": "linear_model.QuantileRegressor()", "settings": {}}

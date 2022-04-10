@@ -2,11 +2,11 @@
 # запусть лучше в анаконде, в SQL Server - старый scikit-learn
 # C:\ProgramData\Anaconda3\python.exe
 # C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\PYTHON_SERVICES\python.exe
-# D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\DataFiles
+# D:\MyProjects\Python\2019_realValue4AspNetCore\DataFiles
 
 ext = ""
 csvSep = ";"
-folderPath = "" #"D:\\WWW\\IMET\\IMETCorePy\\2019_realValue4AspNetCore\\DataFiles"
+folderPath = "" #"D:\\MyProjects\\Python\\2019_realValue4AspNetCore\\DataFiles"
 # Путь к файлам с исходными данными
 sfilePathTrainExcel = ""
 sfilePathPredictExcel = ""
@@ -23,12 +23,9 @@ RND_init = 45
 sSplit = None
 X=[]
 y=[]
-json_object = None
 frameLearn=None
 framePredict=None
 methodScoreData=[]
-r2score = None
-timeout4Method = 15     # 15 секунд на выполнение метода
 
 
 # Python code demonstrate how to create  
@@ -56,10 +53,6 @@ import time
 import sys
 # [OPTIONAL] Seaborn makes plots nicer
 import seaborn
-import multiprocessing
-import time
-import json
-import traceback
 
 # вывод строки в файл и на экран
 def write(input_text):
@@ -169,31 +162,18 @@ def get_features_and_labels(frameLearn, framePredict):
 
 
 # =====================================================================
-def DoCrossValidation(classifier, classifierName, sample_X, sample_y, CVscMode):
+def CrossValidation(classifier, classifierName, X_train, y_train, CVscMode):
     global writer
     from sklearn.model_selection import cross_val_score
-    scores = cross_val_score(classifier, sample_X, sample_y, cv=5, scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
-    # 2022 - new BEGIN
-    scoresLoo = cross_val_score(classifier, sample_X, sample_y, cv=sample_X.shape[0], scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
-    # 2022 - new END
-    #return scores
-    return scores, scoresLoo
-
-
-# ==============================
-# вынесли это сюда, чтобы запускать эту опасность в другом потоке с контролем по времени
-def evaluateRegressor_FitScore(classifier, X_train, y_train):
-    # from sklearn.metrics import r2_score
-    # reference_r2scs[j].append(r2_score(learn_y, reference_result))
-    global r2score
-    classifier.fit(X_train, y_train)
-    r2score = classifier.score(X_train, y_train)
+    scores = cross_val_score(classifier, X_train, y_train, cv=5, scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
+    #write(classifierName+" Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+    return scores
 
 
 # =====================================================================
 # X_learn, X_predict, y_learn, y_predict
 def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_test, y_train, y_testEMPTY):
-    global timeout4Method, frameLearn, framePredict, writer, methodScoreData, r2score
+    global frameLearn, framePredict, writer, methodScoreData
     '''
     Run multiple times with different classifiers to get an idea of the
     relative performance of each configuration.
@@ -205,35 +185,14 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
     # We will calculate the P-R curve for each classifier
     from sklearn.metrics import precision_recall_curve, accuracy_score, roc_auc_score
     from sklearn.model_selection import cross_val_score
-    from sklearn.metrics import r2_score
     # Test the linear support vector classifier
     start_time = time.time()    # засекли время начала
     # Fit the classifier
     repString = ""
-    write("   " + time.strftime("%H:%M:%S", time.localtime()) + " Start evaluateRegressor(timeout=" + str(timeout4Method) + ") " + classifierName + "...")
-    r2Loo, meanLoo, stdLoo = 0, 0, 0
+
     try:
-        if timeout4Method<1:    # INPROCESS - Без защиты!
-            evaluateRegressor_FitScore(classifier, X_train, y_train)
-        else:
-            p = multiprocessing.Process(target=evaluateRegressor_FitScore, args=(classifier, X_train, y_train))
-            p.start()
-            # Wait for 15 seconds or until process finishes
-            p.join(timeout4Method)
-            # If thread is still active
-            if p.is_alive():
-                write(classifierName + " is still running... let's kill it...")
-                # Terminate - may not work if process is stuck for good
-                p.terminate()
-                # OR Kill - will work for sure, no chance for process to finish nicely however
-                # p.kill()
-                p.join()
-                raise NameError(classifierName + " was killed, since took more than {0:.3f} seconds".format(timeout4Method))
-            #else:
-                #p.terminate()
-
-
-        #evaluateRegressor_FitScore(classifier, X_train, y_train)
+        classifier.fit(X_train, y_train)
+        r2score = classifier.score(X_train, y_train)
         #https://scikit-learn.org/stable/modules/model_evaluation.html
         CVscMode = 'explained_variance' #ARDRegression - лидер
         #CVscMode = 'r2'     # чуть хуже (ниже), чем 'explained_variance'
@@ -242,20 +201,16 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
         #CVscMode = 'neg_mean_squared_log_error'     # в половине алгоритмов ошибки при использовании 
         #CVscMode = 'neg_median_absolute_error'     # all is negative
         #scoresCV = CrossValidation(classifier, classifierName, X_train, y_train, CVscMode)
-        scoresCV_EV, scoresCV_EVLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'explained_variance')
-        scoresCV_Abs, scoresCV_AbsLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_absolute_error')
-        scoresCV_Sq, scoresCV_SqLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_squared_error')
-        # 2022 - BEGIN по аналогии от А.Докукина 
-        result, coef, r2Loo, meanLoo, stdLoo = leave_one_out_predict(X_train, y_train, classifier)
+        scoresCV_EV = CrossValidation(classifier, classifierName, X_train, y_train, 'explained_variance')
+        scoresCV_Abs = CrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_absolute_error')
+        scoresCV_Sq = CrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_squared_error')
 
-        classifier.fit(X_train, y_train)    # обучение по всему!
-        # 2022 - END - добавлено после LOO
         if sfilePathPredictExcel!="":
             y_predict = classifier.predict(X_test) # предсказания
             if r2score>0.5:
-                framePredict['a, A [' + classifierName + "_{0:.3f}".format(r2score) + "__loo_{0:.3f}".format(r2Loo) + ']'] = y_predict
+                framePredict['a, A [' + classifierName+"_{0:.3f}".format(r2score)+']'] = y_predict
             else:
-                framePredict['a, A [BAD_' + classifierName + "_{0:.3f}".format(r2score) + "__loo_{0:.3f}".format(r2Loo) + ']'] = y_predict
+                framePredict['a, A [BAD_' + classifierName+"_{0:.3f}".format(r2score)+']'] = y_predict
 
         #write("BEGIN ======== " + classifierName + " (R2={0:.3f})".format(r2score) + " ========")
         # write("len(X_train)={}".format(len(X_train)))
@@ -265,31 +220,22 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
         #    write("Правильное значение: {0:.3f}; спрогнозированное значение: {1:.3f}. Дельта: {2:.3f}".format(y_test[i], y_predict[i], abs(y_test[i]-y_predict[i])))
     except BaseException as err:
         r2score = -1
-        repString = "ERROR: " + classifierName + " " + str(err) + " " + traceback.format_exc()
+        repString = "ERROR: " + classifierName + str(err)
 
     elapsed_time = time.time() - start_time    # получаем длительность
     #repString = classifierName+' (r2score={0:.3f}, time={1:.2f})'.format(r2score, elapsed_time) + " CrossValid("+CVscMode+"): Accuracy: %0.2f (+/- %0.2f)" % (scoresCV.mean(), scoresCV.std() * 2)
     if repString=="":
-        #repString = classifierName + ' (r2score={0:.3f}, r2scoreLoo={1:.3f}, meanLoo={2:.3f}, stdLoo={3:.3f}, time={4:.2f})'.format(r2score, r2Loo, meanLoo, stdLoo, elapsed_time)
-        repString = classifierName + ' (r2score={0:.3f}, r2scoreLoo={1:.3f}, time={2:.2f})'.format(r2score, r2Loo, elapsed_time)
-        repString = repString + " CrossValid(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EV.mean(), scoresCV_EV.std() * 2) + "; CrossValid(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Abs.mean(), scoresCV_Abs.std() * 2) + "; CrossValid(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Sq.mean(), scoresCV_Sq.std() * 2)
-        repString = repString + " LooCV(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EVLoo.mean(), scoresCV_EVLoo.std() * 2) + "; LooCV(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_AbsLoo.mean(), scoresCV_AbsLoo.std() * 2) + "; LooCV(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_SqLoo.mean(), scoresCV_SqLoo.std() * 2)
-        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 'meanLoo': meanLoo, 'stdLoo': stdLoo, 
+        repString = classifierName+' (r2score={0:.3f}, time={1:.2f})'.format(r2score, elapsed_time) + " CrossValid(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EV.mean(), scoresCV_EV.std() * 2) + "; CrossValid(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Abs.mean(), scoresCV_Abs.std() * 2) + "; CrossValid(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Sq.mean(), scoresCV_Sq.std() * 2)
+        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score,
             'CVExplainedVariance_mean': scoresCV_EV.mean(), 'CVExplainedVariance_std +/-': (scoresCV_EV.std() * 2),
             'CVNegMeanAbsoluteError_mean': scoresCV_Abs.mean(), 'CVNegMeanAbsoluteError_std +/-': (scoresCV_Abs.std() * 2),
             'CVNegMeanSquaredError_mean': scoresCV_Sq.mean(), 'CVNegMeanSquaredError_std +/-': (scoresCV_Sq.std() * 2),
-            'LooCVExplainedVariance_mean': scoresCV_EVLoo.mean(), 'LooCVExplainedVariance_std +/-': (scoresCV_EVLoo.std() * 2),
-            'LooCVNegMeanAbsoluteError_mean': scoresCV_AbsLoo.mean(), 'LooCVNegMeanAbsoluteError_std +/-': (scoresCV_AbsLoo.std() * 2),
-            'LooCVNegMeanSquaredError_mean': scoresCV_SqLoo.mean(), 'LooCVNegMeanSquaredError_std +/-': (scoresCV_SqLoo.std() * 2),
             'time': elapsed_time, 'ErrorMessage': ''})
     else:
-        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 'meanLoo': meanLoo, 'stdLoo': stdLoo, 
+        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score,
             'CVExplainedVariance_mean': None, 'CVExplainedVariance_std +/-': None,
             'CVNegMeanAbsoluteError_mean': None, 'CVNegMeanAbsoluteError_std +/-': None,
             'CVNegMeanSquaredError_mean': None, 'CVNegMeanSquaredError_std +/-': None,
-            'LooCVExplainedVariance_mean': None, 'LooCVExplainedVariance_std +/-': None,
-            'LooCVNegMeanAbsoluteError_mean': None, 'LooCVNegMeanAbsoluteError_std +/-': None,
-            'LooCVNegMeanSquaredError_mean': None, 'LooCVNegMeanSquaredError_std +/-': None,
             'time': elapsed_time, 'ErrorMessage': repString})
 
     write(repString)
@@ -297,29 +243,12 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
     return repString, r2score, elapsed_time
 # =====================================================================
 
-def leave_one_out_predict(sample_X, sample_y, model):
-    from sklearn.model_selection import LeaveOneOut
-    from sklearn.metrics import r2_score
-    loo = LeaveOneOut()
-    result = np.zeros(sample_y.shape)
-    coef = np.zeros(sample_X.shape)
-
-    for train_index, test_index in loo.split(sample_X):
-        # print(test_index)
-        X_train, X_test = sample_X[train_index], sample_X[test_index]
-        y_train, y_test = sample_y[train_index], sample_y[test_index]
-        model.fit(X_train, y_train)
-        result[test_index] = model.predict(X_test)
-        coef[test_index, :] = model.coef_
-    r2Loo = r2_score(sample_y, result)
-    meanLoo = np.mean(coef, axis=0)
-    stdLoo = np.std(coef, axis=0)
-    return result, coef, r2Loo, meanLoo, stdLoo
 
 
 # =====================================================================
 # проверка классификатора
 def procRegressor(classifier, classifierName, classifierMode, X_learn, X_predict, y_learn, y_predict, results):
+    #write("procRegressor = " + classifierName)
     repString, scoreAcc, scoreAUC = evaluateRegressor(classifier, classifierName, classifierMode, X_train=X_learn, X_test=X_predict, y_train=y_learn, y_testEMPTY=y_predict)
     results.append((repString, scoreAcc, scoreAUC))
 
@@ -330,25 +259,14 @@ def procAllRegressors(classifierList, X_learn, X_predict, y_learn, y_predict, re
         procRegressor(classifier, classifierName, classifierMode, X_learn=X_learn, X_predict=X_predict, y_learn=y_learn, y_predict=y_predict, results=results)
 
 # =====================================================================
-
-
-def readArgsJson():
-    global json_object, timeout4Method, ext, folderPath, filePathTrainExcel, filePathPredictExcel, filePathPredictExcelResults, sfilePathTrainExcel, sfilePathPredictExcel, sfilePathPredictExcelResults, logFilePath
+def readArgs():
+    global ext, folderPath, filePathTrainExcel, filePathPredictExcel, filePathPredictExcelResults, sfilePathTrainExcel, sfilePathPredictExcel, sfilePathPredictExcelResults, logFilePath
     #for idx, item in enumerate(sys.argv):
     #    write('Argument('+ str(idx) +') = ' + item)
-    jsonFilePath = sys.argv[1]
-    json_object = None
-    with open(jsonFilePath, mode="r", encoding="utf-8") as content:
-        json_object = json.load(content)
-
-    folderPath = json_object["folderPath"] #sys.argv[1] #"D:\\MyProjects\\Python\\2019_realValue4AspNetCore\\DataFiles"
+    folderPath = sys.argv[1] #"D:\\MyProjects\\Python\\2019_realValue4AspNetCore\\DataFiles"
     # Путь к файлам с исходными данными
-    sfilePathTrainExcel = json_object["fileTrain"] # sys.argv[2]
-    sfilePathPredictExcel = json_object["filePredict"] # sys.argv[3] 
-    timeout4Method = json_object["timeout4Method"] # 0
-    #if len(sys.argv)>4:
-    #    timeout4Method = int(sys.argv[4])
-
+    sfilePathTrainExcel = sys.argv[2]
+    sfilePathPredictExcel = sys.argv[3] 
     import os.path
     ext = os.path.splitext(sfilePathTrainExcel)[1][1:].lower()
 
@@ -378,97 +296,10 @@ def readArgsJson():
     #write("6. filePathSANDMethodParam = {}".format(filePathSANDMethodParam))
 
 
-# https://scikit-learn.org/stable/supervised_learning.html#supervised-learning
-def GetClassifierList(X_learn):
-    global json_object
-    # 1.1.1. Ordinary Least Squares
-    # 1.1.2. Ridge regression and classification
-    # 1.1.3. Lasso
-    # - 1.1.4. Multi-task Lasso = MultiTaskLasso - # ValueError: For mono-task outputs, use ElasticNet
-    # 1.1.5. Elastic-Net
-    # - 1.1.6. Multi-task Elastic-Net = MultiTaskElasticNet - # ValueError: For mono-task outputs, use ElasticNet
-    # + 1.1.7. Least Angle Regression   # куча варнингов и бред в результатах # classifierList.append((linear_model.Lars(), "linear_model.Lars", "predictONLY"))    # ConvergenceWarning: Regressors in active set degenerate. Dropping a regressor, after 3 iterations, i.e. alpha=1.662e-02, with an active set of 3 regressors, and the smallest cholesky pivot element being 2.220e-16. Reduce max_iter or increase eps parameters.
-    # 1.1.8. LARS Lasso
-    # 1.1.9. Orthogonal Matching Pursuit (OMP)
-    # 1.1.10.1. Bayesian Ridge Regression
-    # 1.1.10.2. Automatic Relevance Determination - ARD
-    # + 1.1.11. Logistic regression    # classifierList.append((linear_model.LogisticRegression(random_state=RND_init), "linear_model.LogisticRegression", "predict_proba")) # ValueError: Unknown label type: 'continuous'
-    # + 1.1.12. Generalized Linear Regression - TweedieRegressor # на тест
-    # + 1.1.13. Stochastic Gradient Descent - SGD - SGDRegressor # на тест # ValueError: Unknown label type:
-    # + 1.1.14. Perceptron # на тест # ValueError: Unknown label type:
-    # + 1.1.15. Passive Aggressive Algorithms # на тест 
-    # + 1.1.16.2. RANSAC: RANdom SAmple Consensus# ValueError: min_samples may not be larger than number of samples X.shape[0].
-    # 1.1.16.3. Theil-Sen estimator: generalized-median-based estimator
-    # 1.1.16.4. Huber Regression
-    # + 1.1.17. Quantile Regression
-    from sklearn import linear_model
-    from sklearn import discriminant_analysis
-    # 1.3. Kernel ridge regression
-    from sklearn.kernel_ridge import KernelRidge
-    # + 1.4.2. Regression (1.4. Support Vector Machines): SVR, NuSVR and LinearSVR
-    from sklearn import svm  #svm.SVR, svm.NuSVR, svm.LinearSVR
-    # 1.5. Stochastic Gradient Descent => 1.1.13. Stochastic Gradient Descent
-    # + 1.6.3. Nearest Neighbors Regression
-    from sklearn import neighbors
-    # + 1.7.1. Gaussian Process Regression (GPR)
-    from sklearn.gaussian_process import GaussianProcessRegressor
-    # + 1.8.3. PLSRegression
-    from sklearn.cross_decomposition import PLSRegression
-    # + 1.10. Decision Trees => 1.10.2. Regression
-    from sklearn import tree
-    # + 1.11.2.2. Extremely Randomized Trees
-    # + 1.11.4. Gradient Tree Boosting
-    # +++ПОДУМАТЬ 1.11.7. Voting Regressor
-    from sklearn import ensemble
-    # +++ПОДУМАТЬ 1.15. Isotonic regression
-    from sklearn.cross_decomposition import PLSCanonical
-    # 1.17.3. Neural network models (supervised) => Regression
-    from sklearn import neural_network
-    import sand3_09 as sand
-    import fragment_r_03 as fragment
-
-    # "predictONLY"   "predict_proba"   "decision_function"
-    classifierList = []
-    for algorithm in json_object["algorithms"]:
-        classifier = None
-        #print(f"   algorithm.name = {algorithm['name']}, algorithm.class = {algorithm['class']}")
-        #print(f"classifier = {algorithm['class']}")
-        #classifier = get_class("algorithm['class']")
-        classifier = eval(algorithm['class'])
-        #exec(f"classifier = {algorithm['class']}")
-        #print(f"type(classifier) = {type(classifier).__name__}")
-        for key, value in algorithm["settings"].items():
-            #print(f" 0. {key} = {value}")
-            #print('   typeof(value)=' + type(value).__name__)
-            if type(value).__name__== 'str':
-                exec(f'classifier.{key} = r"{value}"') # SyntaxError: EOL while scanning string literal
-                #classifier.path = r'D:\MyProjects\Python\2019_realValue4AspNetCore\DataFiles\Upload\ '
-                #exec(rf'classifier.{key} = """' + value + '"""') # добавление {}
-                #exec(f'classifier.{key} = classifier.{key} + r"\"') # добавление {}
-                #exec(f'classifier.%s = "%s"'%(key, value)) # добавление {}
-                #exec(f'classifier.{key} = ''{value}''') # добавление {}
-                #exec(f'classifier.{key} = list(''{value}'')[0]') # a bytes-like object is required, not 'str'
-                #exec(f'classifier.{key} = \'{value}\'') # SyntaxError: EOL while scanning string literal
-                #exec(r'classifier.{0} = "{1}"'.format(key, value)) # SyntaxError: EOL while scanning string literal
-            else:
-                exec(f'classifier.{key} = {value}')
-            #print(f" 1. {key} = {value}")
-        #print(f"classifier = {classifier}")
-        classifierList.append((classifier, algorithm['name'], algorithm['mode']))
-    #print("=== END LOOP ===")
-    return classifierList
-
-
 def procTask():
-    readArgsJson()
+    readArgs()
     start_time = time.time()    # засекли время начала
-    #for idx, item in enumerate(sys.argv):
-    #    write('Argument('+ str(idx) +') = ' + item)
-
     write("BEGIN =================================================================")
-    import sklearn as sk
-    write('The scikit-learn version is {}.'.format(sk.__version__))
-    write("0. timeout == {}".format(timeout4Method))
     write("1. Читаем данные из файла {} для обучения".format(sfilePathTrainExcel))
     if sfilePathPredictExcel!="":
         write("1b. Читаем данные из файла {} для прогнозирования".format(sfilePathPredictExcel))
@@ -491,20 +322,97 @@ def procTask():
         write("3. Отмасштабированы признаки и подготовлена выборка для обучения за {:.2f} сек.".format(elapsed_time))
     # write("Простые методы:")
     results = []
+    from sklearn import linear_model
+    from sklearn import discriminant_analysis
+    from sklearn.kernel_ridge import KernelRidge
+    from sklearn.gaussian_process import GaussianProcessClassifier
+    from sklearn.svm import LinearSVC
+    from sklearn.svm import NuSVC
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn import ensemble
 
-    classifierList = GetClassifierList(X_learn)
+    import sand3_05 as sand
+
+    # "predictONLY"   "predict_proba"   "decision_function"
+
+    classifierList = []
+    
+    classifierList.append((linear_model.LinearRegression(), "LinearRegression", "predictONLY"))  # NO random_state!!!
+    classifierList.append((linear_model.Ridge(random_state=RND_init), "Ridge", "predictONLY"))
+
+    classifierList.append((linear_model.Lasso(random_state=RND_init), "Lasso", "predictONLY"))
+    
+    #classifierList.append((linear_model.MultiTaskLasso(), "linear_model.MultiTaskLasso", "predictONLY"))     # ValueError: For mono-task outputs, use ElasticNet
+    
+    classifierList.append((linear_model.ElasticNet(max_iter=10000, random_state=RND_init), "ElasticNet", "predictONLY")) # ValueError: Can't handle mix of binary and continuous
+    
+    #classifierList.append((linear_model.MultiTaskElasticNet(), "linear_model.MultiTaskElasticNet", "predictONLY"))   # ValueError: For mono-task outputs, use ElasticNet
+    
+    # куча варнингов и бред в результатах
+    # classifierList.append((linear_model.Lars(), "linear_model.Lars", "predictONLY"))    # ConvergenceWarning: Regressors in active set degenerate. Dropping a regressor, after 3 iterations, i.e. alpha=1.662e-02, with an active set of 3 regressors, and the smallest cholesky pivot element being 2.220e-16. Reduce max_iter or increase eps parameters.
+    
+    classifierList.append((linear_model.LassoLars(), "LassoLars", "predictONLY"))  # NO random_state!!!
+    classifierList.append((linear_model.OrthogonalMatchingPursuit(), "OrthogonalMatchingPursuit", "predictONLY"))  # NO random_state!!!
+    classifierList.append((linear_model.BayesianRidge(), "BayesianRidge", "predictONLY"))  # NO random_state!!!
+    classifierList.append((linear_model.HuberRegressor(), "HuberRegressor", "predictONLY"))  # NO random_state!!!
+    
+    #classifierList.append((linear_model.RANSACRegressor(), "linear_model.RANSACRegressor", "predictONLY"))   # ValueError: min_samples may not be larger than number of samples X.shape[0].
+    classifierList.append((linear_model.TheilSenRegressor(), "TheilSenRegressor", "predictONLY"))
+
+    ### TODO : 1.1.16. Polynomial regression:
+    #classifierList.append((discriminant_analysis.LinearDiscriminantAnalysis(), "discriminant_analysis.LinearDiscriminantAnalysis", "predict_proba")) # ValueError: Unknown label type: (array([8.0294, 8.4   , 8.2833, 8.25  , 8.1315, 8.0007, 7.8348, 8.1709, 8.1725, 8.635 , 8.1616, 7.419 , 8.0138, 8.108 ]),)
+    #classifierList.append((discriminant_analysis.QuadraticDiscriminantAnalysis(), "discriminant_analysis.QuadraticDiscriminantAnalysis", "predict_proba")) # ValueError: Unknown label type: 'continuous'
+    
+    classifierList.append((KernelRidge(), "KernelRidge", "predictONLY"))  # NO random_state!!!
+    from sklearn.cross_decomposition import PLSCanonical
+    ### TODO ПРОВЕРИТЬ - вылетает при форматировании!!!
+    # classifierList.append((PLSCanonical(), "PLSCanonical", "predictONLY"))  # TypeError: unsupported format string passed to numpy.ndarray.__format__
+    
+    from sklearn.cross_decomposition import PLSRegression
+    ### TODO ПРОВЕРИТЬ - вылетает при форматировании!!!
+    # classifierList.append((PLSRegression(), "PLSRegression", "predictONLY"))  # TypeError: unsupported format string passed to numpy.ndarray.__format__
+    #classifierList.append((linear_model.SGDClassifier(random_state=RND_init), "linear_model.SGDClassifier", "decision_function"))   # ValueError: Unknown label type: (array([7.419 , 7.8348, 8.0007, 8.0138, 8.0294, 8.108 , 8.1315, 8.1616, 8.1709, 8.1725, 8.25  , 8.2833, 8.4   , 8.635 ]),)
+    #classifierList.append((linear_model.Perceptron(random_state=RND_init), "linear_model.Perceptron", "decision_function")) # ValueError: Unknown label type: (array([7.419 , 7.8348, 8.0007, 8.0138, 8.0294, 8.108 , 8.1315, 8.1616, 8.1709, 8.1725, 8.25  , 8.2833, 8.4   , 8.635 ]),)
+    #classifierList.append((linear_model.PassiveAggressiveClassifier(loss='hinge', random_state=RND_init), "linear_model.PassiveAggressiveClassifier(loss='hinge')", "decision_function")) # ValueError: Unknown label type: (array([7.419 , 7.8348, 8.0007, 8.0138, 8.0294, 8.108 , 8.1315, 8.1616, 8.1709, 8.1725, 8.25  , 8.2833, 8.4   , 8.635 ]),)
+    #classifierList.append((linear_model.PassiveAggressiveClassifier(loss='squared_hinge', random_state=RND_init), "linear_model.PassiveAggressiveClassifier(loss='squared_hinge')", "decision_function")) # ValueError: Unknown label type: (array([7.419 , 7.8348, 8.0007, 8.0138, 8.0294, 8.108 , 8.1315, 8.1616, 8.1709, 8.1725, 8.25  , 8.2833, 8.4   , 8.635 ]),)
+    #classifierList.append((LinearSVC(random_state=RND_init), "LinearSVC", "decision_function")) # ValueError: Unknown label type: 'continuous'
+    #classifierList.append((NuSVC(nu=0.1, random_state=RND_init), "NuSVC(nu=0.1)", "decision_function")) # ValueError: Unknown label type: 'continuous'
+    #classifierList.append((NuSVC(nu=0.3, random_state=RND_init), "NuSVC(nu=0.3)", "decision_function")) # ValueError: Unknown label type: 'continuous'
+    
+    classifierList.append((linear_model.ARDRegression(), "ARDRegression", "predictONLY")) # долго работает (50 сек)
+    
+    # classifierList.append((linear_model.LogisticRegression(random_state=RND_init), "linear_model.LogisticRegression", "predict_proba")) # ValueError: Unknown label type: 'continuous'
+    #classifierList.append((GaussianProcessClassifier(random_state=RND_init), "GaussianProcessClassifier", "predict_proba")) # ValueError: Unknown label type: (array([8.0294, 8.4   , 8.2833, 8.25  , 8.1315, 8.0007, 7.8348, 8.1709, 8.1725, 8.635 , 8.1616, 7.419 , 8.0138, 8.108 ]),)
+    from sklearn.naive_bayes import GaussianNB
+    #classifierList.append((GaussianNB(), "GaussianNB (Gaussian Naive Bayes)", "predict_proba"))  # ValueError: Unknown label type: (array([7.419 , 7.8348, 8.0007, 8.0138, 8.0294, 8.108 , 8.1315, 8.1616, 8.1709, 8.1725, 8.25  , 8.2833, 8.4   , 8.635 ]),)
+    from sklearn import tree
+    # classifierList.append((tree.DecisionTreeClassifier(random_state=RND_init), "tree.DecisionTreeClassifier", "predict_proba")) # ValueError: Unknown label type: 'continuous'
+    # classifierList.append((KNeighborsClassifier(n_neighbors=5), "KNeighborsClassifier(n_neighbors=5)", "predict_proba"))     # ValueError: Unknown label type: 'continuous'
+    
+    from sklearn import neural_network
+    # classifierList.append((neural_network.MLPClassifier(random_state=RND_init), "neural_network.MLPClassifier", "predict_proba")) # ValueError: Unknown label type: (array([8.0294, 8.4   , 8.2833, 8.25  , 8.1315, 8.0007, 7.8348, 8.1709, 8.1725, 8.635 , 8.1616, 7.419 , 8.0138, 8.108 ]),)
+
+
+    target_interval = 0.14
+    min_syndr_on_count = 1  # 2
+    fea_to_use = X_learn.shape[1]
+    clf = sand.SimpleSyndromeRegressor(max_features=fea_to_use, #  - 5,
+                                       min_sympt_on_count=2,  # 2,
+                                       max_syndr_on_count=15,  # 5
+                                       min_syndr_on_count=min_syndr_on_count,
+                                       # estimation='distance',
+                                       target_interval=target_interval)
+    classifierList.append((clf, "SAND_SimpleSyndromeRegressor", "predictONLY"))
+
 
     procAllRegressors(classifierList=classifierList, X_learn=X_learn, X_predict=X_predict, y_learn=y_learn, y_predict=y_predict, results=results)
     
-    # сохраним результат оценки классификаторов
+    # сохраним результат оценци классификаторов
     import pandas as pd 
-    dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2score', 'r2scoreLoo', 'meanLoo', 'stdLoo', 
+    dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2score', 
 'CVExplainedVariance_mean', 'CVExplainedVariance_std +/-',
 'CVNegMeanAbsoluteError_mean', 'CVNegMeanAbsoluteError_std +/-',
 'CVNegMeanSquaredError_mean', 'CVNegMeanSquaredError_std +/-',
-'LooCVExplainedVariance_mean', 'LooCVExplainedVariance_std +/-',
-'LooCVNegMeanAbsoluteError_mean', 'LooCVNegMeanAbsoluteError_std +/-',
-'LooCVNegMeanSquaredError_mean', 'LooCVNegMeanSquaredError_std +/-',
 'time', 'ErrorMessage']) 
     if ext=="xls" or ext=="xlsx":
         from pandas import ExcelWriter
@@ -544,4 +452,4 @@ def procTask():
 
 if __name__ == '__main__':
     procTask()
-    quit()
+

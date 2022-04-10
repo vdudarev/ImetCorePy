@@ -18,6 +18,12 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
+*.zip
+WWWRelease
+**Upload/
+**Upload/*.txt
+**Upload/*.xls
+#Ignore !**/Upload/*.exe
 [Bb]in
 [Dd]ebug*/
 *.lib

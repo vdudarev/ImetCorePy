@@ -13,6 +13,8 @@
         {"name": "BayesianRidge", "mode": "predictONLY", "class": "linear_model.BayesianRidge()", "settings": {}},
         {"name": "ARDRegression", "mode": "predictONLY", "class": "linear_model.ARDRegression()", "settings": {}},
         {"name": "+LogisticRegression", "mode": "predictONLY", "class": "linear_model.LogisticRegression()", "settings": {"random_state": 15}},
+        {"name": "+ PassiveAggressiveRegressor", "mode": "predictONLY", "class": "linear_model.PassiveAggressiveRegressor()", "settings": {"random_state": 15}},
+        {"name": "+ RANSACRegressor", "mode": "predictONLY", "class": "linear_model.RANSACRegressor()", "settings": {"random_state": 15}},
 
         {"name": "HuberRegressor", "mode": "predictONLY", "class": "linear_model.HuberRegressor()", "settings": {}},
         {"name": "TheilSenRegressor", "mode": "predictONLY", "class": "linear_model.TheilSenRegressor()", "settings": {}},

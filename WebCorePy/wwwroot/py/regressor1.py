@@ -169,22 +169,17 @@ def get_features_and_labels(frameLearn, framePredict):
 
 
 # =====================================================================
-def DoCrossValidation(classifier, classifierName, sample_X, sample_y, CVscMode):
+def CrossValidation(classifier, classifierName, X_train, y_train, CVscMode):
     global writer
     from sklearn.model_selection import cross_val_score
-    scores = cross_val_score(classifier, sample_X, sample_y, cv=5, scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
-    # 2022 - new BEGIN
-    scoresLoo = cross_val_score(classifier, sample_X, sample_y, cv=sample_X.shape[0], scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
-    # 2022 - new END
-    #return scores
-    return scores, scoresLoo
+    scores = cross_val_score(classifier, X_train, y_train, cv=5, scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
+    #write(classifierName+" Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+    return scores
 
 
 # ==============================
 # вынесли это сюда, чтобы запускать эту опасность в другом потоке с контролем по времени
 def evaluateRegressor_FitScore(classifier, X_train, y_train):
-    # from sklearn.metrics import r2_score
-    # reference_r2scs[j].append(r2_score(learn_y, reference_result))
     global r2score
     classifier.fit(X_train, y_train)
     r2score = classifier.score(X_train, y_train)
@@ -205,13 +200,11 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
     # We will calculate the P-R curve for each classifier
     from sklearn.metrics import precision_recall_curve, accuracy_score, roc_auc_score
     from sklearn.model_selection import cross_val_score
-    from sklearn.metrics import r2_score
     # Test the linear support vector classifier
     start_time = time.time()    # засекли время начала
     # Fit the classifier
     repString = ""
     write("   " + time.strftime("%H:%M:%S", time.localtime()) + " Start evaluateRegressor(timeout=" + str(timeout4Method) + ") " + classifierName + "...")
-    r2Loo, meanLoo, stdLoo = 0, 0, 0
     try:
         if timeout4Method<1:    # INPROCESS - Без защиты!
             evaluateRegressor_FitScore(classifier, X_train, y_train)
@@ -242,20 +235,16 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
         #CVscMode = 'neg_mean_squared_log_error'     # в половине алгоритмов ошибки при использовании 
         #CVscMode = 'neg_median_absolute_error'     # all is negative
         #scoresCV = CrossValidation(classifier, classifierName, X_train, y_train, CVscMode)
-        scoresCV_EV, scoresCV_EVLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'explained_variance')
-        scoresCV_Abs, scoresCV_AbsLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_absolute_error')
-        scoresCV_Sq, scoresCV_SqLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_squared_error')
-        # 2022 - BEGIN по аналогии от А.Докукина 
-        result, coef, r2Loo, meanLoo, stdLoo = leave_one_out_predict(X_train, y_train, classifier)
+        scoresCV_EV = CrossValidation(classifier, classifierName, X_train, y_train, 'explained_variance')
+        scoresCV_Abs = CrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_absolute_error')
+        scoresCV_Sq = CrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_squared_error')
 
-        classifier.fit(X_train, y_train)    # обучение по всему!
-        # 2022 - END - добавлено после LOO
         if sfilePathPredictExcel!="":
             y_predict = classifier.predict(X_test) # предсказания
             if r2score>0.5:
-                framePredict['a, A [' + classifierName + "_{0:.3f}".format(r2score) + "__loo_{0:.3f}".format(r2Loo) + ']'] = y_predict
+                framePredict['a, A [' + classifierName+"_{0:.3f}".format(r2score)+']'] = y_predict
             else:
-                framePredict['a, A [BAD_' + classifierName + "_{0:.3f}".format(r2score) + "__loo_{0:.3f}".format(r2Loo) + ']'] = y_predict
+                framePredict['a, A [BAD_' + classifierName+"_{0:.3f}".format(r2score)+']'] = y_predict
 
         #write("BEGIN ======== " + classifierName + " (R2={0:.3f})".format(r2score) + " ========")
         # write("len(X_train)={}".format(len(X_train)))
@@ -270,26 +259,17 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
     elapsed_time = time.time() - start_time    # получаем длительность
     #repString = classifierName+' (r2score={0:.3f}, time={1:.2f})'.format(r2score, elapsed_time) + " CrossValid("+CVscMode+"): Accuracy: %0.2f (+/- %0.2f)" % (scoresCV.mean(), scoresCV.std() * 2)
     if repString=="":
-        #repString = classifierName + ' (r2score={0:.3f}, r2scoreLoo={1:.3f}, meanLoo={2:.3f}, stdLoo={3:.3f}, time={4:.2f})'.format(r2score, r2Loo, meanLoo, stdLoo, elapsed_time)
-        repString = classifierName + ' (r2score={0:.3f}, r2scoreLoo={1:.3f}, time={2:.2f})'.format(r2score, r2Loo, elapsed_time)
-        repString = repString + " CrossValid(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EV.mean(), scoresCV_EV.std() * 2) + "; CrossValid(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Abs.mean(), scoresCV_Abs.std() * 2) + "; CrossValid(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Sq.mean(), scoresCV_Sq.std() * 2)
-        repString = repString + " LooCV(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EVLoo.mean(), scoresCV_EVLoo.std() * 2) + "; LooCV(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_AbsLoo.mean(), scoresCV_AbsLoo.std() * 2) + "; LooCV(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_SqLoo.mean(), scoresCV_SqLoo.std() * 2)
-        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 'meanLoo': meanLoo, 'stdLoo': stdLoo, 
+        repString = classifierName+' (r2score={0:.3f}, time={1:.2f})'.format(r2score, elapsed_time) + " CrossValid(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EV.mean(), scoresCV_EV.std() * 2) + "; CrossValid(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Abs.mean(), scoresCV_Abs.std() * 2) + "; CrossValid(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Sq.mean(), scoresCV_Sq.std() * 2)
+        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score,
             'CVExplainedVariance_mean': scoresCV_EV.mean(), 'CVExplainedVariance_std +/-': (scoresCV_EV.std() * 2),
             'CVNegMeanAbsoluteError_mean': scoresCV_Abs.mean(), 'CVNegMeanAbsoluteError_std +/-': (scoresCV_Abs.std() * 2),
             'CVNegMeanSquaredError_mean': scoresCV_Sq.mean(), 'CVNegMeanSquaredError_std +/-': (scoresCV_Sq.std() * 2),
-            'LooCVExplainedVariance_mean': scoresCV_EVLoo.mean(), 'LooCVExplainedVariance_std +/-': (scoresCV_EVLoo.std() * 2),
-            'LooCVNegMeanAbsoluteError_mean': scoresCV_AbsLoo.mean(), 'LooCVNegMeanAbsoluteError_std +/-': (scoresCV_AbsLoo.std() * 2),
-            'LooCVNegMeanSquaredError_mean': scoresCV_SqLoo.mean(), 'LooCVNegMeanSquaredError_std +/-': (scoresCV_SqLoo.std() * 2),
             'time': elapsed_time, 'ErrorMessage': ''})
     else:
-        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 'meanLoo': meanLoo, 'stdLoo': stdLoo, 
+        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score,
             'CVExplainedVariance_mean': None, 'CVExplainedVariance_std +/-': None,
             'CVNegMeanAbsoluteError_mean': None, 'CVNegMeanAbsoluteError_std +/-': None,
             'CVNegMeanSquaredError_mean': None, 'CVNegMeanSquaredError_std +/-': None,
-            'LooCVExplainedVariance_mean': None, 'LooCVExplainedVariance_std +/-': None,
-            'LooCVNegMeanAbsoluteError_mean': None, 'LooCVNegMeanAbsoluteError_std +/-': None,
-            'LooCVNegMeanSquaredError_mean': None, 'LooCVNegMeanSquaredError_std +/-': None,
             'time': elapsed_time, 'ErrorMessage': repString})
 
     write(repString)
@@ -297,24 +277,6 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
     return repString, r2score, elapsed_time
 # =====================================================================
 
-def leave_one_out_predict(sample_X, sample_y, model):
-    from sklearn.model_selection import LeaveOneOut
-    from sklearn.metrics import r2_score
-    loo = LeaveOneOut()
-    result = np.zeros(sample_y.shape)
-    coef = np.zeros(sample_X.shape)
-
-    for train_index, test_index in loo.split(sample_X):
-        # print(test_index)
-        X_train, X_test = sample_X[train_index], sample_X[test_index]
-        y_train, y_test = sample_y[train_index], sample_y[test_index]
-        model.fit(X_train, y_train)
-        result[test_index] = model.predict(X_test)
-        coef[test_index, :] = model.coef_
-    r2Loo = r2_score(sample_y, result)
-    meanLoo = np.mean(coef, axis=0)
-    stdLoo = np.std(coef, axis=0)
-    return result, coef, r2Loo, meanLoo, stdLoo
 
 
 # =====================================================================
@@ -498,13 +460,10 @@ def procTask():
     
     # сохраним результат оценки классификаторов
     import pandas as pd 
-    dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2score', 'r2scoreLoo', 'meanLoo', 'stdLoo', 
+    dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2score', 
 'CVExplainedVariance_mean', 'CVExplainedVariance_std +/-',
 'CVNegMeanAbsoluteError_mean', 'CVNegMeanAbsoluteError_std +/-',
 'CVNegMeanSquaredError_mean', 'CVNegMeanSquaredError_std +/-',
-'LooCVExplainedVariance_mean', 'LooCVExplainedVariance_std +/-',
-'LooCVNegMeanAbsoluteError_mean', 'LooCVNegMeanAbsoluteError_std +/-',
-'LooCVNegMeanSquaredError_mean', 'LooCVNegMeanSquaredError_std +/-',
 'time', 'ErrorMessage']) 
     if ext=="xls" or ext=="xlsx":
         from pandas import ExcelWriter

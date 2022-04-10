@@ -11,3 +11,216 @@ Ridge (r2score=0.939, time=0.07) CrossValid(explained_variance): mean: 0.66 (std
    16:45:01 Start evaluateRegressor(timeout=0) Lasso...
 Lasso (r2score=0.874, time=0.99) CrossValid(explained_variance): mean: 0.65 (std() * 2: +/- 0.14); CrossValid(neg_mean_absolute_error): mean: -79.50 (std() * 2: +/- 27.36); CrossValid(neg_mean_squared_error): mean: -12480.92 (std() * 2: +/- 7514.51)
 4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.79 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   15:48:08 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, time=0.15) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00)
+   15:48:08 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, time=0.07) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37)
+   15:48:09 Start evaluateRegressor(timeout=0) + RANSACRegressor...
+ERROR: + RANSACRegressor `min_samples` may not be larger than number of samples: n_samples = 28. Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\regressor.py", line 210, in evaluateRegressor
+    evaluateRegressor_FitScore(classifier, X_train, y_train)
+  File "D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\regressor.py", line 184, in evaluateRegressor_FitScore
+    classifier.fit(X_train, y_train)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sklearn\linear_model\_ransac.py", line 281, in fit
+    raise ValueError("`min_samples` may not be larger than number "
+ValueError: `min_samples` may not be larger than number of samples: n_samples = 28.
+
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.72 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   15:58:25 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, time=0.05) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00)
+   15:58:25 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, time=0.06) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37)
+   15:58:25 Start evaluateRegressor(timeout=0) + RANSACRegressor...
+ERROR: + RANSACRegressor `min_samples` may not be larger than number of samples: n_samples = 28. Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\regressor.py", line 210, in evaluateRegressor
+    evaluateRegressor_FitScore(classifier, X_train, y_train)
+  File "D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\regressor.py", line 184, in evaluateRegressor_FitScore
+    classifier.fit(X_train, y_train)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\sklearn\linear_model\_ransac.py", line 281, in fit
+    raise ValueError("`min_samples` may not be larger than number "
+ValueError: `min_samples` may not be larger than number of samples: n_samples = 28.
+
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.72 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   15:58:59 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, time=0.04) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00)
+   15:58:59 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, time=0.05) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.70 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   16:33:50 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, time=0.22) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00)
+   16:33:50 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, time=0.23) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.78 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.05 сек.
+   16:41:41 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, time=0.23) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -4720808635.94 (std() * 2: +/- 49060082461.38); LooCV(neg_mean_squared_error): mean: -624008956956483649536.00 (std() * 2: +/- 6484891306960140369920.00)
+   16:41:41 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, time=0.26) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.31 (std() * 2: +/- 2.13); LooCV(neg_mean_squared_error): mean: -1.23 (std() * 2: +/- 12.61)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.76 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   16:43:52 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, time=0.21) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -4720808635.94 (std() * 2: +/- 49060082461.38); LooCV(neg_mean_squared_error): mean: -624008956956483649536.00 (std() * 2: +/- 6484891306960140369920.00)
+   16:43:52 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, time=0.21) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.31 (std() * 2: +/- 2.13); LooCV(neg_mean_squared_error): mean: -1.23 (std() * 2: +/- 12.61)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 1.16 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.05 сек.
+   04:00:46 Start evaluateRegressor(timeout=0) LinearRegression...
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.73 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   04:03:16 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, r2scoreLoo=-9847576399842780381184.000, time=0.27) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -4720808635.94 (std() * 2: +/- 49060082461.38); LooCV(neg_mean_squared_error): mean: -624008956956483649536.00 (std() * 2: +/- 6484891306960140369920.00)
+   04:03:16 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, r2scoreLoo=-18.346, time=0.28) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.31 (std() * 2: +/- 2.13); LooCV(neg_mean_squared_error): mean: -1.23 (std() * 2: +/- 12.61)
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.73 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.03 сек.
+   04:11:02 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, r2scoreLoo=-9847576399842780381184.000, time=0.27) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -4720808635.94 (std() * 2: +/- 49060082461.38); LooCV(neg_mean_squared_error): mean: -624008956956483649536.00 (std() * 2: +/- 6484891306960140369920.00)
+   04:11:02 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, r2scoreLoo=-18.346, time=0.26) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.31 (std() * 2: +/- 2.13); LooCV(neg_mean_squared_error): mean: -1.23 (std() * 2: +/- 12.61)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.85 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   04:13:08 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, r2scoreLoo=-9847576399842780381184.000, time=0.32) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -4720808635.94 (std() * 2: +/- 49060082461.38); LooCV(neg_mean_squared_error): mean: -624008956956483649536.00 (std() * 2: +/- 6484891306960140369920.00)
+   04:13:08 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, r2scoreLoo=-18.346, time=0.28) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.31 (std() * 2: +/- 2.13); LooCV(neg_mean_squared_error): mean: -1.23 (std() * 2: +/- 12.61)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.77 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   04:19:52 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, r2scoreLoo=-9847576399842780381184.000, time=0.27) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -4720808635.94 (std() * 2: +/- 49060082461.38); LooCV(neg_mean_squared_error): mean: -624008956956483649536.00 (std() * 2: +/- 6484891306960140369920.00)
+   04:19:52 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, r2scoreLoo=-18.346, time=0.27) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.31 (std() * 2: +/- 2.13); LooCV(neg_mean_squared_error): mean: -1.23 (std() * 2: +/- 12.61)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.72 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   04:43:31 Start evaluateRegressor(timeout=0) LinearRegression...
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.88 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   04:44:49 Start evaluateRegressor(timeout=0) LinearRegression...
+ERROR: LinearRegression name 'r2_score' is not defined Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\regressor.py", line 249, in evaluateRegressor
+    result, coef, r2Loo, meanLoo, stdLoo = leave_one_out_predict(X_train, y_train, classifier)
+  File "D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\regressor.py", line 313, in leave_one_out_predict
+    r2Loo = r2_score(sample_y, result)
+NameError: name 'r2_score' is not defined
+
+   04:44:49 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
+ERROR: + PassiveAggressiveRegressor name 'r2_score' is not defined Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\regressor.py", line 249, in evaluateRegressor
+    result, coef, r2Loo, meanLoo, stdLoo = leave_one_out_predict(X_train, y_train, classifier)
+  File "D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\regressor.py", line 313, in leave_one_out_predict
+    r2Loo = r2_score(sample_y, result)
+NameError: name 'r2_score' is not defined
+
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================
+BEGIN =================================================================
+The scikit-learn version is 0.23.2.
+0. timeout == 0
+1. Читаем данные из файла TrainingSet.xls для обучения
+1b. Читаем данные из файла Prediction.xls для прогнозирования
+2. Чтение выполнено за 0.79 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
+3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
+   04:45:28 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.995, r2scoreLoo=-9847576399842780381184.000, time=0.24) CrossValid(explained_variance): mean: -2248226967660493004603392.00 (std() * 2: +/- 8992907870641972018413568.00); CrossValid(neg_mean_absolute_error): mean: -188494777663.16 (std() * 2: +/- 753979110652.59); CrossValid(neg_mean_squared_error): mean: -270228586350008592236544.00 (std() * 2: +/- 1080914345400034234728448.00) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -4720808635.94 (std() * 2: +/- 49060082461.38); LooCV(neg_mean_squared_error): mean: -624008956956483649536.00 (std() * 2: +/- 6484891306960140369920.00)
+   04:45:28 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.912, r2scoreLoo=-18.346, time=0.25) CrossValid(explained_variance): mean: -362.30 (std() * 2: +/- 1451.88); CrossValid(neg_mean_absolute_error): mean: -2.55 (std() * 2: +/- 9.68); CrossValid(neg_mean_squared_error): mean: -44.86 (std() * 2: +/- 179.37) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.31 (std() * 2: +/- 2.13); LooCV(neg_mean_squared_error): mean: -1.23 (std() * 2: +/- 12.61)
+4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
+5. Файл с результатами сохранен: result.xls
+END =================================================================

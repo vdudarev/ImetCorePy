@@ -16,6 +16,7 @@
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <CommandLineArguments>"D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\DataFiles\Upload\!settings.json"</CommandLineArguments>
+    <InterpreterId>Global|ContinuumAnalytics|Anaconda38-64</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,9 @@
     <Compile Include="ObjCreate.py" />
     <Compile Include="regressor.py" />
     <Compile Include="sand3_09.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda38-64" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
