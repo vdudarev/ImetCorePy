@@ -258,6 +258,15 @@ namespace WebCorePy.Controllers
                 ;
         }
 
+        private string GetRunBatTemplate()
+        {
+            string strTemplate = System.IO.File.ReadAllText(env.WebRootPath + "\\py\\!run.template.bat", Encoding.GetEncoding(866));
+            string py = config.GetValue<string>("AppSettings:AnacondaPath");
+            strTemplate = strTemplate.Replace("#WebRootPath#", env.WebRootPath);
+            strTemplate = strTemplate.Replace("#PY#", py);
+            return strTemplate;
+        }
+
         /// <summary>
         /// Основные вычисления
         /// </summary>
@@ -332,14 +341,8 @@ namespace WebCorePy.Controllers
 //call %root%\Scripts\deactivate.bat"
 //            , encoding: Encoding.GetEncoding(866)
 //            );
-            System.IO.File.WriteAllText(runBat,
-$@"set PATH={py}\Scripts;{py};%PATH%
-set root={py}
-call %root%\Scripts\activate base
-%root%\python.exe ""{env.WebRootPath}\py\regressor.py"" ""{env.WebRootPath}\upload\!settings.json""
-call %root%\Scripts\deactivate.bat"
-            , encoding: Encoding.GetEncoding(866)
-            );
+            string batFileInstructions = GetRunBatTemplate();
+            System.IO.File.WriteAllText(runBat, batFileInstructions, encoding: Encoding.GetEncoding(866));
             // запустим программку на питоне
             // RunPythonScript("\"" + env.WebRootPath + "\\py\\regressor.py\" \"" + HttpContext.Session.GetString("fileTrain") + "\" \"" + HttpContext.Session.GetString("filePredict") + "\" \"result.xls\" \"log.txt\"");
             RunCmd(runBat, string.Empty);

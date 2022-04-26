@@ -246,7 +246,8 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
         scoresCV_Abs, scoresCV_AbsLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_absolute_error')
         scoresCV_Sq, scoresCV_SqLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_squared_error')
         # 2022 - BEGIN по аналогии от А.Докукина 
-        result, coef, r2Loo, meanLoo, stdLoo = leave_one_out_predict(X_train, y_train, classifier)
+        # result, coef, r2Loo, meanLoo, stdLoo = leave_one_out_predict(X_train, y_train, classifier)
+        result, r2Loo = leave_one_out_predict(X_train, y_train, classifier)
 
         classifier.fit(X_train, y_train)    # обучение по всему!
         # 2022 - END - добавлено после LOO
@@ -274,7 +275,7 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
         repString = classifierName + ' (r2score={0:.3f}, r2scoreLoo={1:.3f}, time={2:.2f})'.format(r2score, r2Loo, elapsed_time)
         repString = repString + " CrossValid(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EV.mean(), scoresCV_EV.std() * 2) + "; CrossValid(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Abs.mean(), scoresCV_Abs.std() * 2) + "; CrossValid(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Sq.mean(), scoresCV_Sq.std() * 2)
         repString = repString + " LooCV(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EVLoo.mean(), scoresCV_EVLoo.std() * 2) + "; LooCV(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_AbsLoo.mean(), scoresCV_AbsLoo.std() * 2) + "; LooCV(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_SqLoo.mean(), scoresCV_SqLoo.std() * 2)
-        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 'meanLoo': meanLoo, 'stdLoo': stdLoo, 
+        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 
             'CVExplainedVariance_mean': scoresCV_EV.mean(), 'CVExplainedVariance_std +/-': (scoresCV_EV.std() * 2),
             'CVNegMeanAbsoluteError_mean': scoresCV_Abs.mean(), 'CVNegMeanAbsoluteError_std +/-': (scoresCV_Abs.std() * 2),
             'CVNegMeanSquaredError_mean': scoresCV_Sq.mean(), 'CVNegMeanSquaredError_std +/-': (scoresCV_Sq.std() * 2),
@@ -283,7 +284,7 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
             'LooCVNegMeanSquaredError_mean': scoresCV_SqLoo.mean(), 'LooCVNegMeanSquaredError_std +/-': (scoresCV_SqLoo.std() * 2),
             'time': elapsed_time, 'ErrorMessage': ''})
     else:
-        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 'meanLoo': meanLoo, 'stdLoo': stdLoo, 
+        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 
             'CVExplainedVariance_mean': None, 'CVExplainedVariance_std +/-': None,
             'CVNegMeanAbsoluteError_mean': None, 'CVNegMeanAbsoluteError_std +/-': None,
             'CVNegMeanSquaredError_mean': None, 'CVNegMeanSquaredError_std +/-': None,
@@ -302,7 +303,7 @@ def leave_one_out_predict(sample_X, sample_y, model):
     from sklearn.metrics import r2_score
     loo = LeaveOneOut()
     result = np.zeros(sample_y.shape)
-    coef = np.zeros(sample_X.shape)
+    #coef = np.zeros(sample_X.shape)    # LinearRegression only ?
 
     for train_index, test_index in loo.split(sample_X):
         # print(test_index)
@@ -310,11 +311,11 @@ def leave_one_out_predict(sample_X, sample_y, model):
         y_train, y_test = sample_y[train_index], sample_y[test_index]
         model.fit(X_train, y_train)
         result[test_index] = model.predict(X_test)
-        coef[test_index, :] = model.coef_
+        #coef[test_index, :] = model.coef_      # LinearRegression only ?
     r2Loo = r2_score(sample_y, result)
-    meanLoo = np.mean(coef, axis=0)
-    stdLoo = np.std(coef, axis=0)
-    return result, coef, r2Loo, meanLoo, stdLoo
+    #meanLoo = np.mean(coef, axis=0)    # LinearRegression only ?
+    #stdLoo = np.std(coef, axis=0)      # LinearRegression only ?
+    return result, r2Loo    #, coef, meanLoo, stdLoo
 
 
 # =====================================================================
@@ -498,13 +499,13 @@ def procTask():
     
     # сохраним результат оценки классификаторов
     import pandas as pd 
-    dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2score', 'r2scoreLoo', 'meanLoo', 'stdLoo', 
-'CVExplainedVariance_mean', 'CVExplainedVariance_std +/-',
-'CVNegMeanAbsoluteError_mean', 'CVNegMeanAbsoluteError_std +/-',
-'CVNegMeanSquaredError_mean', 'CVNegMeanSquaredError_std +/-',
-'LooCVExplainedVariance_mean', 'LooCVExplainedVariance_std +/-',
-'LooCVNegMeanAbsoluteError_mean', 'LooCVNegMeanAbsoluteError_std +/-',
-'LooCVNegMeanSquaredError_mean', 'LooCVNegMeanSquaredError_std +/-',
+    dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2score', 'r2scoreLoo', 
+'CVExplainedVariance_mean', 'CVExplainedVariance_std +/-', 
+'CVNegMeanAbsoluteError_mean', 'CVNegMeanAbsoluteError_std +/-', 
+'CVNegMeanSquaredError_mean', 'CVNegMeanSquaredError_std +/-', 
+'LooCVExplainedVariance_mean', 'LooCVExplainedVariance_std +/-', 
+'LooCVNegMeanAbsoluteError_mean', 'LooCVNegMeanAbsoluteError_std +/-', 
+'LooCVNegMeanSquaredError_mean', 'LooCVNegMeanSquaredError_std +/-', 
 'time', 'ErrorMessage']) 
     if ext=="xls" or ext=="xlsx":
         from pandas import ExcelWriter

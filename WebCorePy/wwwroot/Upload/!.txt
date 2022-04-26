@@ -1,7 +1,6 @@
-RunCmd START: 10.04.2022 4:52:10
-Process beforeSTARTED: 10.04.2022 4:52:10
-Process STARTED: 10.04.2022 4:52:10
-10.04.2022 4:52:15 Killing process since file resultScore.xls was written at 09.04.2022 15:19:13
-10.04.2022 4:52:15 Process killed...
-Process ENDED: 10.04.2022 4:52:15
+RunCmd START: 14.04.2022 22:47:07
+Process beforeSTARTED: 14.04.2022 22:47:07
+Process STARTED: 14.04.2022 22:47:07
+14.04.2022 22:47:12 TimerCallback pulse...
+Process ENDED: 14.04.2022 22:47:15
 RunCmd END

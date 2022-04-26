@@ -17,3 +17,17 @@
 C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\PYTHON_SERVICES\python.exe
 
 D:\MyProjects\Python\2018_realValuePrediction\regressor.py
+
+
+
+
+
+
+How To Set Up A Python Virtual Environment On Windows 10
+https://www.youtube.com/watch?v=vG4AHYXsOgc
+
+
+pip install -U scikit-learn
+pip install -U seaborn
+pip install -U xlrd
+pip install -U xlwt
