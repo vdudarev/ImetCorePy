@@ -1,6 +1,6 @@
-RunCmd START: 14.04.2022 22:47:07
-Process beforeSTARTED: 14.04.2022 22:47:07
-Process STARTED: 14.04.2022 22:47:07
-14.04.2022 22:47:12 TimerCallback pulse...
-Process ENDED: 14.04.2022 22:47:15
+RunCmd START: 28.04.2022 20:52:20
+Process beforeSTARTED: 28.04.2022 20:52:20
+Process STARTED: 28.04.2022 20:52:20
+28.04.2022 20:52:25 TimerCallback pulse...
+Process ENDED: 28.04.2022 20:52:25
 RunCmd END

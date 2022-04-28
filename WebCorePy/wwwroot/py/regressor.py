@@ -171,10 +171,10 @@ def get_features_and_labels(frameLearn, framePredict):
 # =====================================================================
 def DoCrossValidation(classifier, classifierName, sample_X, sample_y, CVscMode):
     global writer
-    from sklearn.model_selection import cross_val_score
-    scores = cross_val_score(classifier, sample_X, sample_y, cv=5, scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
+    from sklearn.model_selection import cross_validate
+    scores = cross_validate(classifier, sample_X, sample_y, cv=5, scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
     # 2022 - new BEGIN
-    scoresLoo = cross_val_score(classifier, sample_X, sample_y, cv=sample_X.shape[0], scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
+    scoresLoo = cross_validate(classifier, sample_X, sample_y, cv=sample_X.shape[0], scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
     # 2022 - new END
     #return scores
     return scores, scoresLoo
@@ -242,9 +242,13 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
         #CVscMode = 'neg_mean_squared_log_error'     # в половине алгоритмов ошибки при использовании 
         #CVscMode = 'neg_median_absolute_error'     # all is negative
         #scoresCV = CrossValidation(classifier, classifierName, X_train, y_train, CVscMode)
-        scoresCV_EV, scoresCV_EVLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'explained_variance')
-        scoresCV_Abs, scoresCV_AbsLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_absolute_error')
-        scoresCV_Sq, scoresCV_SqLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_squared_error')
+        scores, scoresLOO = DoCrossValidation(classifier, classifierName, X_train, y_train, ('neg_mean_absolute_error', 'neg_mean_squared_error', 'explained_variance'))
+        scoresCV_Abs = scores['test_neg_mean_absolute_error']
+        scoresCV_Sq = scores['test_neg_mean_squared_error']
+        scoresCV_EV = scores['test_explained_variance']
+        scoresCV_AbsLoo = scoresLOO['test_neg_mean_absolute_error']
+        scoresCV_SqLoo = scoresLOO['test_neg_mean_squared_error']
+        scoresCV_EVLoo = scoresLOO['test_explained_variance']
         # 2022 - BEGIN по аналогии от А.Докукина 
         # result, coef, r2Loo, meanLoo, stdLoo = leave_one_out_predict(X_train, y_train, classifier)
         result, r2Loo = leave_one_out_predict(X_train, y_train, classifier)
@@ -276,12 +280,12 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
         repString = repString + " CrossValid(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EV.mean(), scoresCV_EV.std() * 2) + "; CrossValid(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Abs.mean(), scoresCV_Abs.std() * 2) + "; CrossValid(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Sq.mean(), scoresCV_Sq.std() * 2)
         repString = repString + " LooCV(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EVLoo.mean(), scoresCV_EVLoo.std() * 2) + "; LooCV(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_AbsLoo.mean(), scoresCV_AbsLoo.std() * 2) + "; LooCV(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_SqLoo.mean(), scoresCV_SqLoo.std() * 2)
         methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 
-            'CVExplainedVariance_mean': scoresCV_EV.mean(), 'CVExplainedVariance_std +/-': (scoresCV_EV.std() * 2),
-            'CVNegMeanAbsoluteError_mean': scoresCV_Abs.mean(), 'CVNegMeanAbsoluteError_std +/-': (scoresCV_Abs.std() * 2),
-            'CVNegMeanSquaredError_mean': scoresCV_Sq.mean(), 'CVNegMeanSquaredError_std +/-': (scoresCV_Sq.std() * 2),
-            'LooCVExplainedVariance_mean': scoresCV_EVLoo.mean(), 'LooCVExplainedVariance_std +/-': (scoresCV_EVLoo.std() * 2),
-            'LooCVNegMeanAbsoluteError_mean': scoresCV_AbsLoo.mean(), 'LooCVNegMeanAbsoluteError_std +/-': (scoresCV_AbsLoo.std() * 2),
-            'LooCVNegMeanSquaredError_mean': scoresCV_SqLoo.mean(), 'LooCVNegMeanSquaredError_std +/-': (scoresCV_SqLoo.std() * 2),
+            'CVExplainedVariance_mean': scoresCV_EV.mean(), 'CVExplainedVariance_std +/-': (scoresCV_EV.mean()),
+            'CVNegMeanAbsoluteError_mean': scoresCV_Abs.mean(), 'CVNegMeanAbsoluteError_std +/-': (scoresCV_Abs.mean()),
+            'CVNegMeanSquaredError_mean': scoresCV_Sq.mean(), 'CVNegMeanSquaredError_std +/-': (scoresCV_Sq.mean()),
+            'LooCVExplainedVariance_mean': scoresCV_EVLoo.mean(), 'LooCVExplainedVariance_std +/-': (scoresCV_EVLoo.mean()),
+            'LooCVNegMeanAbsoluteError_mean': scoresCV_AbsLoo.mean(), 'LooCVNegMeanAbsoluteError_std +/-': (scoresCV_AbsLoo.mean()),
+            'LooCVNegMeanSquaredError_mean': scoresCV_SqLoo.mean(), 'LooCVNegMeanSquaredError_std +/-': (scoresCV_SqLoo.mean()),
             'time': elapsed_time, 'ErrorMessage': ''})
     else:
         methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 

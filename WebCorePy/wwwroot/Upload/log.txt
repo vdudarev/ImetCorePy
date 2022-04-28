@@ -1,18 +1,220 @@
 BEGIN =================================================================
 The scikit-learn version is 1.0.2.
 0. timeout == 0
-1. Читаем данные из файла TrainingSet.xls для обучения
-1b. Читаем данные из файла Prediction.xls для прогнозирования
-2. Чтение выполнено за 0.21 сек. Обучаемся на объектах: 28 с 109 атрибутами. Прогнозируем объектов: 46
-3. Отмасштабированы признаки и подготовлены выборки (обучение+прогнозирование) за 0.02 сек.
-   22:47:10 Start evaluateRegressor(timeout=0) LinearRegression...
-LinearRegression (r2score=0.998, r2scoreLoo=-2458230099954494341120.000, time=0.20) CrossValid(explained_variance): mean: 0.44 (std() * 2: +/- 2.20); CrossValid(neg_mean_absolute_error): mean: -0.11 (std() * 2: +/- 0.38); CrossValid(neg_mean_squared_error): mean: -0.07 (std() * 2: +/- 0.27) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -2358647186.81 (std() * 2: +/- 24511780587.96); LooCV(neg_mean_squared_error): mean: -155770063449939476480.00 (std() * 2: +/- 1618809985161137225728.00)
-   22:47:10 Start evaluateRegressor(timeout=0) Ridge...
-Ridge (r2score=0.997, r2scoreLoo=0.986, time=0.23) CrossValid(explained_variance): mean: 0.96 (std() * 2: +/- 0.06); CrossValid(neg_mean_absolute_error): mean: -0.03 (std() * 2: +/- 0.05); CrossValid(neg_mean_squared_error): mean: -0.00 (std() * 2: +/- 0.01) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.02 (std() * 2: +/- 0.04); LooCV(neg_mean_squared_error): mean: -0.00 (std() * 2: +/- 0.00)
-   22:47:10 Start evaluateRegressor(timeout=0) Lasso...
-Lasso (r2score=0.000, r2scoreLoo=-0.075, time=0.27) CrossValid(explained_variance): mean: -0.00 (std() * 2: +/- 0.00); CrossValid(neg_mean_absolute_error): mean: -0.23 (std() * 2: +/- 0.25); CrossValid(neg_mean_squared_error): mean: -0.09 (std() * 2: +/- 0.16) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.20 (std() * 2: +/- 0.34); LooCV(neg_mean_squared_error): mean: -0.07 (std() * 2: +/- 0.24)
-   22:47:11 Start evaluateRegressor(timeout=0) SAND_SimpleSyndromeRegressor...
-SAND_SimpleSyndromeRegressor (r2score=0.911, r2scoreLoo=0.696, time=3.08) CrossValid(explained_variance): mean: 0.58 (std() * 2: +/- 0.59); CrossValid(neg_mean_absolute_error): mean: -0.10 (std() * 2: +/- 0.17); CrossValid(neg_mean_squared_error): mean: -0.03 (std() * 2: +/- 0.08) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -0.11 (std() * 2: +/- 0.18); LooCV(neg_mean_squared_error): mean: -0.02 (std() * 2: +/- 0.07)
-4. Файл с результатами оценки алгоритмов сохранен: resultScore.xls
-5. Файл с результатами сохранен: result.xls
-END =================================================================
+1. Читаем данные из файла Zn-ini-25-04-22.xlsx для обучения
+BEGIN =================================================================
+The scikit-learn version is 1.0.2.
+0. timeout == 0
+1. Читаем данные из файла Zn-ini-25-04-22.xlsx для обучения
+BEGIN =================================================================
+The scikit-learn version is 1.0.2.
+0. timeout == 0
+1. Читаем данные из файла Zn-ini-25-04-22.xlsx для обучения
+2. Чтение выполнено за 0.96 сек. Обучаемся на объектах: 321 с 6 атрибутами.
+3. Отмасштабированы признаки и подготовлена выборка для обучения за 0.05 сек.
+   20:59:25 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.603, r2scoreLoo=0.566, time=2.36) CrossValid(explained_variance): mean: -1.06 (std() * 2: +/- 4.21); CrossValid(neg_mean_absolute_error): mean: -4.03 (std() * 2: +/- 4.83); CrossValid(neg_mean_squared_error): mean: -52.69 (std() * 2: +/- 148.13) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.52 (std() * 2: +/- 10.29); LooCV(neg_mean_squared_error): mean: -38.81 (std() * 2: +/- 426.47)
+   20:59:27 Start evaluateRegressor(timeout=0) Ridge...
+Ridge (r2score=0.603, r2scoreLoo=0.566, time=2.51) CrossValid(explained_variance): mean: -1.05 (std() * 2: +/- 4.17); CrossValid(neg_mean_absolute_error): mean: -4.02 (std() * 2: +/- 4.83); CrossValid(neg_mean_squared_error): mean: -52.84 (std() * 2: +/- 149.24) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.51 (std() * 2: +/- 10.29); LooCV(neg_mean_squared_error): mean: -38.80 (std() * 2: +/- 427.47)
+   20:59:29 Start evaluateRegressor(timeout=0) Lasso...
+Lasso (r2score=0.566, r2scoreLoo=0.526, time=3.13) CrossValid(explained_variance): mean: -0.24 (std() * 2: +/- 1.58); CrossValid(neg_mean_absolute_error): mean: -3.95 (std() * 2: +/- 7.14); CrossValid(neg_mean_squared_error): mean: -84.98 (std() * 2: +/- 296.67) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.16 (std() * 2: +/- 11.39); LooCV(neg_mean_squared_error): mean: -42.44 (std() * 2: +/- 538.67)
+   20:59:33 Start evaluateRegressor(timeout=0) ElasticNet...
+ElasticNet (r2score=0.526, r2scoreLoo=0.495, time=3.16) CrossValid(explained_variance): mean: 0.11 (std() * 2: +/- 0.90); CrossValid(neg_mean_absolute_error): mean: -3.67 (std() * 2: +/- 6.64); CrossValid(neg_mean_squared_error): mean: -76.21 (std() * 2: +/- 270.61) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.14 (std() * 2: +/- 11.89); LooCV(neg_mean_squared_error): mean: -45.23 (std() * 2: +/- 600.97)
+   20:59:36 Start evaluateRegressor(timeout=0) + Lars...
++ Lars (r2score=0.603, r2scoreLoo=0.566, time=8.42) CrossValid(explained_variance): mean: -1.06 (std() * 2: +/- 4.21); CrossValid(neg_mean_absolute_error): mean: -4.03 (std() * 2: +/- 4.83); CrossValid(neg_mean_squared_error): mean: -52.69 (std() * 2: +/- 148.13) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.52 (std() * 2: +/- 10.29); LooCV(neg_mean_squared_error): mean: -38.81 (std() * 2: +/- 426.47)
+   20:59:44 Start evaluateRegressor(timeout=0) LassoLars...
+LassoLars (r2score=0.000, r2scoreLoo=-0.006, time=5.69) CrossValid(explained_variance): mean: -0.00 (std() * 2: +/- 0.00); CrossValid(neg_mean_absolute_error): mean: -5.70 (std() * 2: +/- 6.20); CrossValid(neg_mean_squared_error): mean: -101.22 (std() * 2: +/- 319.26) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -5.23 (std() * 2: +/- 15.83); LooCV(neg_mean_squared_error): mean: -90.05 (std() * 2: +/- 991.87)
+   20:59:50 Start evaluateRegressor(timeout=0) OrthogonalMatchingPursuit...
+OrthogonalMatchingPursuit (r2score=0.406, r2scoreLoo=0.375, time=5.65) CrossValid(explained_variance): mean: -0.01 (std() * 2: +/- 0.60); CrossValid(neg_mean_absolute_error): mean: -3.92 (std() * 2: +/- 6.21); CrossValid(neg_mean_squared_error): mean: -66.13 (std() * 2: +/- 209.51) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.91 (std() * 2: +/- 12.75); LooCV(neg_mean_squared_error): mean: -55.92 (std() * 2: +/- 561.38)
+   20:59:55 Start evaluateRegressor(timeout=0) BayesianRidge...
+BayesianRidge (r2score=0.603, r2scoreLoo=0.567, time=3.47) CrossValid(explained_variance): mean: -0.99 (std() * 2: +/- 4.02); CrossValid(neg_mean_absolute_error): mean: -3.98 (std() * 2: +/- 4.86); CrossValid(neg_mean_squared_error): mean: -52.71 (std() * 2: +/- 150.37) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.49 (std() * 2: +/- 10.31); LooCV(neg_mean_squared_error): mean: -38.78 (std() * 2: +/- 430.58)
+   20:59:59 Start evaluateRegressor(timeout=0) ARDRegression...
+ARDRegression (r2score=0.603, r2scoreLoo=0.564, time=9.04) CrossValid(explained_variance): mean: -1.08 (std() * 2: +/- 4.26); CrossValid(neg_mean_absolute_error): mean: -3.98 (std() * 2: +/- 4.89); CrossValid(neg_mean_squared_error): mean: -53.09 (std() * 2: +/- 150.03) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.48 (std() * 2: +/- 10.37); LooCV(neg_mean_squared_error): mean: -38.98 (std() * 2: +/- 430.42)
+   21:00:08 Start evaluateRegressor(timeout=0) +- LogisticRegression(int or LabelEncoder)...
+ERROR: +- LogisticRegression(int or LabelEncoder) Unknown label type: 'continuous' Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 217, in evaluateRegressor
+    evaluateRegressor_FitScore(classifier, X_train, y_train)
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 189, in evaluateRegressor_FitScore
+    classifier.fit(X_train, y_train)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\linear_model\_logistic.py", line 1516, in fit
+    check_classification_targets(y)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\utils\multiclass.py", line 197, in check_classification_targets
+    raise ValueError("Unknown label type: %r" % y_type)
+ValueError: Unknown label type: 'continuous'
+
+   21:00:08 Start evaluateRegressor(timeout=0) + TweedieRegressor...
++ TweedieRegressor (r2score=0.492, r2scoreLoo=0.466, time=5.76) CrossValid(explained_variance): mean: 0.25 (std() * 2: +/- 0.67); CrossValid(neg_mean_absolute_error): mean: -3.69 (std() * 2: +/- 6.40); CrossValid(neg_mean_squared_error): mean: -73.46 (std() * 2: +/- 260.57) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.23 (std() * 2: +/- 12.23); LooCV(neg_mean_squared_error): mean: -47.80 (std() * 2: +/- 637.52)
+   21:00:14 Start evaluateRegressor(timeout=0) + SGDRegressor...
++ SGDRegressor (r2score=0.603, r2scoreLoo=0.566, time=5.54) CrossValid(explained_variance): mean: -1.02 (std() * 2: +/- 4.07); CrossValid(neg_mean_absolute_error): mean: -4.00 (std() * 2: +/- 4.82); CrossValid(neg_mean_squared_error): mean: -52.82 (std() * 2: +/- 149.83) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.52 (std() * 2: +/- 10.28); LooCV(neg_mean_squared_error): mean: -38.83 (std() * 2: +/- 427.26)
+   21:00:19 Start evaluateRegressor(timeout=0) +- Perceptron...
+ERROR: +- Perceptron Unknown label type: (array([ 0.2,  0.3,  0.4,  0.5,  0.6,  0.7,  0.8,  0.9,  1. ,  1.1,  1.2,
+        1.3,  1.4,  1.5,  1.6,  1.7,  1.8,  1.9,  2. ,  2.1,  2.2,  2.3,
+        2.4,  2.5,  2.6,  2.7,  2.8,  2.9,  3. ,  3.1,  3.2,  3.3,  3.4,
+        3.5,  3.6,  3.7,  3.8,  3.9,  4. ,  4.1,  4.2,  4.3,  4.5,  4.8,
+        4.9,  5. ,  5.1,  5.2,  5.3,  5.5,  5.6,  5.7,  5.8,  5.9,  6. ,
+        6.1,  6.2,  6.3,  6.4,  6.5,  7. ,  7.2,  7.6,  7.9,  8. ,  8.1,
+        8.5,  8.8,  9. ,  9.1,  9.9, 10. , 10.6, 10.7, 11.2, 12. , 13. ,
+       13.5, 13.7, 13.8, 14.9, 15. , 15.6, 17.5, 17.9, 18.7, 18.9, 19.9,
+       21.9, 22.9, 24.9, 30.2, 32.1, 34.8, 37.7, 39.7, 49.9, 59.2, 60.4,
+       90.8]),) Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 217, in evaluateRegressor
+    evaluateRegressor_FitScore(classifier, X_train, y_train)
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 189, in evaluateRegressor_FitScore
+    classifier.fit(X_train, y_train)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\linear_model\_stochastic_gradient.py", line 883, in fit
+    return self._fit(
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\linear_model\_stochastic_gradient.py", line 677, in _fit
+    self._partial_fit(
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\linear_model\_stochastic_gradient.py", line 584, in _partial_fit
+    _check_partial_fit_first_call(self, classes)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\utils\multiclass.py", line 360, in _check_partial_fit_first_call
+    clf.classes_ = unique_labels(classes)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\utils\multiclass.py", line 101, in unique_labels
+    raise ValueError("Unknown label type: %s" % repr(ys))
+ValueError: Unknown label type: (array([ 0.2,  0.3,  0.4,  0.5,  0.6,  0.7,  0.8,  0.9,  1. ,  1.1,  1.2,
+        1.3,  1.4,  1.5,  1.6,  1.7,  1.8,  1.9,  2. ,  2.1,  2.2,  2.3,
+        2.4,  2.5,  2.6,  2.7,  2.8,  2.9,  3. ,  3.1,  3.2,  3.3,  3.4,
+        3.5,  3.6,  3.7,  3.8,  3.9,  4. ,  4.1,  4.2,  4.3,  4.5,  4.8,
+        4.9,  5. ,  5.1,  5.2,  5.3,  5.5,  5.6,  5.7,  5.8,  5.9,  6. ,
+        6.1,  6.2,  6.3,  6.4,  6.5,  7. ,  7.2,  7.6,  7.9,  8. ,  8.1,
+        8.5,  8.8,  9. ,  9.1,  9.9, 10. , 10.6, 10.7, 11.2, 12. , 13. ,
+       13.5, 13.7, 13.8, 14.9, 15. , 15.6, 17.5, 17.9, 18.7, 18.9, 19.9,
+       21.9, 22.9, 24.9, 30.2, 32.1, 34.8, 37.7, 39.7, 49.9, 59.2, 60.4,
+       90.8]),)
+
+   21:00:19 Start evaluateRegressor(timeout=0) + PassiveAggressiveRegressor...
++ PassiveAggressiveRegressor (r2score=0.524, r2scoreLoo=0.445, time=4.21) CrossValid(explained_variance): mean: -0.93 (std() * 2: +/- 4.95); CrossValid(neg_mean_absolute_error): mean: -3.27 (std() * 2: +/- 5.04); CrossValid(neg_mean_squared_error): mean: -49.82 (std() * 2: +/- 150.62) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.87 (std() * 2: +/- 11.79); LooCV(neg_mean_squared_error): mean: -49.70 (std() * 2: +/- 473.31)
+   21:00:24 Start evaluateRegressor(timeout=0) +- RANSACRegressor...
++- RANSACRegressor (r2score=0.319, r2scoreLoo=0.203, time=91.63) CrossValid(explained_variance): mean: 0.19 (std() * 2: +/- 0.88); CrossValid(neg_mean_absolute_error): mean: -3.22 (std() * 2: +/- 6.39); CrossValid(neg_mean_squared_error): mean: -66.67 (std() * 2: +/- 233.53) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.39 (std() * 2: +/- 15.47); LooCV(neg_mean_squared_error): mean: -71.31 (std() * 2: +/- 803.76)
+   21:01:55 Start evaluateRegressor(timeout=0) TheilSenRegressor...
+TheilSenRegressor (r2score=0.476, r2scoreLoo=0.469, time=1526.85) CrossValid(explained_variance): mean: -0.95 (std() * 2: +/- 5.29); CrossValid(neg_mean_absolute_error): mean: -3.20 (std() * 2: +/- 5.13); CrossValid(neg_mean_squared_error): mean: -54.97 (std() * 2: +/- 176.82) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -2.93 (std() * 2: +/- 12.47); LooCV(neg_mean_squared_error): mean: -47.79 (std() * 2: +/- 615.69)
+   21:27:22 Start evaluateRegressor(timeout=0) HuberRegressor...
+HuberRegressor (r2score=0.456, r2scoreLoo=0.434, time=11.88) CrossValid(explained_variance): mean: -0.37 (std() * 2: +/- 2.62); CrossValid(neg_mean_absolute_error): mean: -3.34 (std() * 2: +/- 5.58); CrossValid(neg_mean_squared_error): mean: -57.11 (std() * 2: +/- 187.04) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -2.92 (std() * 2: +/- 12.98); LooCV(neg_mean_squared_error): mean: -50.69 (std() * 2: +/- 659.06)
+   21:27:34 Start evaluateRegressor(timeout=0) +- QuantileRegressor (ver1)...
+ERROR: +- QuantileRegressor (ver1)  Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 247, in evaluateRegressor
+    scoresCV_Sq, scoresCV_SqLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'neg_mean_squared_error')
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 175, in DoCrossValidation
+    scores = cross_val_score(classifier, sample_X, sample_y, cv=5, scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\model_selection\_validation.py", line 509, in cross_val_score
+    cv_results = cross_validate(
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\model_selection\_validation.py", line 267, in cross_validate
+    results = parallel(
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 1046, in __call__
+    while self.dispatch_one_batch(iterator):
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 861, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 779, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "C:\Program Files\Python310\lib\site-packages\joblib\_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "C:\Program Files\Python310\lib\site-packages\joblib\_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\utils\fixes.py", line 216, in __call__
+    return self.function(*args, **kwargs)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\model_selection\_validation.py", line 680, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\linear_model\_quantile.py", line 255, in fit
+    result = linprog(
+  File "C:\Program Files\Python310\lib\site-packages\scipy\optimize\_linprog.py", line 657, in linprog
+    x, status, message, iteration = _linprog_ip(
+  File "C:\Program Files\Python310\lib\site-packages\scipy\optimize\_linprog_ip.py", line 1119, in _linprog_ip
+    x, status, message, iteration = _ip_hsd(A, b, c, c0, alpha0, beta,
+  File "C:\Program Files\Python310\lib\site-packages\scipy\optimize\_linprog_ip.py", line 750, in _ip_hsd
+    d_x, d_y, d_z, d_tau, d_kappa = _get_delta(
+  File "C:\Program Files\Python310\lib\site-packages\scipy\optimize\_linprog_ip.py", line 265, in _get_delta
+    u, v = _sym_solve(Dinv, A, rhatd -
+  File "C:\Program Files\Python310\lib\site-packages\scipy\optimize\_linprog_ip.py", line 344, in _sym_solve
+    v = solve(r)
+  File "C:\Program Files\Python310\lib\site-packages\scipy\optimize\_linprog_ip.py", line 107, in solve
+    return sp.linalg.lstsq(M, r)[0]
+  File "C:\Program Files\Python310\lib\site-packages\scipy\linalg\_basic.py", line 1204, in lstsq
+    x, s, rank, info = lapack_func(a1, b1, lwork,
+KeyboardInterrupt
+
+   23:18:52 Start evaluateRegressor(timeout=0) KernelRidge...
+KernelRidge (r2score=0.259, r2scoreLoo=0.217, time=8.44) CrossValid(explained_variance): mean: -0.91 (std() * 2: +/- 2.73); CrossValid(neg_mean_absolute_error): mean: -8.70 (std() * 2: +/- 5.19); CrossValid(neg_mean_squared_error): mean: -143.55 (std() * 2: +/- 311.99) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -6.39 (std() * 2: +/- 10.82); LooCV(neg_mean_squared_error): mean: -70.08 (std() * 2: +/- 528.42)
+   23:19:00 Start evaluateRegressor(timeout=0) + svm.SVR...
++ svm.SVR (r2score=0.376, r2scoreLoo=0.335, time=16.63) CrossValid(explained_variance): mean: 0.36 (std() * 2: +/- 0.39); CrossValid(neg_mean_absolute_error): mean: -3.23 (std() * 2: +/- 7.13); CrossValid(neg_mean_squared_error): mean: -79.51 (std() * 2: +/- 291.24) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -2.69 (std() * 2: +/- 14.46); LooCV(neg_mean_squared_error): mean: -59.48 (std() * 2: +/- 843.03)
+   23:19:17 Start evaluateRegressor(timeout=0) + svm.NuSVR...
++ svm.NuSVR (r2score=0.381, r2scoreLoo=0.351, time=19.32) CrossValid(explained_variance): mean: 0.39 (std() * 2: +/- 0.37); CrossValid(neg_mean_absolute_error): mean: -3.26 (std() * 2: +/- 7.02); CrossValid(neg_mean_squared_error): mean: -78.34 (std() * 2: +/- 286.54) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -2.70 (std() * 2: +/- 14.26); LooCV(neg_mean_squared_error): mean: -58.09 (std() * 2: +/- 830.99)
+   23:19:36 Start evaluateRegressor(timeout=0) + svm.LinearSVR...
++ svm.LinearSVR (r2score=0.441, r2scoreLoo=0.417, time=5.34) CrossValid(explained_variance): mean: -0.22 (std() * 2: +/- 2.34); CrossValid(neg_mean_absolute_error): mean: -3.20 (std() * 2: +/- 5.70); CrossValid(neg_mean_squared_error): mean: -57.57 (std() * 2: +/- 193.47) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -2.89 (std() * 2: +/- 13.24); LooCV(neg_mean_squared_error): mean: -52.16 (std() * 2: +/- 683.83)
+   23:19:42 Start evaluateRegressor(timeout=0) + KNeighborsRegressor...
++ KNeighborsRegressor (r2score=0.840, r2scoreLoo=0.727, time=4.86) CrossValid(explained_variance): mean: 0.05 (std() * 2: +/- 0.93); CrossValid(neg_mean_absolute_error): mean: -3.19 (std() * 2: +/- 5.95); CrossValid(neg_mean_squared_error): mean: -62.14 (std() * 2: +/- 209.58) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -1.92 (std() * 2: +/- 9.11); LooCV(neg_mean_squared_error): mean: -24.43 (std() * 2: +/- 360.95)
+   23:19:47 Start evaluateRegressor(timeout=0) +- RadiusNeighborsRegressor...
+ERROR: +- RadiusNeighborsRegressor Input contains NaN, infinity or a value too large for dtype('float64'). Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 250, in evaluateRegressor
+    result, r2Loo = leave_one_out_predict(X_train, y_train, classifier)
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 315, in leave_one_out_predict
+    r2Loo = r2_score(sample_y, result)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\metrics\_regression.py", line 789, in r2_score
+    y_type, y_true, y_pred, multioutput = _check_reg_targets(
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\metrics\_regression.py", line 96, in _check_reg_targets
+    y_pred = check_array(y_pred, ensure_2d=False, dtype=dtype)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\utils\validation.py", line 800, in check_array
+    _assert_all_finite(array, allow_nan=force_all_finite == "allow-nan")
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\utils\validation.py", line 114, in _assert_all_finite
+    raise ValueError(
+ValueError: Input contains NaN, infinity or a value too large for dtype('float64').
+
+   23:19:52 Start evaluateRegressor(timeout=0) + GaussianProcessRegressor...
++ GaussianProcessRegressor (r2score=1.000, r2scoreLoo=-953.792, time=18.90) CrossValid(explained_variance): mean: -9401.20 (std() * 2: +/- 23632.24); CrossValid(neg_mean_absolute_error): mean: -135.21 (std() * 2: +/- 270.17); CrossValid(neg_mean_squared_error): mean: -107252.21 (std() * 2: +/- 328827.49) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -76.64 (std() * 2: +/- 564.16); LooCV(neg_mean_squared_error): mean: -85444.45 (std() * 2: +/- 1306538.04)
+   23:20:11 Start evaluateRegressor(timeout=0) + PLSRegression...
++ PLSRegression (r2score=0.603, r2scoreLoo=0.566, time=3.87) CrossValid(explained_variance): mean: -1.18 (std() * 2: +/- 4.78); CrossValid(neg_mean_absolute_error): mean: -3.93 (std() * 2: +/- 4.73); CrossValid(neg_mean_squared_error): mean: -53.36 (std() * 2: +/- 151.83) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.54 (std() * 2: +/- 10.26); LooCV(neg_mean_squared_error): mean: -38.85 (std() * 2: +/- 428.81)
+   23:20:15 Start evaluateRegressor(timeout=0) + DecisionTreeRegressor...
++ DecisionTreeRegressor (r2score=1.000, r2scoreLoo=0.802, time=4.87) CrossValid(explained_variance): mean: -0.23 (std() * 2: +/- 1.36); CrossValid(neg_mean_absolute_error): mean: -3.29 (std() * 2: +/- 5.25); CrossValid(neg_mean_squared_error): mean: -58.34 (std() * 2: +/- 169.20) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -1.94 (std() * 2: +/- 7.46); LooCV(neg_mean_squared_error): mean: -17.69 (std() * 2: +/- 180.21)
+   23:20:20 Start evaluateRegressor(timeout=0) + ExtraTreesRegressor...
++ ExtraTreesRegressor (r2score=1.000, r2scoreLoo=0.882, time=340.43) CrossValid(explained_variance): mean: 0.21 (std() * 2: +/- 0.89); CrossValid(neg_mean_absolute_error): mean: -2.82 (std() * 2: +/- 5.32); CrossValid(neg_mean_squared_error): mean: -50.29 (std() * 2: +/- 171.97) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -1.39 (std() * 2: +/- 5.86); LooCV(neg_mean_squared_error): mean: -10.53 (std() * 2: +/- 154.70)
+   23:26:00 Start evaluateRegressor(timeout=0) + GradientBoostingRegressor...
++ GradientBoostingRegressor (r2score=0.991, r2scoreLoo=0.889, time=115.51) CrossValid(explained_variance): mean: 0.27 (std() * 2: +/- 0.70); CrossValid(neg_mean_absolute_error): mean: -2.62 (std() * 2: +/- 4.38); CrossValid(neg_mean_squared_error): mean: -43.02 (std() * 2: +/- 142.52) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -1.47 (std() * 2: +/- 5.58); LooCV(neg_mean_squared_error): mean: -9.95 (std() * 2: +/- 128.81)
+   23:27:56 Start evaluateRegressor(timeout=0) +- HistGradientBoostingRegressor (ver0.21)...
+ERROR: +- HistGradientBoostingRegressor (ver0.21)  Traceback (most recent call last):
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 245, in evaluateRegressor
+    scoresCV_EV, scoresCV_EVLoo = DoCrossValidation(classifier, classifierName, X_train, y_train, 'explained_variance')
+  File "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py", line 177, in DoCrossValidation
+    scoresLoo = cross_val_score(classifier, sample_X, sample_y, cv=sample_X.shape[0], scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\model_selection\_validation.py", line 509, in cross_val_score
+    cv_results = cross_validate(
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\model_selection\_validation.py", line 267, in cross_validate
+    results = parallel(
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 1046, in __call__
+    while self.dispatch_one_batch(iterator):
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 861, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 779, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "C:\Program Files\Python310\lib\site-packages\joblib\_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "C:\Program Files\Python310\lib\site-packages\joblib\_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "C:\Program Files\Python310\lib\site-packages\joblib\parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\utils\fixes.py", line 216, in __call__
+    return self.function(*args, **kwargs)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\model_selection\_validation.py", line 680, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\ensemble\_hist_gradient_boosting\gradient_boosting.py", line 526, in fit
+    grower.grow()
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\ensemble\_hist_gradient_boosting\grower.py", line 360, in grow
+    self.split_next()
+  File "C:\Program Files\Python310\lib\site-packages\sklearn\ensemble\_hist_gradient_boosting\grower.py", line 451, in split_next
+    ) = self.splitter.split_indices(node.split_info, node.sample_indices)
+KeyboardInterrupt
+
+   23:29:22 Start evaluateRegressor(timeout=0) + MLPRegressor...
+BEGIN =================================================================
+The scikit-learn version is 1.0.2.
+0. timeout == 0
+1. Читаем данные из файла Zn-ini-25-04-22.xlsx для обучения
+2. Чтение выполнено за 0.99 сек. Обучаемся на объектах: 321 с 6 атрибутами.
+3. Отмасштабированы признаки и подготовлена выборка для обучения за 0.04 сек.
+   23:31:03 Start evaluateRegressor(timeout=0) LinearRegression...
+LinearRegression (r2score=0.603, r2scoreLoo=0.566, time=2.44) CrossValid(explained_variance): mean: -1.06 (std() * 2: +/- 4.21); CrossValid(neg_mean_absolute_error): mean: -4.03 (std() * 2: +/- 4.83); CrossValid(neg_mean_squared_error): mean: -52.69 (std() * 2: +/- 148.13) LooCV(explained_variance): mean: 1.00 (std() * 2: +/- 0.00); LooCV(neg_mean_absolute_error): mean: -3.52 (std() * 2: +/- 10.29); LooCV(neg_mean_squared_error): mean: -38.81 (std() * 2: +/- 426.47)
+   23:31:06 Start evaluateRegressor(timeout=0) Ridge...
