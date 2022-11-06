@@ -258,9 +258,9 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
         if sfilePathPredictExcel!="":
             y_predict = classifier.predict(X_test) # предсказания
             if r2score>0.5:
-                framePredict['a, A [' + classifierName + "_{0:.3f}".format(r2score) + "__loo_{0:.3f}".format(r2Loo) + ']'] = y_predict
+                framePredict[framePredict.columns[0] + ' [' + classifierName + "_{0:.3f}".format(r2score) + "__loo_{0:.3f}".format(r2Loo) + ']'] = y_predict
             else:
-                framePredict['a, A [BAD_' + classifierName + "_{0:.3f}".format(r2score) + "__loo_{0:.3f}".format(r2Loo) + ']'] = y_predict
+                framePredict[framePredict.columns[0] + ' [BAD_' + classifierName + "_{0:.3f}".format(r2score) + "__loo_{0:.3f}".format(r2Loo) + ']'] = y_predict
 
         #write("BEGIN ======== " + classifierName + " (R2={0:.3f})".format(r2score) + " ========")
         # write("len(X_train)={}".format(len(X_train)))
@@ -277,14 +277,14 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
     if repString=="":
         #repString = classifierName + ' (r2score={0:.3f}, r2scoreLoo={1:.3f}, meanLoo={2:.3f}, stdLoo={3:.3f}, time={4:.2f})'.format(r2score, r2Loo, meanLoo, stdLoo, elapsed_time)
         repString = classifierName + ' (r2score={0:.3f}, r2scoreLoo={1:.3f}, time={2:.2f})'.format(r2score, r2Loo, elapsed_time)
-        repString = repString + " CrossValid(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EV.mean(), scoresCV_EV.std() * 2) + "; CrossValid(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Abs.mean(), scoresCV_Abs.std() * 2) + "; CrossValid(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Sq.mean(), scoresCV_Sq.std() * 2)
-        repString = repString + " LooCV(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EVLoo.mean(), scoresCV_EVLoo.std() * 2) + "; LooCV(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_AbsLoo.mean(), scoresCV_AbsLoo.std() * 2) + "; LooCV(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_SqLoo.mean(), scoresCV_SqLoo.std() * 2)
+        repString = repString + " CrossValid(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EV.mean(), scoresCV_EV.std() * 2) + "; CrossValid(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (abs(scoresCV_Abs.mean()), scoresCV_Abs.std() * 2) + "; CrossValid(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Sq.mean(), scoresCV_Sq.std() * 2)
+        repString = repString + " LooCV(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EVLoo.mean(), scoresCV_EVLoo.std() * 2) + "; LooCV(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (abs(scoresCV_AbsLoo.mean()), scoresCV_AbsLoo.std() * 2) + "; LooCV(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_SqLoo.mean(), scoresCV_SqLoo.std() * 2)
         methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 
             'CVExplainedVariance_mean': scoresCV_EV.mean(), 'CVExplainedVariance_std +/-': (scoresCV_EV.mean()),
-            'CVNegMeanAbsoluteError_mean': scoresCV_Abs.mean(), 'CVNegMeanAbsoluteError_std +/-': (scoresCV_Abs.mean()),
+            'CVNegMeanAbsoluteError_mean': abs(scoresCV_Abs.mean()), 'CVNegMeanAbsoluteError_std +/-': abs(scoresCV_Abs.mean()),
             'CVNegMeanSquaredError_mean': scoresCV_Sq.mean(), 'CVNegMeanSquaredError_std +/-': (scoresCV_Sq.mean()),
             'LooCVExplainedVariance_mean': scoresCV_EVLoo.mean(), 'LooCVExplainedVariance_std +/-': (scoresCV_EVLoo.mean()),
-            'LooCVNegMeanAbsoluteError_mean': scoresCV_AbsLoo.mean(), 'LooCVNegMeanAbsoluteError_std +/-': (scoresCV_AbsLoo.mean()),
+            'LooCVNegMeanAbsoluteError_mean': abs(scoresCV_AbsLoo.mean()), 'LooCVNegMeanAbsoluteError_std +/-': abs(scoresCV_AbsLoo.mean()),
             'LooCVNegMeanSquaredError_mean': scoresCV_SqLoo.mean(), 'LooCVNegMeanSquaredError_std +/-': (scoresCV_SqLoo.mean()),
             'time': elapsed_time, 'ErrorMessage': ''})
     else:

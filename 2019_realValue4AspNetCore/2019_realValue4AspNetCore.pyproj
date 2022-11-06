@@ -16,7 +16,7 @@
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <CommandLineArguments>"D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\DataFiles\Upload\!settings.json"</CommandLineArguments>
-    <InterpreterId>Global|ContinuumAnalytics|Anaconda38-64</InterpreterId>
+    <InterpreterId>Global|VisualStudio|SqlServer Python</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda38-64" />
+    <InterpreterReference Include="Global|VisualStudio|SqlServer Python" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
