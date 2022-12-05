@@ -25,7 +25,7 @@ namespace WebCorePy
                     //.Build();
                     .ConfigureKestrel(options =>
                     {
-                        options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(60);
+                        options.Limits.KeepAliveTimeout = TimeSpan.FromHours(12);
                     });
                 });
     }

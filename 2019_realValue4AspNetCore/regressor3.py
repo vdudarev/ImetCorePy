@@ -3,13 +3,6 @@
 # C:\ProgramData\Anaconda3\python.exe
 # C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\PYTHON_SERVICES\python.exe
 # D:\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\DataFiles
-# DOKUKIN params - begin
-forest_params = dict(min_samples_leaf=3, n_estimators=50, random_state=6)
-convex_combinations_params_loop = dict(n_combinations=400, generation_threshold=0.999, decorrelation_type='loop')
-convex_combinations_params_final = dict(n_combinations=400, generation_threshold=0.999, decorrelation_type='final')
-elnet_params=dict(normalize=True, max_iter=100000, l1_ratio=0.4)
-# DOKUKIN params - end
-
 
 ext = ""
 csvSep = ";"
@@ -437,7 +430,6 @@ def GetClassifierList(X_learn):
     # 1.17.3. Neural network models (supervised) => Regression
     from sklearn import neural_network
     import sand3_09 as sand
-    from convexforest import DecorrelatedConvexForestRegressor
     import fragment_r_03 as fragment
 
     # "predictONLY"   "predict_proba"   "decision_function"

@@ -412,15 +412,17 @@ namespace WebCorePy.Controllers
                 FileName = cmd,
                 Arguments = args,
                 UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true, 
-                StandardOutputEncoding = Encoding.GetEncoding(1251),
-                StandardErrorEncoding = Encoding.GetEncoding(1251)
+                // DO NOT USE RedirectStandardXXX if they are not read (4096 bufer size => overflow == deadlock) 
+                // https://stackoverflow.com/questions/43204624/what-are-buffer-sizes-of-process-start-for-stdout-and-stderr
+                RedirectStandardOutput = false,
+                RedirectStandardError = false,  
+                // StandardOutputEncoding = Encoding.GetEncoding(1251),
+                // StandardErrorEncoding = Encoding.GetEncoding(1251)
             };
             string stdOut = string.Empty;
             string stdErr = string.Empty;
-            Task<string> taskStdOut = null;
-            Task<string> taskstdErr = null;
+            // Task<string> taskStdOut = null;
+            // Task<string> taskstdErr = null;
             Log($"Process beforeSTARTED: {DateTime.Now}");
             var tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
