@@ -1,0 +1,30 @@
+﻿@using WebCorePy.Utils;
+@{
+    List<string> roles = UserUtils.GetUserRoles(Context);
+}
+@if (Context.User.Identity?.IsAuthenticated ?? false)
+{
+    <h2>Здравствуйте, @Context.User.Identity.Name!</h2>
+    <p>
+        @if (roles.Count == 0)
+        {
+            <span class="text-danger">Но по умолчанию доступ к системе не предоставляется, поскольку вы не входите ни в одну из ролей. Пожалуйста, свяжитесь с ответственным для назначения вам роли...</span>
+        }
+        else
+        {
+            <span>Вы успешно прошли аутентификацию и вам назначены следующие роли:</span>
+            <ul>
+                @foreach (var role in roles)
+                {
+                    <li><b>@role</b> (@UserUtils.GetText(@role))</li>
+                }
+            </ul>
+        }
+    </p>
+}
+else
+{
+    <p>
+        Здравствуйте! Вам необходимо <a href="/identity/account/login">авторизоваться</a> для получения доступа.
+    </p>
+}

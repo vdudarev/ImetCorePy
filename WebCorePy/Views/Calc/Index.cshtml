@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Http
+@using WebCorePy.Utils;
+@model int
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    int userId = Model;
+    string rel = UserUtils.GetUserUploadRelativeFolder(userId, taskId: 0);
+    ViewData["Title"] = "Calculations Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Прогноз значений непрерывных величин</h1>
+    <p>Загрузите <a href="/Home/Format">данные в формате Excel / CSV</a> и нажмите кпопку "Обработать".</p>
+
+
+    <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+        <div class="form-group mb-3">
+            <div class="col-md-12">
+                @Html.Raw(ViewBag.Msg)
+
+                @if (ViewBag.ShowResults ?? false) {
+                    <h4>Сводный результат по методам</h4>
+                    <div class="alert alert-success" role="alert">Сводные результаты работы методов в виде файла доступны по <a target="_blank" href="@rel/resultScore.@ViewBag.ShowResultsXlsExtension">ссылке</a></div>
+                    @if (ViewBag.ShowResultsXls ?? false) {
+                        <h4>Результат прогноза</h4>
+                        <div class="alert alert-success" role="alert">Результаты обработки в виде файла доступны по <a target="_blank" href="@rel/result.@ViewBag.ShowResultsXlsExtension">ссылке</a></div>
+                    }
+                    <h4>Журнал</h4>
+                    <div class="alert alert-success" role="alert">Журнал доступен по <a target="_blank" href="@rel/log.txt">ссылке</a></div>
+                    <pre class="text-start">@Html.Raw(ViewBag.Log)</pre>
+
+                }
+                else {
+                    <div class="container">
+                        <div class="row justify-content-start text-left">
+                            <div class="col border py-2">
+                                <div class="float-right font-italic">@HttpContextAccessor.HttpContext.Session.GetString("fileTrain")</div>
+                                <p>Загрузите файл для обучения:</p>
+                                <input type="file" name="fileTrain">
+                            </div>
+                            <div class="col border py-2">
+                                <div class="float-right font-italic">@HttpContextAccessor.HttpContext.Session.GetString("filePredict")</div>
+                                <p>Загрузите файл для прогнозирования (опционально):</p>
+                                <input type="file" name="filePredict">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @if (ViewBag.ShowResults ?? false) {
+                }
+                else {
+                    <p>
+                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMethods" role="button" aria-expanded="false" aria-controls="collapseMethods">
+                            Выбранные методы <span class="badge bg-light text-dark" id="methodsSelectedCount">@Html.Raw(ViewBag.MethodsSelectedCount)</span>
+                        </a>
+                    </p>
+                    <div class="collapse" id="collapseMethods">
+                        <div class="card card-body pb-0 mb-3">
+                            @Html.Raw(ViewBag.Methods)
+                        </div>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            $("#collapseMethods input[type='checkbox']").click(function () {
+                                $("#methodsSelectedCount").html($("#collapseMethods input[type='checkbox']:checked").length);
+                            });
+                        });
+                    </script>
+
+                    <div class="float-left">Таймаут на метод, сек (0 - не установлено): <input type="text" value="0" size="3" name="timeout"></div>
+                    <input type="submit" value="Обработать">
+                }
+                <div class="float-right">@Html.ActionLink("Очистить сессию", "Clear", "Calc", null)</div>
+            </div>
+        </div>
+
+    </form>
+
+</div>

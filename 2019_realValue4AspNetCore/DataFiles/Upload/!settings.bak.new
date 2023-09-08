@@ -1,5 +1,6 @@
 {
-    "folderPath": "D:\\MyProjects\\Python\\2019_realValue4AspNetCore\\DataFiles",
+    "folderPath": "C:\\RUB\\!WORK\\!WEB\\ImetCorePy\\2019_realValue4AspNetCore\\DataFiles\\Upload",
+    "wwwrootPath": "C:\\RUB\\!WORK\\!WEB\\ImetCorePy\\2019_realValue4AspNetCore\\DataFiles",
     "fileTrain": "learn_Tпл_ABHal4_elem_2-03-21.xls",
     "filePredict": "exam_Tпл_ABHal4_elem_2-03-21.xls",
     "timeout4Method": 0,

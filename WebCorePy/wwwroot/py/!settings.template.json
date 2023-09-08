@@ -1,5 +1,6 @@
 {
-    "folderPath": "#ROOT#",
+    "folderPath": "#UserUpload#",
+    "wwwrootPath": "#ROOT#",
     "fileTrain": "#fileTrain#",
     "filePredict": "#filePredict#",
     "timeout4Method": #TIMEOUT#,

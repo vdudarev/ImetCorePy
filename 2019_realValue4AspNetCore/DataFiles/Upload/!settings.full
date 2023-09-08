@@ -1,5 +1,6 @@
 {
-    "folderPath": "D:\\WWW\\IMET\\IMETCorePy\\2019_realValue4AspNetCore\\DataFiles",
+    "folderPath": "C:\\RUB\\!WORK\\!WEB\\ImetCorePy\\2019_realValue4AspNetCore\\DataFiles\\Upload",
+    "wwwrootPath": "C:\\RUB\\!WORK\\!WEB\\ImetCorePy\\2019_realValue4AspNetCore\\DataFiles",
     "fileTrain": "TrainingSet.xls",
     "filePredict": "Prediction.xls",
     "timeout4Method": 0,

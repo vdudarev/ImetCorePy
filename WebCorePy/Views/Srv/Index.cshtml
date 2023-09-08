@@ -1,0 +1,87 @@
+﻿@model (IWebHostEnvironment host, IConfiguration config, IEmailSender mailSender, SmtpConfiguration smtpConfig, UserManager<ApplicationUser> userManager)
+@using System.Data
+@using Dapper
+@using System.Data.SqlClient
+@using IdentityManagerUI.Models
+@using Microsoft.AspNetCore.Hosting;
+@using Microsoft.AspNetCore.Identity.UI.Services
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Configuration;
+@using WebCorePy.Utils;
+@inject WebCorePy.DBContext.DataContext dataContext
+@{
+    ViewData["Title"] = "Service";
+
+    System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+    bool isAdmin = currentUser.IsInRole("Administrator");
+    bool HasClaim_Name = currentUser.HasClaim(c => c.Type.EndsWith("/identity/claims/name"));
+    string Claim_Name = string.Empty; // currentUser.Claims.SingleOrDefault(c => c.Type == "Name")?.Value;
+    var appUser = Model.userManager.GetUserAsync(currentUser).Result; // Get user id
+
+}
+<h1 class="display-4">Service</h1>
+
+<div>
+    <h2>Identity</h2>
+    <p><b>appUser</b>: @appUser</p>
+    <p><b>appUser.id</b>: @appUser.Id</p>
+    <p><b>isAdmin</b>: @isAdmin</p>
+    <p><b>HasClaim_Name</b>: @HasClaim_Name</p>
+    <p><b>Claim_Name</b>: @Claim_Name</p>
+    @foreach (var cl in currentUser.Claims)
+    {
+        <li><u>@cl.Type</u> @cl.Value</li>
+       
+    }
+
+    <h2>IWebHostEnvironment</h2>
+    <p><b>IsAuthenticated</b>: @System.Security.Principal.WindowsIdentity.GetCurrent().IsAuthenticated</p>
+    <p><b>UserName</b>: @System.Security.Principal.WindowsIdentity.GetCurrent().Name</p>
+    <p><b>RoleClaimType</b>: @System.Security.Principal.WindowsIdentity.GetCurrent().RoleClaimType</p>
+    <p><b>WebRootPath</b>: @Model.host.WebRootPath</p>
+    <p><b>ContentRootPath</b>: @Model.host.ContentRootPath</p>
+    <p><b>ToString</b>: @Model.ToString()</p>
+
+</div>
+
+
+<hr />
+<h2>SMTP Config</h2>
+
+<p>
+    <a class="btn btn-primary btn-sm" id="btnCollapseFilterAdditionalGroup" data-bs-toggle="collapse" href="#collapseFilterAdditionalGroup" role="button" aria-expanded="false" aria-controls="collapseFilterAdditionalGroup">
+        Sensitive info
+    </a>
+</p>
+<div class="collapse collapseFilterAdditionalGroup" id="collapseFilterAdditionalGroup">
+    <p>Host:Port: @Model.smtpConfig.Host:@Model.smtpConfig.Port</p>
+    <p>UseSSL: @Model.smtpConfig.UseSSL</p>
+    <p>Credentials (domain, user, password): @Model.smtpConfig.CredentialsDomain, @Model.smtpConfig.CredentialsUserName, @Model.smtpConfig.CredentialsPassword</p>
+    <p>From (Name, Email): @Model.smtpConfig.FromName, @Model.smtpConfig.FromEmail</p>
+</div>
+
+
+<hr />
+<h2>Send Email Message</h2>
+<form method="post" asp-controller="srv" asp-action="SendMail">
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Subject</label>
+        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" value="Test subject">
+    </div>
+    <div class="form-group">
+        <label for="htmlMessage">Message</label>
+        <textarea class="form-control" id="htmlMessage" name="htmlMessage" placeholder="HTML Message">Test message in HTML</textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </div>
+    <div class="form-group">
+    </div>
+</form>
+
+
+<p>Release date: 11.08.2023</p>

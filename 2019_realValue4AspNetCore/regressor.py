@@ -14,6 +14,7 @@ elnet_params=dict(normalize=True, max_iter=100000, l1_ratio=0.4)
 ext = ""
 csvSep = ";"
 folderPath = "" #"D:\\WWW\\IMET\\IMETCorePy\\2019_realValue4AspNetCore\\DataFiles"
+wwwrootPath = "" # wwwrootPath
 # Путь к файлам с исходными данными
 sfilePathTrainExcel = ""
 sfilePathPredictExcel = ""
@@ -142,9 +143,9 @@ def get_features_and_labels(frameLearn, framePredict):
     # scikit-learn to calculate missing values (below)
     #frame[frame.isnull()] = 0.0
     # Convert values to floats
-    arr1 = np.array(frameLearn, dtype=np.float)
+    arr1 = np.array(frameLearn, dtype=float)
     if sfilePathPredictExcel!="":
-        arr2 = np.array(framePredict, dtype=np.float)
+        arr2 = np.array(framePredict, dtype=float)
     else:
         arr2 = None
 
@@ -345,7 +346,7 @@ def procAllRegressors(classifierList, X_learn, X_predict, y_learn, y_predict, re
 
 
 def readArgsJson():
-    global json_object, timeout4Method, ext, folderPath, filePathTrainExcel, filePathPredictExcel, filePathPredictExcelResults, sfilePathTrainExcel, sfilePathPredictExcel, sfilePathPredictExcelResults, logFilePath
+    global json_object, timeout4Method, ext, folderPath, wwwrootPath, filePathTrainExcel, filePathPredictExcel, filePathPredictExcelResults, sfilePathTrainExcel, sfilePathPredictExcel, sfilePathPredictExcelResults, logFilePath
     #for idx, item in enumerate(sys.argv):
     #    write('Argument('+ str(idx) +') = ' + item)
     jsonFilePath = sys.argv[1]
@@ -354,6 +355,7 @@ def readArgsJson():
         json_object = json.load(content)
 
     folderPath = json_object["folderPath"] #sys.argv[1] #"D:\\MyProjects\\Python\\2019_realValue4AspNetCore\\DataFiles"
+    wwwrootPath = json_object["wwwrootPath"]  # без upload + "\\py\\" + sfilePathMethodParam
     # Путь к файлам с исходными данными
     sfilePathTrainExcel = json_object["fileTrain"] # sys.argv[2]
     sfilePathPredictExcel = json_object["filePredict"] # sys.argv[3] 
@@ -366,18 +368,18 @@ def readArgsJson():
 
     #sfilePathPredictExcelResults = "result.xlsx"
     sfilePathPredictExcelResults = "result." + ext    # sys.argv[4]
-    filePathTrainExcel = folderPath + "\\Upload\\" + sfilePathTrainExcel    # folderPath + "\\ "TrainingSet.xls"    # обучающая выборка
-    filePathPredictExcel = folderPath + "\\Upload\\" + sfilePathPredictExcel # folderPath + "\\Prediction.xls"    # данные для прогнозирования
-    filePathPredictExcelResults = folderPath + "\\Upload\\" + sfilePathPredictExcelResults # folderPath + "\\Prediction_Results.xls"    # результаты прогнозирования
+    filePathTrainExcel = folderPath + "\\" + sfilePathTrainExcel    # folderPath + "\\ "TrainingSet.xls"    # обучающая выборка
+    filePathPredictExcel = folderPath + "\\" + sfilePathPredictExcel # folderPath + "\\Prediction.xls"    # данные для прогнозирования
+    filePathPredictExcelResults = folderPath + "\\" + sfilePathPredictExcelResults # folderPath + "\\Prediction_Results.xls"    # результаты прогнозирования
     # Путь к файлу с логами
-    # logFilePath = folderPath + "\\Upload\\" + sys.argv[5] # folderPath + "\\Log.txt"
-    logFilePath = folderPath + "\\Upload\\log.txt"
+    # logFilePath = folderPath + "\\" + sys.argv[5] # folderPath + "\\Log.txt"
+    logFilePath = folderPath + "\\log.txt"
 
     # write("sys.version = " + sys.version + "; sys.executable = " + sys.executable + "; ext = '" + ext + "'")
     
     global filePathSANDMethodParam
     sfilePathMethodParam = "sandRegressor_134spinel.txt"
-    filePathSANDMethodParam = folderPath + "\\py\\" + sfilePathMethodParam
+    filePathSANDMethodParam = wwwrootPath + "\\py\\" + sfilePathMethodParam
 
     #write("sys.version = " + sys.version + "; sys.executable = " + sys.executable)
     #write('Argument List (' + str(len(sys.argv)) + ' items):' + str(sys.argv))
@@ -522,13 +524,13 @@ def procTask():
     if ext=="xls" or ext=="xlsx":
         from pandas import ExcelWriter
         # сохраним результат
-        writer = ExcelWriter(folderPath + "\\Upload\\resultScore." + ext)
+        writer = ExcelWriter(folderPath + "\\resultScore." + ext)
         dfScore.to_excel(writer, 'Results')
-        writer.save()
+        writer.close()
         write("4. Файл с результатами оценки алгоритмов сохранен: " + "resultScore." + ext)
     elif ext=="csv" or ext=="txt": 
         # framePredict.to_csv(filePathPredictExcelResults, sep=csvSep, encoding='utf-8')    # without BOM
-        dfScore.to_csv(folderPath + "\\Upload\\resultScore." + ext, sep=csvSep, encoding='utf-8-sig')  # with BOM
+        dfScore.to_csv(folderPath + "\\resultScore." + ext, sep=csvSep, encoding='utf-8-sig')  # with BOM
         write("4. Файл с результатами оценки алгоритмов сохранен: " + "resultScore." + ext)
     else:
         raise NameError('Unsupported filetype: ' + ext)
@@ -542,7 +544,7 @@ def procTask():
             # сохраним результат прогнозирования
             writer = ExcelWriter(filePathPredictExcelResults)
             framePredict.to_excel(writer, 'Results')
-            writer.save()
+            writer.close()
             write("5. Файл с результатами сохранен: " + sfilePathPredictExcelResults)
         elif ext=="csv" or ext=="txt": 
             # framePredict.to_csv(filePathPredictExcelResults, sep=csvSep, encoding='utf-8')    # without BOM

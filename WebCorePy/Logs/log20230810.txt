@@ -1,0 +1,179 @@
+2023-08-10 23:51:05.627 +02:00 [INF] The global logger has been configured
+2023-08-10 23:51:06.673 +02:00 [WRN] Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength. HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS. You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit.
+2023-08-10 23:51:06.981 +02:00 [INF] User profile is available. Using 'C:\Users\vic\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 23:51:07.814 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-10 23:51:07.814 +02:00 [INF] Hosting environment: Development
+2023-08-10 23:51:07.815 +02:00 [INF] Content root path: C:\RUB\!WORK\!WEB\ImetCorePy\WebCorePy
+2023-08-10 23:51:07.958 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/ - -
+2023-08-10 23:51:08.160 +02:00 [INF] Executing endpoint 'WebCorePy.Controllers.HomeController.Index (WebCorePy)'
+2023-08-10 23:51:08.194 +02:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.HomeController (WebCorePy).
+2023-08-10 23:51:08.210 +02:00 [INF] Executing ViewResult, running view Index.
+2023-08-10 23:52:04.380 +02:00 [INF] The global logger has been configured
+2023-08-10 23:52:04.673 +02:00 [WRN] Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength. HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS. You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit.
+2023-08-10 23:52:04.785 +02:00 [INF] User profile is available. Using 'C:\Users\vic\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 23:52:05.062 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-10 23:52:05.062 +02:00 [INF] Hosting environment: Development
+2023-08-10 23:52:05.062 +02:00 [INF] Content root path: C:\RUB\!WORK\!WEB\ImetCorePy\WebCorePy
+2023-08-10 23:52:05.101 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/ - -
+2023-08-10 23:52:05.197 +02:00 [INF] Executing endpoint 'WebCorePy.Controllers.HomeController.Index (WebCorePy)'
+2023-08-10 23:52:05.226 +02:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.HomeController (WebCorePy).
+2023-08-10 23:52:05.239 +02:00 [INF] Executing ViewResult, running view Index.
+2023-08-10 23:52:05.755 +02:00 [INF] Executed ViewResult - view Index executed in 520.3003ms.
+2023-08-10 23:52:05.760 +02:00 [INF] Executed action WebCorePy.Controllers.HomeController.Index (WebCorePy) in 533.4413ms
+2023-08-10 23:52:05.761 +02:00 [INF] Executed endpoint 'WebCorePy.Controllers.HomeController.Index (WebCorePy)'
+2023-08-10 23:52:05.796 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/lib/bootstrap/dist/css/bootstrap.min.css - -
+2023-08-10 23:52:05.796 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/css/site.css - -
+2023-08-10 23:52:05.800 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/ - - - 200 - text/html;+charset=utf-8 701.7502ms
+2023-08-10 23:52:05.826 +02:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\RUB\!WORK\!WEB\ImetCorePy\WebCorePy\wwwroot\css\site.css'
+2023-08-10 23:52:05.827 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/css/site.css - - - 200 1163 text/css 30.9957ms
+2023-08-10 23:52:05.829 +02:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\RUB\!WORK\!WEB\ImetCorePy\WebCorePy\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2023-08-10 23:52:05.837 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/lib/bootstrap/dist/css/bootstrap.min.css - - - 200 162720 text/css 41.2255ms
+2023-08-10 23:52:05.839 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/lib/jquery/dist/jquery.js - -
+2023-08-10 23:52:05.893 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/lib/bootstrap/dist/js/bootstrap.bundle.js - -
+2023-08-10 23:52:05.906 +02:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.js'. Physical path: 'C:\RUB\!WORK\!WEB\ImetCorePy\WebCorePy\wwwroot\lib\jquery\dist\jquery.js'
+2023-08-10 23:52:05.912 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2023-08-10 23:52:05.915 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 23:52:05.918 +02:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\RUB\!WORK\!WEB\ImetCorePy\WebCorePy\wwwroot\js\site.js'
+2023-08-10 23:52:05.918 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 200 230 text/javascript 9.7510ms
+2023-08-10 23:52:05.921 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/lib/jquery/dist/jquery.js - - - 200 287630 text/javascript 81.9906ms
+2023-08-10 23:52:05.926 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - -
+2023-08-10 23:52:05.937 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - - - 200 12350 application/javascript;+charset=utf-8 21.2833ms
+2023-08-10 23:52:05.966 +02:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.js'. Physical path: 'C:\RUB\!WORK\!WEB\ImetCorePy\WebCorePy\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js'
+2023-08-10 23:52:05.971 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/lib/bootstrap/dist/js/bootstrap.bundle.js - - - 200 208492 text/javascript 77.9621ms
+2023-08-10 23:52:05.986 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 59.3288ms
+2023-08-10 23:52:14.070 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/identity/account/login - -
+2023-08-10 23:52:14.079 +02:00 [INF] Executing endpoint '/Account/Login'
+2023-08-10 23:52:14.115 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2023-08-10 23:52:14.148 +02:00 [INF] Executing handler method Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal.LoginModel.OnGetAsync - ModelState is "Valid"
+2023-08-10 23:52:14.160 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2023-08-10 23:52:14.161 +02:00 [INF] Executed handler method OnGetAsync, returned result .
+2023-08-10 23:52:14.165 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2023-08-10 23:52:14.166 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2023-08-10 23:52:14.250 +02:00 [INF] Executed page /Account/Login in 133.7448ms
+2023-08-10 23:52:14.250 +02:00 [INF] Executed endpoint '/Account/Login'
+2023-08-10 23:52:14.256 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/identity/account/login - - - 200 - text/html;+charset=utf-8 186.6095ms
+2023-08-10 23:52:14.266 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 23:52:14.267 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - - - 200 12350 application/javascript;+charset=utf-8 1.4242ms
+2023-08-10 23:52:14.286 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - -
+2023-08-10 23:52:14.302 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 16.3302ms
+2023-08-10 23:52:16.499 +02:00 [INF] Request starting HTTP/2 POST https://localhost:44392/identity/account/externallogin?returnUrl=%2F application/x-www-form-urlencoded 198
+2023-08-10 23:52:16.508 +02:00 [INF] Executing endpoint '/Account/ExternalLogin'
+2023-08-10 23:52:16.518 +02:00 [INF] Route matched with {page = "/Account/ExternalLogin", area = "Identity", action = "", controller = ""}. Executing page /Account/ExternalLogin
+2023-08-10 23:52:16.572 +02:00 [INF] Executing handler method Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal.ExternalLoginModel.OnPost - ModelState is "Invalid"
+2023-08-10 23:52:16.574 +02:00 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.ChallengeResult.
+2023-08-10 23:52:16.577 +02:00 [INF] Executing ChallengeResult with authentication schemes (["Google"]).
+2023-08-10 23:52:16.585 +02:00 [INF] AuthenticationScheme: Google was challenged.
+2023-08-10 23:52:16.586 +02:00 [INF] Executed page /Account/ExternalLogin in 67.5579ms
+2023-08-10 23:52:16.586 +02:00 [INF] Executed endpoint '/Account/ExternalLogin'
+2023-08-10 23:52:16.588 +02:00 [INF] Request finished HTTP/2 POST https://localhost:44392/identity/account/externallogin?returnUrl=%2F application/x-www-form-urlencoded 198 - 302 - - 88.6225ms
+2023-08-10 23:52:17.001 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/signin-google?state=CfDJ8KDt3LlYtwFErDbgjNNFCDGDgdW2g9_Fko14hrn5CRWDlfdq8NUiVRsSKpk1siySGfNsi4M_sZWp6tGAttWmj7RFZiXBNEBRKe1pcy9FWLs9ry9623nHBL5Qgsjbn-JhH9O5FlF5P5-mqXAYoHB-bpey-Kud-XJqbJ48Gmohgz0nzZ9gV4rIxuzeg4pwsJFKzz9c9QTXSRcWHTmXCmT220mYzx5GZvOPnCxqcYgS7bF4Ku04L5dm_DPFDLCRtNFSGaxZrrTNJKPXLtHJsDrbZ3PmEBZFZFqWRrEI3nwXKQ0wLkX7gaT5JG8v4829YL_arA&code=4%2F0Adeu5BV3BgtEFF4lUs8eal6--etK1apO6KkQqpUf3Ewvhcro6H8JaO--4-cl_vyHqjTgJw&scope=email+profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=none - -
+2023-08-10 23:52:17.599 +02:00 [INF] User profile is available. Using 'C:\Users\vic\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 23:52:19.934 +02:00 [INF] AuthenticationScheme: Identity.External signed in.
+2023-08-10 23:52:19.935 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/signin-google?state=CfDJ8KDt3LlYtwFErDbgjNNFCDGDgdW2g9_Fko14hrn5CRWDlfdq8NUiVRsSKpk1siySGfNsi4M_sZWp6tGAttWmj7RFZiXBNEBRKe1pcy9FWLs9ry9623nHBL5Qgsjbn-JhH9O5FlF5P5-mqXAYoHB-bpey-Kud-XJqbJ48Gmohgz0nzZ9gV4rIxuzeg4pwsJFKzz9c9QTXSRcWHTmXCmT220mYzx5GZvOPnCxqcYgS7bF4Ku04L5dm_DPFDLCRtNFSGaxZrrTNJKPXLtHJsDrbZ3PmEBZFZFqWRrEI3nwXKQ0wLkX7gaT5JG8v4829YL_arA&code=4%2F0Adeu5BV3BgtEFF4lUs8eal6--etK1apO6KkQqpUf3Ewvhcro6H8JaO--4-cl_vyHqjTgJw&scope=email+profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=none - - - 302 - - 2934.4735ms
+2023-08-10 23:52:19.943 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/identity/account/externallogin?returnUrl=%2F&handler=Callback - -
+2023-08-10 23:52:19.944 +02:00 [INF] Executing endpoint '/Account/ExternalLogin'
+2023-08-10 23:52:19.945 +02:00 [INF] Route matched with {page = "/Account/ExternalLogin", area = "Identity", action = "", controller = ""}. Executing page /Account/ExternalLogin
+2023-08-10 23:52:19.946 +02:00 [INF] Executing handler method Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal.ExternalLoginModel.OnGetCallbackAsync - ModelState is "Valid"
+2023-08-10 23:52:20.070 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2023-08-10 23:52:20.156 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2023-08-10 23:52:20.158 +02:00 [INF] User logged in with Google provider.
+2023-08-10 23:52:20.160 +02:00 [INF] Executed handler method OnGetCallbackAsync, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2023-08-10 23:52:20.163 +02:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2023-08-10 23:52:20.163 +02:00 [INF] Executed page /Account/ExternalLogin in 218.266ms
+2023-08-10 23:52:20.163 +02:00 [INF] Executed endpoint '/Account/ExternalLogin'
+2023-08-10 23:52:20.168 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/ - -
+2023-08-10 23:52:20.172 +02:00 [INF] Executing endpoint 'WebCorePy.Controllers.HomeController.Index (WebCorePy)'
+2023-08-10 23:52:20.172 +02:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.HomeController (WebCorePy).
+2023-08-10 23:52:20.172 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/identity/account/externallogin?returnUrl=%2F&handler=Callback - - - 302 - - 229.6732ms
+2023-08-10 23:52:20.173 +02:00 [INF] Executing ViewResult, running view Index.
+2023-08-10 23:52:20.189 +02:00 [INF] Executed ViewResult - view Index executed in 15.9648ms.
+2023-08-10 23:52:20.189 +02:00 [INF] Executed action WebCorePy.Controllers.HomeController.Index (WebCorePy) in 17.0614ms
+2023-08-10 23:52:20.189 +02:00 [INF] Executed endpoint 'WebCorePy.Controllers.HomeController.Index (WebCorePy)'
+2023-08-10 23:52:20.193 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/ - - - 200 - text/html;+charset=utf-8 24.9901ms
+2023-08-10 23:52:20.206 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 23:52:20.206 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - -
+2023-08-10 23:52:20.208 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - - - 200 12350 application/javascript;+charset=utf-8 1.7845ms
+2023-08-10 23:52:20.229 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 22.2192ms
+2023-08-10 23:52:22.218 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/home/privacy - -
+2023-08-10 23:52:22.222 +02:00 [INF] Executing endpoint 'WebCorePy.Controllers.HomeController.Privacy (WebCorePy)'
+2023-08-10 23:52:22.224 +02:00 [INF] Route matched with {action = "Privacy", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Privacy() on controller WebCorePy.Controllers.HomeController (WebCorePy).
+2023-08-10 23:52:22.225 +02:00 [INF] Executing ViewResult, running view Privacy.
+2023-08-10 23:52:22.240 +02:00 [INF] Executed ViewResult - view Privacy executed in 15.8065ms.
+2023-08-10 23:52:22.241 +02:00 [INF] Executed action WebCorePy.Controllers.HomeController.Privacy (WebCorePy) in 16.428ms
+2023-08-10 23:52:22.241 +02:00 [INF] Executed endpoint 'WebCorePy.Controllers.HomeController.Privacy (WebCorePy)'
+2023-08-10 23:52:22.245 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/home/privacy - - - 200 - text/html;+charset=utf-8 25.2378ms
+2023-08-10 23:52:22.255 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - -
+2023-08-10 23:52:22.255 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 23:52:22.256 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - - - 200 12350 application/javascript;+charset=utf-8 1.7310ms
+2023-08-10 23:52:22.272 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 17.3376ms
+2023-08-10 23:52:26.298 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/srv - -
+2023-08-10 23:52:26.309 +02:00 [INF] Executing endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2023-08-10 23:52:26.311 +02:00 [INF] Route matched with {action = "Index", controller = "Srv", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.SrvController (WebCorePy).
+2023-08-10 23:52:26.315 +02:00 [INF] We have to write { First = first, Second = second } and later we write { First2 = first22, Second2 = second22 } !
+2023-08-10 23:52:26.322 +02:00 [INF] Executing ViewResult, running view Index.
+2023-08-10 23:52:26.323 +02:00 [ERR] The view 'Index' was not found. Searched locations: ["/Views/Srv/Index.cshtml","/Views/Shared/Index.cshtml","/Pages/Shared/Index.cshtml"]
+2023-08-10 23:52:26.329 +02:00 [INF] Executed action WebCorePy.Controllers.SrvController.Index (WebCorePy) in 17.0708ms
+2023-08-10 23:52:26.330 +02:00 [INF] Executed endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2023-08-10 23:52:26.334 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The view 'Index' was not found. The following locations were searched:
+/Views/Srv/Index.cshtml
+/Views/Shared/Index.cshtml
+/Pages/Shared/Index.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-08-10 23:52:26.469 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/srv - - - 500 - text/html;+charset=utf-8 170.4993ms
+2023-08-10 23:52:26.488 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - -
+2023-08-10 23:52:26.492 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 23:52:26.494 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - - - 200 12350 application/javascript;+charset=utf-8 2.2024ms
+2023-08-10 23:52:26.504 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 15.7050ms
+2023-08-10 23:54:58.885 +02:00 [INF] The global logger has been configured
+2023-08-10 23:54:59.196 +02:00 [WRN] Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength. HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS. You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit.
+2023-08-10 23:54:59.300 +02:00 [INF] User profile is available. Using 'C:\Users\vic\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 23:54:59.587 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-10 23:54:59.588 +02:00 [INF] Hosting environment: Development
+2023-08-10 23:54:59.588 +02:00 [INF] Content root path: C:\RUB\!WORK\!WEB\ImetCorePy\WebCorePy
+2023-08-10 23:54:59.630 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/ - -
+2023-08-10 23:54:59.923 +02:00 [INF] Executing endpoint 'WebCorePy.Controllers.HomeController.Index (WebCorePy)'
+2023-08-10 23:54:59.935 +02:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.HomeController (WebCorePy).
+2023-08-10 23:54:59.947 +02:00 [INF] Executing ViewResult, running view Index.
+2023-08-10 23:55:00.195 +02:00 [INF] Executed ViewResult - view Index executed in 249.9085ms.
+2023-08-10 23:55:00.200 +02:00 [INF] Executed action WebCorePy.Controllers.HomeController.Index (WebCorePy) in 264.0821ms
+2023-08-10 23:55:00.201 +02:00 [INF] Executed endpoint 'WebCorePy.Controllers.HomeController.Index (WebCorePy)'
+2023-08-10 23:55:00.227 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/ - - - 200 - text/html;+charset=utf-8 600.2843ms
+2023-08-10 23:55:00.262 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 23:55:00.262 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - -
+2023-08-10 23:55:00.271 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - - - 200 12350 application/javascript;+charset=utf-8 8.1651ms
+2023-08-10 23:55:00.281 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 18.5891ms
+2023-08-10 23:55:02.699 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/srv - -
+2023-08-10 23:55:02.727 +02:00 [INF] Executing endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2023-08-10 23:55:02.730 +02:00 [INF] Route matched with {action = "Index", controller = "Srv", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.SrvController (WebCorePy).
+2023-08-10 23:55:02.734 +02:00 [INF] We have to write { First = first, Second = second } and later we write { First2 = first22, Second2 = second22 } !
+2023-08-10 23:55:02.736 +02:00 [INF] Executing ViewResult, running view Index.
+2023-08-10 23:55:04.444 +02:00 [INF] Executed ViewResult - view Index executed in 1709.3076ms.
+2023-08-10 23:55:04.445 +02:00 [INF] Executed action WebCorePy.Controllers.SrvController.Index (WebCorePy) in 1714.037ms
+2023-08-10 23:55:04.445 +02:00 [INF] Executed endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2023-08-10 23:55:04.458 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - -
+2023-08-10 23:55:04.458 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 23:55:04.461 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - - - 200 12350 application/javascript;+charset=utf-8 3.1859ms
+2023-08-10 23:55:04.482 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/srv - - - 200 - text/html;+charset=utf-8 1783.9948ms
+2023-08-10 23:55:04.493 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 35.1187ms

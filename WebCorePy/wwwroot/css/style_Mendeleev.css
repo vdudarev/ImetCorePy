@@ -1,0 +1,196 @@
+.Mendeleev {
+	clear: both;
+	width: 100%;
+	min-width: 770px;
+	/*background:White;*/
+	margin: 0;
+	padding: 0;
+	font-family: var(--bs-body-font-family);
+}
+
+/* ЯЗЫКИ */
+.Mendeleev .ru	{ display:none; }
+.Mendeleev>table { background:White;}
+.Mendeleev .b0, .Mendeleev .b0 td, .Mendeleev .b0 th	{ border:0 none;text-align:center; }
+.Mendeleev ul	{ margin:0; padding-left:20px; }
+.Mendeleev div	{ margin:0; padding:0; }
+.Mendeleev .periods {border-right: solid 1px #DDDDDD;}
+.Mendeleev.noborders td { border:none; }
+.Mendeleev .element	{ position: relative; width: 70px; padding:2px; height: 41px; border:solid 2px white; }
+
+/* Элемент при наведении мышкой - рамка */
+.Mendeleev .element:hover	{ border:solid 2px Black; opacity:1.0 !important; }
+
+/* Элемент выбран (т.е. по нему ведется поиск )*/
+.Mendeleev .element.selected	{ border:solid 2px Red; }
+.Mendeleev .selectedSystem	{ font-weight:bold; }
+
+/* Элемент НЕАКТИВЕН (т.е. при его выборе ничего не покажется, т.к. в БД этого нет) */
+.Mendeleev .inactive, .FilterSubstrate .inactive		{ color:#999; }
+.Mendeleev .element.inactive, .FilterSubstrate .btn.inactive	{ opacity:0.5; }
+.FilterSubstrate .btn.inactive[data-id="0"] { opacity:1; color:#000;}
+
+.Mendeleev .periods {
+	width: 33px;
+}
+.Mendeleev .rows			{ width:20px;}
+.Mendeleev .selectedElementsResult	{
+	margin:10px auto 0 auto;
+	width:690px;
+}
+.Mendeleev .rotate {
+  font-size:8px;
+  font-family:Arial;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+
+  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+
+  /* Should be unset in IE9+ I think. */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+.Mendeleev>table	{
+	margin:0 auto;
+	border-collapse:collapse;
+}
+.Mendeleev>table td	{ padding:0; }
+.Mendeleev>table th	{ padding:0 2px; font-family:Tahoma; text-transform:uppercase; }
+.Mendeleev>table th.row-item	{ font-size:13px; }
+
+
+.Mendeleev .insLine	 {
+	position: relative;
+	width: 70px;
+	padding:2px;
+	height: 41px;
+	border:solid 2px white;
+}
+.Mendeleev .insLine.green, .Mendeleev .insLine.greenD	{ width:70px !important; } 
+
+.Mendeleev .insLine .nameFull	{ display:none; }
+.Mendeleev .insLine .name, .Mendeleev .insLine .number	{ text-align:center; float:none; position:relative; }
+
+
+.Mendeleev .pink	{
+	background: #ffccff;
+}
+.Mendeleev .yellow	{
+	background: #FFFF99;
+}
+.Mendeleev .blue	{
+	background:#99CCFF;
+}
+.Mendeleev .green, .Mendeleev .greenD	{
+	background:#66FF66;
+}
+.Mendeleev:not(.wide) .green, .Mendeleev:not(.wide) .greenD	{
+	width:60px !important;
+}
+
+.Mendeleev .number	{
+	position:absolute;
+	font-size:11px;
+	font-family:Verdana;
+	top:0px; right:1px;
+}
+.Mendeleev .blue .number, 
+.Mendeleev .green .number,
+.Mendeleev .greenD .number	{
+	left:1px; right:auto;
+}
+
+.Mendeleev .name	{
+	font-family:Verdana;
+	position:absolute;
+    font-size:20px;
+    font-weight:normal;
+	top:0px; left:2px;
+}
+.Mendeleev .blue .name, 
+.Mendeleev .green .name,
+.Mendeleev .greenD .name	{
+	right:2px; left:auto;
+}
+
+
+.Mendeleev .nameFull	{
+	position:absolute;
+	font-size:8px;
+	font-family:Arial;
+	text-transform:uppercase;
+	left:2px; top:20px;
+}
+.Mendeleev .blue .nameFull,
+.Mendeleev .green .nameFull,
+.Mendeleev .greenD .nameFull	{
+	right:2px; left:auto;
+}
+
+.Mendeleev .massa	{
+	position:absolute;
+	font-size:9px;
+	bottom:2px; left:2px;
+}
+.Mendeleev .blue .massa, 
+.Mendeleev .green .massa, 
+.Mendeleev .greenD .massa	{
+	position:absolute;
+	font-size:10px;
+	right:2px; left:auto;
+}
+
+.Mendeleev h3	{ text-align:center; margin:10px 0 0 0; font-size:15px; font-family:Verdana;  }
+
+.Mendeleev.smallPTable:not(.wide) .green,
+.Mendeleev.smallPTable:not(.wide) .greenD
+	{ width:35px !important;  }
+
+.Mendeleev.smallPTable .nameFull,
+.Mendeleev.smallPTable .massa,
+.Mendeleev.smallPTable .insLine .number
+	{ display:none; }
+.Mendeleev.smallPTable .number
+	{ font-size:8px; font-family:Arial; }
+.Mendeleev.smallPTable .insLine
+	{ height:18px; width:40px !important; }
+.Mendeleev.smallPTable .insLine .name
+	{ font-size:14px; text-align:center; width:40px !important; color:#555; }
+
+.Mendeleev.smallPTable .element	
+	{ width:40px; height:30px; }
+.Mendeleev.smallPTable>table th	{ font-size:12px; text-align: center; }
+.Mendeleev.smallPTable h3	{ font-size:13px; }
+
+.Mendeleev a.btn, .Mendeleev a.btn:hover		{ display:block; width:65px; height:29px; line-height:29px; background:url(/i/btn.png); margin:0; padding:0; font-family:Tahoma; color:#fafafc; font-weight:bold; font-size:12px; text-decoration:none; text-align:center; position:relative; white-space:nowrap; border-radius:4px; }
+.Mendeleev a.btn:hover, .Mendeleev a.btn.act { background:url(/i/btnAct.png) }
+
+.Mendeleev .result		{ margin:5px auto 0 auto; }
+.Mendeleev span.err		{ color:Red; text-align:center; }
+
+.Mendeleev .resTab		{ border-style:none; border-spacing:0; border-collapse:collapse; }
+.Mendeleev .resTab th	{ background:#EEEEEE; padding:5px; }
+.Mendeleev .resTab td	{ padding:2px; }
+.Mendeleev .resTab tr	{ vertical-align:top; }
+
+.Mendeleev .db			{ width:500px; margin:0 auto 0 auto; background:White; border:solid 1px #808080; padding-left:0; }
+.Mendeleev .db>li>a		{ background:#EEEEEE; padding:5px 10px 5px 10px; display:block; font-weight:bold; color:Black; text-decoration:none; }
+.Mendeleev .db>li>a:hover	{ color:Blue; } 
+.Mendeleev .db>li		{ list-style:none; }
+.Mendeleev .sys			{ margin-left:20px; }
+.Mendeleev .sys>li		{ position:relative; }
+.Mendeleev .sys>li>a	{ background:white; padding:2px; display:block; color:Black; }
+.Mendeleev .sys>li>a:hover		{ color:Blue; }
+.Mendeleev .prop		{ display:none; background:#007CC3; position:absolute; z-index:10; left:100px; top:10px; border:solid 1px Black; min-width:300px; padding:10px 0 10px 0; margin:0; }
+.Mendeleev .prop>li		{ padding:0; margin:0; list-style:none; }
+.Mendeleev .prop>li:hover	{ background-color:#00649e; }
+/*.Mendeleev .prop>li:before	{ content:'- '; }*/
+.Mendeleev .prop>li>a	{ padding:1px 15px 3px 15px; display:block; color:white; font-size:12px; font-family:Tahoma; }
+.Mendeleev .prop>li>a:hover	{  color:Yellow;  }

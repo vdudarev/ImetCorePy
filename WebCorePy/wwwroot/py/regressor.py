@@ -14,6 +14,7 @@ elnet_params=dict(normalize=True, max_iter=100000, l1_ratio=0.4)
 ext = ""
 csvSep = ";"
 folderPath = "" #"D:\\WWW\\IMET\\IMETCorePy\\2019_realValue4AspNetCore\\DataFiles"
+wwwrootPath = "" # wwwrootPath
 # Путь к файлам с исходными данными
 sfilePathTrainExcel = ""
 sfilePathPredictExcel = ""
@@ -142,9 +143,9 @@ def get_features_and_labels(frameLearn, framePredict):
     # scikit-learn to calculate missing values (below)
     #frame[frame.isnull()] = 0.0
     # Convert values to floats
-    arr1 = np.array(frameLearn, dtype=np.float)
+    arr1 = np.array(frameLearn, dtype=float)
     if sfilePathPredictExcel!="":
-        arr2 = np.array(framePredict, dtype=np.float)
+        arr2 = np.array(framePredict, dtype=float)
     else:
         arr2 = None
 
@@ -286,23 +287,23 @@ def evaluateRegressor(classifier, classifierName, classifierMode, X_train, X_tes
         repString = classifierName + ' (r2score={0:.3f}, r2scoreLoo={1:.3f}, time={2:.2f})'.format(r2score, r2Loo, elapsed_time)
         repString = repString + " CrossValid(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EV.mean(), scoresCV_EV.std() * 2) + "; CrossValid(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (abs(scoresCV_Abs.mean()), scoresCV_Abs.std() * 2) + "; CrossValid(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_Sq.mean(), scoresCV_Sq.std() * 2)
         repString = repString + " LooCV(explained_variance): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_EVLoo.mean(), scoresCV_EVLoo.std() * 2) + "; LooCV(neg_mean_absolute_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (abs(scoresCV_AbsLoo.mean()), scoresCV_AbsLoo.std() * 2) + "; LooCV(neg_mean_squared_error): mean: %0.2f (std() * 2: +/- %0.2f)" % (scoresCV_SqLoo.mean(), scoresCV_SqLoo.std() * 2)
-        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 
-            'CVExplainedVariance_mean': scoresCV_EV.mean(), 'CVExplainedVariance_std +/-': (scoresCV_EV.mean()),
+        methodScoreData.append({'Метод': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 
+            'CVExplainedVariance_mean': abs(scoresCV_EV.mean()), 'CVExplainedVariance_std +/-': abs(scoresCV_EV.mean()),
             'CVNegMeanAbsoluteError_mean': abs(scoresCV_Abs.mean()), 'CVNegMeanAbsoluteError_std +/-': abs(scoresCV_Abs.mean()),
-            'CVNegMeanSquaredError_mean': scoresCV_Sq.mean(), 'CVNegMeanSquaredError_std +/-': (scoresCV_Sq.mean()),
-            'LooCVExplainedVariance_mean': scoresCV_EVLoo.mean(), 'LooCVExplainedVariance_std +/-': (scoresCV_EVLoo.mean()),
-            'LooCVNegMeanAbsoluteError_mean': abs(scoresCV_AbsLoo.mean()), 'LooCVNegMeanAbsoluteError_std +/-': abs(scoresCV_AbsLoo.mean()),
-            'LooCVNegMeanSquaredError_mean': scoresCV_SqLoo.mean(), 'LooCVNegMeanSquaredError_std +/-': (scoresCV_SqLoo.mean()),
-            'time': elapsed_time, 'ErrorMessage': ''})
+            'CVNegMeanSquaredError_mean': abs(scoresCV_Sq.mean()), 'CVNegMeanSquaredError_std +/-': abs(scoresCV_Sq.mean()),
+            'LooCVExplainedVariance_mean': abs(scoresCV_EVLoo.mean()), 'LooCVExplainedVariance_std +/-': abs(scoresCV_EVLoo.mean()),
+            'Средняя абсолютная ошибка (MAE)': abs(scoresCV_AbsLoo.mean()), 'LooCVNegMeanAbsoluteError_std +/-': abs(scoresCV_AbsLoo.mean()),
+            'Среднеквадратичная ошибка (MSE)': abs(scoresCV_SqLoo.mean()), 'LooCVNegMeanSquaredError_std +/-': abs(scoresCV_SqLoo.mean()),
+            'Время расчетов': elapsed_time, 'Информация об ошибке': ''})
     else:
-        methodScoreData.append({'MethodName': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 
+        methodScoreData.append({'Метод': classifierName, 'r2score': r2score, 'r2scoreLoo': r2Loo, 
             'CVExplainedVariance_mean': None, 'CVExplainedVariance_std +/-': None,
             'CVNegMeanAbsoluteError_mean': None, 'CVNegMeanAbsoluteError_std +/-': None,
             'CVNegMeanSquaredError_mean': None, 'CVNegMeanSquaredError_std +/-': None,
             'LooCVExplainedVariance_mean': None, 'LooCVExplainedVariance_std +/-': None,
-            'LooCVNegMeanAbsoluteError_mean': None, 'LooCVNegMeanAbsoluteError_std +/-': None,
-            'LooCVNegMeanSquaredError_mean': None, 'LooCVNegMeanSquaredError_std +/-': None,
-            'time': elapsed_time, 'ErrorMessage': repString})
+            'Средняя абсолютная ошибка (MAE)': None, 'LooCVNegMeanAbsoluteError_std +/-': None,
+            'Среднеквадратичная ошибка (MSE)': None, 'LooCVNegMeanSquaredError_std +/-': None,
+            'Время расчетов': elapsed_time, 'Информация об ошибке': repString})
 
     write(repString)
     #write("END ======== " + classifierName + " ========")
@@ -345,7 +346,7 @@ def procAllRegressors(classifierList, X_learn, X_predict, y_learn, y_predict, re
 
 
 def readArgsJson():
-    global json_object, timeout4Method, ext, folderPath, filePathTrainExcel, filePathPredictExcel, filePathPredictExcelResults, sfilePathTrainExcel, sfilePathPredictExcel, sfilePathPredictExcelResults, logFilePath
+    global json_object, timeout4Method, ext, folderPath, wwwrootPath, filePathTrainExcel, filePathPredictExcel, filePathPredictExcelResults, sfilePathTrainExcel, sfilePathPredictExcel, sfilePathPredictExcelResults, logFilePath
     #for idx, item in enumerate(sys.argv):
     #    write('Argument('+ str(idx) +') = ' + item)
     jsonFilePath = sys.argv[1]
@@ -354,6 +355,7 @@ def readArgsJson():
         json_object = json.load(content)
 
     folderPath = json_object["folderPath"] #sys.argv[1] #"D:\\MyProjects\\Python\\2019_realValue4AspNetCore\\DataFiles"
+    wwwrootPath = json_object["wwwrootPath"]  # без upload + "\\py\\" + sfilePathMethodParam
     # Путь к файлам с исходными данными
     sfilePathTrainExcel = json_object["fileTrain"] # sys.argv[2]
     sfilePathPredictExcel = json_object["filePredict"] # sys.argv[3] 
@@ -366,18 +368,18 @@ def readArgsJson():
 
     #sfilePathPredictExcelResults = "result.xlsx"
     sfilePathPredictExcelResults = "result." + ext    # sys.argv[4]
-    filePathTrainExcel = folderPath + "\\Upload\\" + sfilePathTrainExcel    # folderPath + "\\ "TrainingSet.xls"    # обучающая выборка
-    filePathPredictExcel = folderPath + "\\Upload\\" + sfilePathPredictExcel # folderPath + "\\Prediction.xls"    # данные для прогнозирования
-    filePathPredictExcelResults = folderPath + "\\Upload\\" + sfilePathPredictExcelResults # folderPath + "\\Prediction_Results.xls"    # результаты прогнозирования
+    filePathTrainExcel = folderPath + "\\" + sfilePathTrainExcel    # folderPath + "\\ "TrainingSet.xls"    # обучающая выборка
+    filePathPredictExcel = folderPath + "\\" + sfilePathPredictExcel # folderPath + "\\Prediction.xls"    # данные для прогнозирования
+    filePathPredictExcelResults = folderPath + "\\" + sfilePathPredictExcelResults # folderPath + "\\Prediction_Results.xls"    # результаты прогнозирования
     # Путь к файлу с логами
-    # logFilePath = folderPath + "\\Upload\\" + sys.argv[5] # folderPath + "\\Log.txt"
-    logFilePath = folderPath + "\\Upload\\log.txt"
+    # logFilePath = folderPath + "\\" + sys.argv[5] # folderPath + "\\Log.txt"
+    logFilePath = folderPath + "\\log.txt"
 
     # write("sys.version = " + sys.version + "; sys.executable = " + sys.executable + "; ext = '" + ext + "'")
     
     global filePathSANDMethodParam
     sfilePathMethodParam = "sandRegressor_134spinel.txt"
-    filePathSANDMethodParam = folderPath + "\\py\\" + sfilePathMethodParam
+    filePathSANDMethodParam = wwwrootPath + "\\py\\" + sfilePathMethodParam
 
     #write("sys.version = " + sys.version + "; sys.executable = " + sys.executable)
     #write('Argument List (' + str(len(sys.argv)) + ' items):' + str(sys.argv))
@@ -473,6 +475,7 @@ def GetClassifierList(X_learn):
 
 
 def procTask():
+    global framePredict
     readArgsJson()
     start_time = time.time()    # засекли время начала
     #for idx, item in enumerate(sys.argv):
@@ -505,30 +508,36 @@ def procTask():
     # write("Простые методы:")
     results = []
 
+    # удалим все столбы из результирующего Excel со значениями прогнозов
+    if sfilePathPredictExcel!="":
+        framePredict = framePredict.iloc[:,:1]
+
     classifierList = GetClassifierList(X_learn)
 
     procAllRegressors(classifierList=classifierList, X_learn=X_learn, X_predict=X_predict, y_learn=y_learn, y_predict=y_predict, results=results)
     
     # сохраним результат оценки классификаторов
     import pandas as pd 
-    dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2score', 'r2scoreLoo', 
-'CVExplainedVariance_mean', 'CVExplainedVariance_std +/-', 
-'CVNegMeanAbsoluteError_mean', 'CVNegMeanAbsoluteError_std +/-', 
-'CVNegMeanSquaredError_mean', 'CVNegMeanSquaredError_std +/-', 
-'LooCVExplainedVariance_mean', 'LooCVExplainedVariance_std +/-', 
-'LooCVNegMeanAbsoluteError_mean', 'LooCVNegMeanAbsoluteError_std +/-', 
-'LooCVNegMeanSquaredError_mean', 'LooCVNegMeanSquaredError_std +/-', 
-'time', 'ErrorMessage']) 
+#     dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2score', 'r2scoreLoo', 
+# 'CVExplainedVariance_mean', 'CVExplainedVariance_std +/-', 
+# 'CVNegMeanAbsoluteError_mean', 'CVNegMeanAbsoluteError_std +/-', 
+# 'CVNegMeanSquaredError_mean', 'CVNegMeanSquaredError_std +/-', 
+# 'LooCVExplainedVariance_mean', 'LooCVExplainedVariance_std +/-', 
+# 'LooCVMeanAbsoluteError_mean', 'LooCVNegMeanAbsoluteError_std +/-', 
+# 'LooCVMeanSquaredError_mean', 'LooCVNegMeanSquaredError_std +/-', 
+# 'time', 'ErrorMessage']) 
+    # dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2scoreLoo', 'LooCVMeanAbsoluteError_mean', 'LooCVMeanSquaredError_mean', 'time', 'ErrorMessage']) 
+    dfScore = pd.DataFrame(methodScoreData, columns = ['Метод', 'r2scoreLoo', 'Средняя абсолютная ошибка (MAE)', 'Среднеквадратичная ошибка (MSE)', 'Время расчетов', 'Информация об ошибке']) 
     if ext=="xls" or ext=="xlsx":
         from pandas import ExcelWriter
         # сохраним результат
-        writer = ExcelWriter(folderPath + "\\Upload\\resultScore." + ext)
+        writer = ExcelWriter(folderPath + "\\resultScore." + ext)
         dfScore.to_excel(writer, 'Results')
-        writer.save()
+        writer.close()
         write("4. Файл с результатами оценки алгоритмов сохранен: " + "resultScore." + ext)
     elif ext=="csv" or ext=="txt": 
         # framePredict.to_csv(filePathPredictExcelResults, sep=csvSep, encoding='utf-8')    # without BOM
-        dfScore.to_csv(folderPath + "\\Upload\\resultScore." + ext, sep=csvSep, encoding='utf-8-sig')  # with BOM
+        dfScore.to_csv(folderPath + "\\resultScore." + ext, sep=csvSep, encoding='utf-8-sig')  # with BOM
         write("4. Файл с результатами оценки алгоритмов сохранен: " + "resultScore." + ext)
     else:
         raise NameError('Unsupported filetype: ' + ext)
@@ -537,12 +546,14 @@ def procTask():
 
     # сохраним результат прогнозирования
     if sfilePathPredictExcel!="":
+        # delete first column (which is empty, but important to build the following ones)
+        del framePredict[framePredict.columns[0]]   
         if ext=="xls" or ext=="xlsx":
             from pandas import ExcelWriter
             # сохраним результат прогнозирования
             writer = ExcelWriter(filePathPredictExcelResults)
             framePredict.to_excel(writer, 'Results')
-            writer.save()
+            writer.close()
             write("5. Файл с результатами сохранен: " + sfilePathPredictExcelResults)
         elif ext=="csv" or ext=="txt": 
             # framePredict.to_csv(filePathPredictExcelResults, sep=csvSep, encoding='utf-8')    # without BOM
