@@ -1,9 +1,10 @@
 import numpy as np
 from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.base import BaseEstimator, RegressorMixin
 from random import random
 
 
-class VPK_divergent():
+class VPK_divergent(BaseEstimator, RegressorMixin):
 
     def __init__(self, mode='corr', mu=0.5, t=1.0, tau=0.0, p=1.0, n_estimators=100, random_seed=42, divergence=False):
         self.ans = {}
@@ -14,15 +15,9 @@ class VPK_divergent():
         self.tau = tau
         self.n_estimators = n_estimators
         self.p = p
+        self.random_seed = random_seed
         self.divergence = divergence
         np.random.seed(random_seed)
-
-    def score(self, X, y, sample_weight=None):
-
-        from sklearn.metrics import r2_score
-
-        y_pred = self.predict(X)
-        return r2_score(y, y_pred, sample_weight=sample_weight)
 
     def _create_predictors(self, X, y):
         self.predictors = {}
