@@ -1,0 +1,57 @@
+2025-10-29 09:31:30.899 +01:00 [INF] The global logger has been configured
+2025-10-29 09:31:31.272 +01:00 [WRN] Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength. HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS. You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit.
+2025-10-29 09:31:31.422 +01:00 [INF] User profile is available. Using 'C:\Users\vic\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-29 09:31:31.895 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/ - null null
+2025-10-29 09:31:31.932 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-29 09:31:31.933 +01:00 [INF] Hosting environment: Development
+2025-10-29 09:31:31.933 +01:00 [INF] Content root path: C:\Vic\WWW\IMET\IMETCorePy\WebCorePy
+2025-10-29 09:31:32.368 +01:00 [INF] Executing endpoint 'WebCorePy.Controllers.HomeController.Index (WebCorePy)'
+2025-10-29 09:31:32.387 +01:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.HomeController (WebCorePy).
+2025-10-29 09:31:32.401 +01:00 [INF] Executing ViewResult, running view Index.
+2025-10-29 09:31:32.585 +01:00 [INF] Executed ViewResult - view Index executed in 187.5059ms.
+2025-10-29 09:31:32.604 +01:00 [INF] Executed action WebCorePy.Controllers.HomeController.Index (WebCorePy) in 216.1846ms
+2025-10-29 09:31:32.604 +01:00 [INF] Executed endpoint 'WebCorePy.Controllers.HomeController.Index (WebCorePy)'
+2025-10-29 09:31:32.614 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/ - 200 null text/html; charset=utf-8 726.4318ms
+2025-10-29 09:31:32.766 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-29 09:31:32.768 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - null null
+2025-10-29 09:31:32.773 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 7.713ms
+2025-10-29 09:31:32.850 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - 200 null text/javascript; charset=UTF-8 82.1089ms
+2025-10-29 09:31:38.376 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/srv - null null
+2025-10-29 09:31:38.457 +01:00 [INF] Executing endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2025-10-29 09:31:38.461 +01:00 [INF] Route matched with {action = "Index", controller = "Srv", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.SrvController (WebCorePy).
+2025-10-29 09:31:38.466 +01:00 [INF] We have to write { First = first, Second = second } and later we write { First2 = first22, Second2 = second22 } !
+2025-10-29 09:31:38.469 +01:00 [INF] Executing ViewResult, running view Index.
+2025-10-29 09:31:40.925 +01:00 [INF] Executed ViewResult - view Index executed in 2457.9079ms.
+2025-10-29 09:31:40.926 +01:00 [INF] Executed action WebCorePy.Controllers.SrvController.Index (WebCorePy) in 2464.2448ms
+2025-10-29 09:31:40.926 +01:00 [INF] Executed endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2025-10-29 09:31:40.936 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/srv - 200 null text/html; charset=utf-8 2559.318ms
+2025-10-29 09:31:40.973 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-29 09:31:40.973 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - null null
+2025-10-29 09:31:40.975 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 1.5433ms
+2025-10-29 09:31:40.992 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - 200 null text/javascript; charset=UTF-8 19.1954ms
+2025-10-29 09:32:13.110 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/srv - null null
+2025-10-29 09:32:13.139 +01:00 [INF] Executing endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2025-10-29 09:32:13.142 +01:00 [INF] Route matched with {action = "Index", controller = "Srv", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.SrvController (WebCorePy).
+2025-10-29 09:32:13.143 +01:00 [INF] We have to write { First = first, Second = second } and later we write { First2 = first22, Second2 = second22 } !
+2025-10-29 09:32:13.145 +01:00 [INF] Executing ViewResult, running view Index.
+2025-10-29 09:32:13.247 +01:00 [INF] Executed ViewResult - view Index executed in 103.619ms.
+2025-10-29 09:32:13.247 +01:00 [INF] Executed action WebCorePy.Controllers.SrvController.Index (WebCorePy) in 105.1526ms
+2025-10-29 09:32:13.247 +01:00 [INF] Executed endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2025-10-29 09:32:13.248 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/srv - 200 null text/html; charset=utf-8 137.8109ms
+2025-10-29 09:32:13.289 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - null null
+2025-10-29 09:32:13.297 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-29 09:32:13.299 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 1.9678ms
+2025-10-29 09:32:13.309 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - 200 null text/javascript; charset=UTF-8 19.9904ms
+2025-10-29 09:32:20.258 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/srv - null null
+2025-10-29 09:32:20.263 +01:00 [INF] Executing endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2025-10-29 09:32:20.265 +01:00 [INF] Route matched with {action = "Index", controller = "Srv", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebCorePy.Controllers.SrvController (WebCorePy).
+2025-10-29 09:32:20.266 +01:00 [INF] We have to write { First = first, Second = second } and later we write { First2 = first22, Second2 = second22 } !
+2025-10-29 09:32:20.268 +01:00 [INF] Executing ViewResult, running view Index.
+2025-10-29 09:32:20.308 +01:00 [INF] Executed ViewResult - view Index executed in 41.9892ms.
+2025-10-29 09:32:20.308 +01:00 [INF] Executed action WebCorePy.Controllers.SrvController.Index (WebCorePy) in 42.9644ms
+2025-10-29 09:32:20.309 +01:00 [INF] Executed endpoint 'WebCorePy.Controllers.SrvController.Index (WebCorePy)'
+2025-10-29 09:32:20.309 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/srv - 200 null text/html; charset=utf-8 51.3342ms
+2025-10-29 09:32:20.354 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_vs/browserLink - null null
+2025-10-29 09:32:20.361 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-29 09:32:20.362 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 1.1027ms
+2025-10-29 09:32:20.368 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44392/_vs/browserLink - 200 null text/javascript; charset=UTF-8 14.2354ms

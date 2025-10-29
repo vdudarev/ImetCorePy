@@ -5,11 +5,13 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCorePy", "WebCorePy\WebCorePy.csproj", "{AE300D15-3093-43B5-84B7-A6E2C6EB3EBB}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "2019_realValue4AspNetCore", "2019_realValue4AspNetCore\2019_realValue4AspNetCore.pyproj", "{8F5E4FFF-292B-42F9-9B2F-F902E11CE943}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "2019_realValue4AspNetCore", "2019_realValue4AspNetCore\2019_realValue4AspNetCore.pyproj", "{84929960-0E37-41C6-9A8C-D5861EA22D6F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpRunner4Python", "CSharpRunner4Python\CSharpRunner4Python.csproj", "{794B1D7F-A894-4F86-9F16-15D6928EBA06}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityManagerUI", "..\IdentityManagerUI\IdentityManagerUI.csproj", "{B95231E7-8B79-453F-93A4-AB2678000152}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigHelpers", "ConfigHelpers\ConfigHelpers.csproj", "{0A8CEFC7-3BBA-BF81-07EB-8BBC9E606DEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,8 @@ Global
 		{AE300D15-3093-43B5-84B7-A6E2C6EB3EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE300D15-3093-43B5-84B7-A6E2C6EB3EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE300D15-3093-43B5-84B7-A6E2C6EB3EBB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F5E4FFF-292B-42F9-9B2F-F902E11CE943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F5E4FFF-292B-42F9-9B2F-F902E11CE943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84929960-0E37-41C6-9A8C-D5861EA22D6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84929960-0E37-41C6-9A8C-D5861EA22D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{794B1D7F-A894-4F86-9F16-15D6928EBA06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{794B1D7F-A894-4F86-9F16-15D6928EBA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{794B1D7F-A894-4F86-9F16-15D6928EBA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,6 +33,10 @@ Global
 		{B95231E7-8B79-453F-93A4-AB2678000152}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B95231E7-8B79-453F-93A4-AB2678000152}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B95231E7-8B79-453F-93A4-AB2678000152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A8CEFC7-3BBA-BF81-07EB-8BBC9E606DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A8CEFC7-3BBA-BF81-07EB-8BBC9E606DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A8CEFC7-3BBA-BF81-07EB-8BBC9E606DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A8CEFC7-3BBA-BF81-07EB-8BBC9E606DEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

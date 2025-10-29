@@ -15,7 +15,7 @@
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
-    <CommandLineArguments>"C:\RUB\!WORK\!WEB\ImetCorePy\2019_realValue4AspNetCore\DataFiles\Upload\!settings.json"</CommandLineArguments>
+    <CommandLineArguments>"C:\Vic\WWW\IMET\IMETCorePy\2019_realValue4AspNetCore\DataFiles\Upload\!settings.json"</CommandLineArguments>
     <InterpreterId>Global|VisualStudio|SqlServer Python</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

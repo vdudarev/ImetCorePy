@@ -43,7 +43,9 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; ИМЕТ РАН 2019-@DateTime.Now.Year - iMetCorePy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика использования</a>
+            <span title="System Core updated on @WebCorePy.Utils.FileUtils.Version()">
+                &copy; ИМЕТ РАН 2019-@DateTime.Now.Year
+            </span> - iMetCorePy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика использования</a>
             @if (this.User.IsInRole("Administrator"))
             {
                 @Html.Raw(" [")
