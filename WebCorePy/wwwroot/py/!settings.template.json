@@ -4,6 +4,8 @@
     "fileTrain": "#fileTrain#",
     "filePredict": "#filePredict#",
     "timeout4Method": #TIMEOUT#,
+    "language": "#LANGUAGE#",
+    "cvFolds": #CV_FOLDS#,
     "algorithms": [
 #ALGORITHMS#
     ]

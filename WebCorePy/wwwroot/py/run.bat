@@ -1,0 +1,1 @@
+"C:\Vic\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\.venv\Scripts\python.exe" "C:\Vic\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py" "C:\Vic\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\Upload\User2\!settings.json"

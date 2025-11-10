@@ -8,7 +8,7 @@
     <p>
         @if (roles.Count == 0)
         {
-            <span class="text-danger">But by default you are not granted access to the system, since you are not in any of roles. Please contact <a href="https://vdudarev.ru/" target="_blank" rel="nofollow">Victor Dudarev</a>...</span>
+            <span class="text-danger">But by default you are not granted access to the system, since you are not in any of roles. Please contact the person responsible for assigning you a role...</span>
         }
         else
         {
@@ -16,7 +16,7 @@
             <ul>
                 @foreach (var role in roles)
                 {
-                    <li><b>@role</b> (@UserUtils.GetText(@role))</li>
+                    <li><b>@role</b> (@UserUtils.GetText(@role, "en"))</li>
                 }
             </ul>
         }

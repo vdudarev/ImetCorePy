@@ -54,3 +54,8 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+.img-rub {
+    width: 300px;
+    background-color: #17365c;
+    border: 15px solid #17365c;
+}

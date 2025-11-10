@@ -11,6 +11,14 @@
     <IISExpressSSLPort>6001</IISExpressSSLPort-->
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.66" />
@@ -35,6 +43,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\IdentityManagerUI\IdentityManagerUI.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 
 

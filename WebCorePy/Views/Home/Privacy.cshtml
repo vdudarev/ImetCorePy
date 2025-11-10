@@ -1,7 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Политика использования";
+    var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    ViewData["Title"] = lang=="ru" ? "Политика использования" : "Policy";
 }
 <h1>@ViewData["Title"]</h1>
-
-<p>Для некоммерческого использования в ИМЕТ РАН.</p>
-<p>Используется библиотека <a href="https://scikit-learn.org/stable/" target="_blank">scikit-learn</a> и ASP.Net Core.</p>
+@if (lang == "ru") {
+    <p>Для некоммерческого использования в RUB и ИМЕТ РАН.</p>
+    <p>Используется библиотека <a href="https://scikit-learn.org/stable/" target="_blank">scikit-learn</a> и ASP.Net Core.</p>
+}
+else {
+    <p>For non-commenrcial use in RUB and IMET RAS.</p>
+    <p><a href="https://scikit-learn.org/stable/" target="_blank">Scikit-learn</a> library and ASP.Net Core are used.</p>
+}

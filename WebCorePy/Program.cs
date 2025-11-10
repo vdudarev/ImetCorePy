@@ -126,8 +126,19 @@ builder.Services.AddDefaultIdentity<IdentityManagerUI.Models.ApplicationUser>(op
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddControllersWithViews().AddFormHelper();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()  // https://www.youtube.com/watch?v=6aNM9EAhsEA&pp=0gcJCQMKAYcqIYzv
+    .AddFormHelper();
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(option =>
+{
+    var supportedCultures = new[] { "en", "ru" };
+    option.SetDefaultCulture(supportedCultures[0])
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures);
+});
 
 // StartUpUsers.CreateRolesAndUsers(builder.Services.BuildServiceProvider(), builder.Configuration["Authentication:Admin:Email"], builder.Configuration["Authentication:Admin:Password"]);    // run once only to feed DB
 
@@ -145,6 +156,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseRequestLocalization();
 
 app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
 

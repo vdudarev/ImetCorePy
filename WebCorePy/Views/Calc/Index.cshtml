@@ -5,79 +5,201 @@
 @{
     int userId = Model;
     string rel = UserUtils.GetUserUploadRelativeFolder(userId, taskId: 0);
-    ViewData["Title"] = "Calculations Page";
+    var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    int.TryParse(HttpContextAccessor.HttpContext.Request?.Cookies?["timeout"]?.ToString() ?? string.Empty, out int timeout);
+    if (!int.TryParse(HttpContextAccessor.HttpContext.Request?.Cookies?["cvFolds"]?.ToString() ?? string.Empty, out int cvFolds)) { 
+        cvFolds = 5;    // default
+    }
+    ViewData["Title"] = lang == "ru" ? "Страница вычислений" : "Calculations Page";
 }
-<div class="text-center">
-    <h1 class="display-4">Прогноз значений непрерывных величин</h1>
-    <p>Загрузите <a href="/Home/Format">данные в формате Excel / CSV</a> и нажмите кпопку "Обработать".</p>
+@if (lang == "ru")
+{
+    <div class="text-center">
+        <h1 class="display-4">Прогноз значений непрерывных величин</h1>
+        <p>Загрузите <a href="/Home/Format">данные в формате Excel / CSV</a> и нажмите кпопку "Обработать".</p>
 
 
-    <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
-        <div class="form-group mb-3">
-            <div class="col-md-12">
-                @Html.Raw(ViewBag.Msg)
+        <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+            <div class="form-group mb-3">
+                <div class="col-md-12">
+                    @Html.Raw(ViewBag.Msg)
 
-                @if (ViewBag.ShowResults ?? false) {
-                    <h4>Сводный результат по методам</h4>
-                    <div class="alert alert-success" role="alert">Сводные результаты работы методов в виде файла доступны по <a target="_blank" href="@rel/resultScore.@ViewBag.ShowResultsXlsExtension">ссылке</a></div>
-                    @if (ViewBag.ShowResultsXls ?? false) {
-                        <h4>Результат прогноза</h4>
-                        <div class="alert alert-success" role="alert">Результаты обработки в виде файла доступны по <a target="_blank" href="@rel/result.@ViewBag.ShowResultsXlsExtension">ссылке</a></div>
+                    @if (ViewBag.ShowResults ?? false)
+                    {
+                        <h4>Сводный результат по методам</h4>
+                        <div class="alert alert-success" role="alert">Сводные результаты работы методов в виде файла доступны по <a target="_blank" href="@rel/resultScore.@ViewBag.ShowResultsXlsExtension">ссылке</a></div>
+                        @if (ViewBag.ShowResultsXls ?? false)
+                        {
+                            <h4>Результат прогноза</h4>
+                            <div class="alert alert-success" role="alert">Результаты обработки в виде файла доступны по <a target="_blank" href="@rel/result.@ViewBag.ShowResultsXlsExtension">ссылке</a></div>
+                        }
+                        <h4>Журнал</h4>
+                        <div class="alert alert-success" role="alert">Журнал доступен по <a target="_blank" href="@rel/log.txt">ссылке</a></div>
+                        <pre class="text-start">@Html.Raw(ViewBag.Log)</pre>
+
                     }
-                    <h4>Журнал</h4>
-                    <div class="alert alert-success" role="alert">Журнал доступен по <a target="_blank" href="@rel/log.txt">ссылке</a></div>
-                    <pre class="text-start">@Html.Raw(ViewBag.Log)</pre>
-
-                }
-                else {
-                    <div class="container">
-                        <div class="row justify-content-start text-left">
-                            <div class="col border py-2">
-                                <div class="float-right font-italic">@HttpContextAccessor.HttpContext.Session.GetString("fileTrain")</div>
-                                <p>Загрузите файл для обучения:</p>
-                                <input type="file" name="fileTrain">
-                            </div>
-                            <div class="col border py-2">
-                                <div class="float-right font-italic">@HttpContextAccessor.HttpContext.Session.GetString("filePredict")</div>
-                                <p>Загрузите файл для прогнозирования (опционально):</p>
-                                <input type="file" name="filePredict">
+                    else
+                    {
+                        <div class="container">
+                            <div class="row justify-content-start text-left">
+                                <div class="col border py-2">
+                                    <div class="float-right font-italic">@HttpContextAccessor.HttpContext.Session.GetString("fileTrain")</div>
+                                    <p>Загрузите файл для обучения:</p>
+                                    <input type="file" name="fileTrain">
+                                </div>
+                                <div class="col border py-2">
+                                    <div class="float-right font-italic">@HttpContextAccessor.HttpContext.Session.GetString("filePredict")</div>
+                                    <p>Загрузите файл для прогнозирования (опционально):</p>
+                                    <input type="file" name="filePredict">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-12">
-                @if (ViewBag.ShowResults ?? false) {
-                }
-                else {
-                    <p>
-                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMethods" role="button" aria-expanded="false" aria-controls="collapseMethods">
-                            Выбранные методы <span class="badge bg-light text-dark" id="methodsSelectedCount">@Html.Raw(ViewBag.MethodsSelectedCount)</span>
-                        </a>
-                    </p>
-                    <div class="collapse" id="collapseMethods">
-                        <div class="card card-body pb-0 mb-3">
-                            @Html.Raw(ViewBag.Methods)
+            <div class="form-group">
+                <div class="col-md-12">
+                    @if (ViewBag.ShowResults ?? false)
+                    {
+                    }
+                    else
+                    {
+                        <p>
+                            <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseMethods" role="button" aria-expanded="false" aria-controls="collapseMethods">
+                                Выбранные методы <span class="badge bg-light text-dark" id="methodsSelectedCount">@Html.Raw(ViewBag.MethodsSelectedCount)</span>
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseMethods">
+                            <div class="card card-body pb-0 mb-3">
+                                @Html.Raw(ViewBag.Methods)
+                            </div>
                         </div>
-                    </div>
-                    <script>
-                        $(document).ready(function () {
-                            $("#collapseMethods input[type='checkbox']").click(function () {
-                                $("#methodsSelectedCount").html($("#collapseMethods input[type='checkbox']:checked").length);
+                        <script>
+                            $(document).ready(function () {
+                                $("#collapseMethods input[type='checkbox']").click(function () {
+                                    $("#methodsSelectedCount").html($("#collapseMethods input[type='checkbox']:checked").length);
+                                });
                             });
-                        });
-                    </script>
+                        </script>
 
-                    <div class="float-left">Таймаут на метод, сек (0 - не установлено): <input type="text" value="0" size="3" name="timeout"></div>
-                    <input type="submit" value="Обработать">
-                }
-                <div class="float-right">@Html.ActionLink("Очистить сессию", "Clear", "Calc", null)</div>
+                        <div class="input-group mb-1">
+                            <div class="input-group-text">
+                                Таймаут на метод, секунд (0 - не установлено)
+                            </div>
+                            <input type="number" class="form-control" value="@timeout" size="3" name="timeout">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-text">
+                                Режим валидации (<b>0</b>&nbsp;- только Leave-One-Out (LOO);&nbsp;<b>-&lt;N&gt;</b>&nbsp;- LOO +&nbsp;<i>N</i>-fold;&nbsp;<b>&lt;N&gt;</b>&nbsp;- только&nbsp;<i>N</i>-fold)
+                            </div>
+                            <input type="number" class="form-control" value="@cvFolds" size="3" name="cv_Folds">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" title="Обработать"><i class="bi bi-hourglass-split"></i> Обработать</button>
+                    }
+                    <div class="clearfix"></div>
+                    <div class="float-right">@Html.ActionLink(lang == "ru" ? "Очистить сессию" : "Clear session", "Clear", "Calc", null)</div>
+                </div>
             </div>
-        </div>
 
-    </form>
+        </form>
 
-</div>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Prediction of continuous variable values</h1>
+        <p>Upload <a href="/Home/Format">data in Excel / CSV format</a> and press "Process" button.</p>
+
+
+        <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+            <div class="form-group mb-3">
+                <div class="col-md-12">
+                    @Html.Raw(ViewBag.Msg)
+
+                    @if (ViewBag.ShowResults ?? false)
+                    {
+                        <h4>Summary result by methods</h4>
+                        <div class="alert alert-success" role="alert">The summary results of the methods are available as a file at the <a target="_blank" href="@rel/resultScore.@ViewBag.ShowResultsXlsExtension">link</a></div>
+                        @if (ViewBag.ShowResultsXls ?? false)
+                        {
+                            <h4>Prediction result</h4>
+                            <div class="alert alert-success" role="alert">The processing results are available as a file at the <a target="_blank" href="@rel/result.@ViewBag.ShowResultsXlsExtension">link</a></div>
+                        }
+                        <h4>Log</h4>
+                        <div class="alert alert-success" role="alert">The log is available at the <a target="_blank" href="@rel/log.txt">link</a></div>
+                        <pre class="text-start">@Html.Raw(ViewBag.Log)</pre>
+
+                    }
+                    else
+                    {
+                        <div class="container">
+                            <div class="row justify-content-start text-left">
+                                <div class="col border py-2">
+                                    <div class="float-right font-italic">@HttpContextAccessor.HttpContext.Session.GetString("fileTrain")</div>
+                                    <p>Upload the file for training:</p>
+                                    <input type="file" name="fileTrain">
+                                </div>
+                                <div class="col border py-2">
+                                    <div class="float-right font-italic">@HttpContextAccessor.HttpContext.Session.GetString("filePredict")</div>
+                                    <p>Upload the file for predictions (optional):</p>
+                                    <input type="file" name="filePredict">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @if (ViewBag.ShowResults ?? false)
+                    {
+                    }
+                    else
+                    {
+                        <p>
+                            <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseMethods" role="button" aria-expanded="false" aria-controls="collapseMethods">
+                                Selected methods <span class="badge bg-light text-dark" id="methodsSelectedCount">@Html.Raw(ViewBag.MethodsSelectedCount)</span>
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseMethods">
+                            <div class="card card-body pb-0 mb-3">
+                                @Html.Raw(ViewBag.Methods)
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                $("#collapseMethods input[type='checkbox']").click(function () {
+                                    $("#methodsSelectedCount").html($("#collapseMethods input[type='checkbox']:checked").length);
+                                });
+                            });
+                        </script>
+
+
+                        <div class="input-group mb-1">
+                                <div class="input-group-text">
+                                    Method timeout in seconds (0 - not set)
+                                </div>
+                            <input type="number" class="form-control" value="@timeout" size="3" name="timeout">
+                        </div>
+                        <div class="input-group mb-3">
+                                <div class="input-group-text">
+                                Cross Validation mode (<b>0</b>&nbsp;- Leave-One-Out (LOO) only;&nbsp;<b>-&lt;N&gt;</b>&nbsp;- LOO +&nbsp;<i>N</i>-fold;&nbsp;<b>&lt;N&gt;</b>&nbsp;-&nbsp;<i>N</i>-fold only)
+                                </div>
+                            <input type="number" class="form-control" value="@cvFolds" size="3" name="cv_Folds">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" title="Process"><i class="bi bi-hourglass-split"></i> Process</button>
+                    }
+                    <div class="clearfix"></div>
+                    <div class="float-end">@Html.ActionLink(lang == "ru" ? "Очистить сессию" : "Clear session", "Clear", "Calc", null)</div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+}

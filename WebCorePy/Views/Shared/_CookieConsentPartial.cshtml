@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http.Features
-
 @{
+    var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
     var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
     var showBanner = !consentFeature?.CanTrack ?? false;
     var cookieString = consentFeature?.CreateConsentCookie();
@@ -9,9 +9,9 @@
 @if (showBanner)
 {
     <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        Use this space to summarize your privacy and cookie use policy. <a asp-area="" asp-controller="Home" asp-action="Privacy">Learn More</a>.
+        @(lang == "ru" ? "Сайт требует использование Cookies" : "Website requires cookies to be used"). <a asp-area="" asp-controller="Home" asp-action="Privacy">@(lang == "ru" ? "Узнать больше" : "Learn More")</a>.
         <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">Accept</span>
+            <span aria-hidden="true">@(lang == "ru" ? "Принять" : "Accept")</span>
         </button>
     </div>
     <script>

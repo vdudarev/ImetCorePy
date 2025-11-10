@@ -62,7 +62,6 @@ cvFolds = 5    # 0 - Leave-One-Out (LOO) only; -N - LOO + N-fold; N - N-fold onl
 
 import numbers
 import numpy as np
-import pandas as pd 
 import time
 import sys
 # [OPTIONAL] Seaborn makes plots nicer
@@ -530,9 +529,7 @@ def procTask():
     write("BEGIN =================================================================")
     import sklearn as sk
     write('The scikit-learn version is {}.'.format(sk.__version__))
-    cv_text = "no" if cvFolds == 0 else f"{abs(cvFolds)}-fold"
-    loo_text = "yes" if cvFolds <= 0 else "no"
-    write(f"0. language: {language}; timeout: {timeout4Method}; cvFolds[{cvFolds}]: {cv_text}; LOO: {loo_text}")
+    write(f"0. language: {language}; timeout: {timeout4Method}; cvFolds[{cvFolds}]: {"no" if cvFolds==0 else str(abs(cvFolds))+"-fold"}; LOO: {"yes" if cvFolds<=0 else "no"}")
     write(("1. Читаем данные из файла {} для обучения." if language=="ru" else "1. Read data from the {} file for training.").format(sfilePathTrainExcel))
     if sfilePathPredictExcel!="":
         write(("1b. Читаем данные из файла {} для прогнозирования." if language=="ru" else "1b. Read data from the {} file for prediction.").format(sfilePathPredictExcel))
@@ -561,6 +558,7 @@ def procTask():
     procAllRegressors(classifierList=classifierList, X_learn=X_learn, X_predict=X_predict, y_learn=y_learn, y_predict=y_predict, results=results)
     
     # сохраним результат оценки классификаторов
+    import pandas as pd 
     dfScore = pd.DataFrame(methodScoreData, columns = ['MethodName', 'r2score', 'r2scoreLoo', 
 'CVExplainedVariance_mean', 'CVExplainedVariance_std +/-', 
 'CVNegMeanAbsoluteError_mean', 'CVNegMeanAbsoluteError_std +/-', 

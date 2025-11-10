@@ -1,4 +1,6 @@
 ﻿@using WebCorePy.Utils;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
 @{
     List<string> roles = UserUtils.GetUserRoles(Context);
 }
@@ -16,7 +18,7 @@
             <ul>
                 @foreach (var role in roles)
                 {
-                    <li><b>@role</b> (@UserUtils.GetText(@role))</li>
+                    <li><b>@role</b> (@UserUtils.GetText(@role, "ru"))</li>
                 }
             </ul>
         }

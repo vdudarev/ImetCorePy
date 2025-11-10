@@ -1,19 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Client;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
 using WebCorePy.Models;
 using WebCorePy.Utils;
 
@@ -276,7 +279,7 @@ namespace WebCorePy.Controllers
         }
 
 
-        private string GetSettingsJson(int timeout4Method, string algorithmsJson=null) {
+        private string GetSettingsJson(int timeout4Method, int cvFolds, string lang, string algorithmsJson=null) {
             string jsonTemplate = System.IO.File.ReadAllText(env.WebRootPath + "\\py\\!settings.template.json", encodingBatDos);
             if (algorithmsJson==null)
                 algorithmsJson = GetSelectedAlgorithmsJson();
@@ -288,6 +291,8 @@ namespace WebCorePy.Controllers
                 .Replace("#fileTrain#", HttpContext.Session.GetString("fileTrain"))
                 .Replace("#filePredict#", HttpContext.Session.GetString("filePredict"))
                 .Replace("#TIMEOUT#", timeout4Method.ToString())
+                .Replace("#LANGUAGE#", lang)
+                .Replace("#CV_FOLDS#", cvFolds.ToString())
                 ;
         }
 
@@ -295,7 +300,7 @@ namespace WebCorePy.Controllers
         {
             string strTemplate = System.IO.File.ReadAllText(env.WebRootPath + "\\py\\!run.template.bat", encodingBatDos);
             string pythonExe = config.GetValue<string>("AppSettings:PythonExePath");
-            strTemplate = strTemplate.Replace("#UserUpload#", GetUserUploadFolder(env.WebRootPath, userId).Replace("\\", "\\\\"));
+            strTemplate = strTemplate.Replace("#UserUpload#", GetUserUploadFolder(env.WebRootPath, userId));
             strTemplate = strTemplate.Replace("#WebRootPath#", env.WebRootPath);
             strTemplate = strTemplate.Replace("#PythonExe#", pythonExe);
             return strTemplate;
@@ -308,11 +313,16 @@ namespace WebCorePy.Controllers
         /// <param name="filePredict">файл для тестирования</param>
         /// <returns></returns>
         [HttpPost("UploadFiles")]
-        public async Task<IActionResult> Post(List<IFormFile> fileTrain, List<IFormFile> filePredict, string timeout)        // поменять сходу не получилось (IFormFile fileSingle)
+        public async Task<IActionResult> Post(List<IFormFile> fileTrain, List<IFormFile> filePredict, string timeout, string cv_Folds)
         {
+            var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
             if (userProcess.TryGetValue(userId, out Process process) && process != null)
             {
-                ViewBag.Msg = $"<div class=\"alert alert-danger\" role=\"alert\">Идет обработка... Для ее принудительного завершения перейдите по ссылке \"Очистить сессию\"</div>";
+                // "Очистить сессию" : "Clear session"
+                ViewBag.Msg = $"<div class=\"alert alert-danger\" role=\"alert\">{(lang == "ru"
+                        ? "Идет обработка... Для ее принудительного завершения перейдите по ссылке \"Очистить сессию\""
+                        : "Process is running... To terminate, please, follow the link \"Clear session\""
+                    )}</div>";
                 return View("Index", userId);
             }
 
@@ -325,7 +335,14 @@ namespace WebCorePy.Controllers
             ViewBag.ShowResults = false;
             ViewBag.ShowResultsXls = false;
             int timeout4Method;
-            int.TryParse(timeout, out timeout4Method);
+            int cvFolds;        // 0 - Leave-One-Out (LOO) only; -N - LOO + N-fold; N - N-fold only
+            if (int.TryParse(timeout, out timeout4Method)) {
+                SetCookie("timeout", timeout4Method.ToString(), 365);
+            }
+            if (int.TryParse(cv_Folds, out cvFolds)) {
+                SetCookie("cvFolds", cvFolds.ToString(), 365);
+            }
+
             long size = fileTrain.Sum(f => f.Length);
 
             string folder = GetUserUploadFolder(env.WebRootPath, userId);
@@ -340,26 +357,21 @@ namespace WebCorePy.Controllers
             msg[0] = await SaveFile(folder, 0, fileTrain);
             msg[1] = await SaveFile(folder, 1, filePredict);
             if (string.IsNullOrEmpty(msg[0]) || string.IsNullOrEmpty(msg[1])) {
-                ViewBag.Msg = $"<div class=\"alert alert-success\" role=\"alert\">Загружен файл {string.Join(" и ", msg.Where(s => !string.IsNullOrEmpty(s)))}</div>";
+                ViewBag.Msg = $"<div class=\"alert alert-success\" role=\"alert\">{(lang == "ru" ? "Загружен файл" : "File uploaded")} {
+                    string.Join((lang == "ru" ? " и " : " and "), msg.Where(s => !string.IsNullOrEmpty(s)))
+                    }</div>";
             }
 
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("fileTrain"))) {
-                ViewBag.Msg = $"<div class=\"alert alert-danger\" role=\"alert\">Не выбран файл для обучения!</div>";
+                ViewBag.Msg = $"<div class=\"alert alert-danger\" role=\"alert\">{(lang == "ru" ? "Не выбран файл для обучения" : "No training file selected")}!</div>";
                 return View("Index", userId);
             }
 
-            // process uploaded files
-            //return Ok(new { count = files.Count, size, filePath, WebRootPath = env.WebRootPath }); // {"count":1,"size":18506,"filePath":"C:\\Users\\Дударев Виктор\\AppData\\Local\\Temp\\tmp3CAF.tmp"}
-
             string runBat = folder + "\\run.bat";
-            //prepareBat();
             string py = config.GetValue<string>("AppSettings:AnacondaPath");
-            //System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);    // ???????
-            // %root%\python.exe "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\py\regressor.py" "D:\WWW\IMET\IMETCorePy\WebCorePy\wwwroot\upload\!settings.json"
-
 
             System.IO.File.WriteAllText(folder + "\\!settings.json",
-                GetSettingsJson(timeout4Method),
+                GetSettingsJson(timeout4Method, cvFolds, lang),
                 encoding: new UTF8Encoding(false)   // without BOM!
                 );
 
@@ -518,8 +530,12 @@ namespace WebCorePy.Controllers
             }
             process = null;
             ViewBag.ShowResults = true;
+            string path = $@"{GetUserUploadFolder(env.WebRootPath, userId)}\log.txt";
             // надо использовать кодировку 1251
-            ViewBag.Log = System.IO.File.ReadAllText($@"{GetUserUploadFolder(env.WebRootPath, userId)}\log.txt", encoding: Encoding.GetEncoding(1251))
+            ViewBag.Log =
+                (System.IO.File.Exists(path)
+                ? System.IO.File.ReadAllText($@"{GetUserUploadFolder(env.WebRootPath, userId)}\log.txt", encoding: Encoding.GetEncoding(1251)) 
+                : $"file log.txt was not found in the user directory [userId={userId}]")
                 .Replace("\r\n", "<br>")
                 // + "<hr><b>отладочная информация</b><hr>"
                 // + "<b>stdOut</b>: " + stdOut + "<br>"

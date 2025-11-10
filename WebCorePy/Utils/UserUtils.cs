@@ -14,13 +14,27 @@ namespace WebCorePy.Utils
             return $"/Upload/User{userId}";
         }
 
-        public static string GetText(string role)
+        public static string GetText(string role, string lang) 
+            => lang == "ru" ? GetTextRu(role) : GetTextEn(role);
+
+        public static string GetTextEn(string role)
         {
             switch (role)
             {
-                case "User": return "Read-only access to protected information";
-                case "PowerUser": return "Read-write access to protected information";
+                case "User": return "Perform calculations";
+                case "PowerUser": return "Perform calculations and modify methods";
                 case "Administrator": return "User access control list";
+                default: return string.Empty;
+            }
+        }
+
+        public static string GetTextRu(string role)
+        {
+            switch (role)
+            {
+                case "User": return "Выполнение вычислений";
+                case "PowerUser": return "Выполнение вычислений и изменение методов";
+                case "Administrator": return "Управление правами пользователей";
                 default: return string.Empty;
             }
         }

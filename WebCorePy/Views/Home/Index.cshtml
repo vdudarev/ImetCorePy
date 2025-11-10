@@ -1,15 +1,18 @@
 ﻿@using Microsoft.AspNetCore.Http
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "Home Page";
+    var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    ViewData["Title"] = localizer["h1"];
 }
 <div class="text-center">
-    <h1 class="display-4">Система для цифрового моделирования в металлургии</h1>
-    <div class="container">
-        <img src="~/i/imet.jpg" class="img-fluid me-2" alt="ИМЕТ РАН" />
-        <img src="~/i/sev.jpg" class="img-fluid ms-2" alt="Северсталь" />
-    </div>
-    <p>Система разработана на базе ИМЕТ РАН.</p>
+    <h1 class="display-4">@localizer["h1"]</h1>
+    @localizer["bodyHtml"]
 </div>
-
-<partial name="UserStatus" />
+@if (lang == "ru")
+{
+    <partial name="UserStatus" />
+}
+else
+{
+    <partial name="UserStatusEng" />
+}
