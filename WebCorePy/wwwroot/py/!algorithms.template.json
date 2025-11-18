@@ -31,7 +31,7 @@
 {"name": "HistGradientBoostingRegressor (ver0.21)", "mode": "predictONLY", "class": "ensemble.HistGradientBoostingRegressor()", "settings": {"random_state": 15}}
 {"name": "MLPRegressor", "mode": "predictONLY", "class": "neural_network.MLPRegressor()", "settings": {"random_state": 15}}
 {"name": "SAND_SimpleSyndromeRegressor", "mode": "predictONLY", "class": "sand.SimpleSyndromeRegressor()", "settings": {}}
-{"name": "-- FRAGMENT_regressor", "mode": "predictONLY", "class": "fragment.FragmentRegressor()", "settings": {"path": "#ROOT#\\Upload"}}
+{"name": "-- FRAGMENT_regressor", "mode": "predictONLY", "class": "fragment.FragmentRegressor(path=\"#ROOT2#\\\\Upload\")", "settings": {}}
 {"name": "VC: Forest", "mode": "predictONLY", "class": "DecorrelatedConvexForestRegressor(forest_params = forest_params, convex_combinations_params = None, elnet_params = None)", "settings": {}}
 {"name": "VC: Forest with elastic net", "mode": "predictONLY", "class": "DecorrelatedConvexForestRegressor(forest_params = forest_params, convex_combinations_params = None, elnet_params = elnet_params)", "settings": {}}
 {"name": "VC: Convex with loop reduction", "mode": "predictONLY", "class": "DecorrelatedConvexForestRegressor(forest_params = None, convex_combinations_params = convex_combinations_params_loop, elnet_params = None)", "settings": {}}

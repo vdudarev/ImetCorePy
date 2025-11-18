@@ -2,7 +2,7 @@
 {"name": "Ridge", "mode": "predictONLY", "class": "linear_model.Ridge()", "settings": {"random_state": 15}}
 {"name": "Lasso", "mode": "predictONLY", "class": "linear_model.Lasso()", "settings": {"random_state": 15}}
 {"name": "ElasticNet", "mode": "predictONLY", "class": "linear_model.ElasticNet()", "settings": {"random_state": 15, "normalize": true, "max_iter": 100000}}
-{"name": "ElasticNetCV", "mode": "predictONLY", "class": "linear_model.ElasticNetCV()", "settings": {"random_state": 15, "normalize": true, "max_iter": 100000, "l1_ratio": 0.4}}
+{"name": "++ ElasticNetCV", "mode": "predictONLY", "class": "linear_model.ElasticNetCV()", "settings": {"random_state": 15, "normalize": true, "max_iter": 100000, "l1_ratio": 0.4}}
 {"name": "Lars", "mode": "predictONLY", "class": "linear_model.Lars()", "settings": {}}
 {"name": "LassoLars", "mode": "predictONLY", "class": "linear_model.LassoLars()", "settings": {}}
 {"name": "OrthogonalMatchingPursuit", "mode": "predictONLY", "class": "linear_model.OrthogonalMatchingPursuit()", "settings": {}}
@@ -31,7 +31,7 @@
 {"name": "HistGradientBoostingRegressor (ver0.21)", "mode": "predictONLY", "class": "ensemble.HistGradientBoostingRegressor()", "settings": {"random_state": 15}}
 {"name": "MLPRegressor", "mode": "predictONLY", "class": "neural_network.MLPRegressor()", "settings": {"random_state": 15}}
 {"name": "SAND_SimpleSyndromeRegressor", "mode": "predictONLY", "class": "sand.SimpleSyndromeRegressor()", "settings": {}}
-{"name": "-- FRAGMENT_regressor", "mode": "predictONLY", "class": "fragment.FragmentRegressor()", "settings": {"path": "#ROOT#\\Upload"}}
+{"name": "-- FRAGMENT_regressor", "mode": "predictONLY", "class": "fragment.FragmentRegressor(path=\"#ROOT2#\\\\Upload\")", "settings": {}}
 {"name": "VC: Forest", "mode": "predictONLY", "class": "DecorrelatedConvexForestRegressor(forest_params = forest_params, convex_combinations_params = None, elnet_params = None)", "settings": {}}
 {"name": "VC: Forest with elastic net", "mode": "predictONLY", "class": "DecorrelatedConvexForestRegressor(forest_params = forest_params, convex_combinations_params = None, elnet_params = elnet_params)", "settings": {}}
 {"name": "VC: Convex with loop reduction", "mode": "predictONLY", "class": "DecorrelatedConvexForestRegressor(forest_params = None, convex_combinations_params = convex_combinations_params_loop, elnet_params = None)", "settings": {}}
@@ -40,3 +40,4 @@
 {"name": "VC: Convex forest with loop reduction and elastic net", "mode": "predictONLY", "class": "DecorrelatedConvexForestRegressor(forest_params = forest_params, convex_combinations_params = convex_combinations_params_loop, elnet_params = elnet_params)", "settings": {}}
 {"name": "VC: Convex forest with final reduction and elastic net", "mode": "predictONLY", "class": "DecorrelatedConvexForestRegressor(forest_params = forest_params, convex_combinations_params = convex_combinations_params_final, elnet_params = elnet_params)", "settings": {}}
 {"name": "VC: Elastic net", "mode": "predictONLY", "class": "DecorrelatedConvexForestRegressor(forest_params = None, convex_combinations_params = None, elnet_params = elnet_params)", "settings": {}}
+{"name": "VC: Divergent Forest", "mode": "predictONLY", "class": "vpk_divergent.VPK_divergent(mode=\"corr\", mu=0.5, t=1.0, tau=0.0, p=1.0, n_estimators=100, random_seed=42, divergence=False)", "settings": {}}

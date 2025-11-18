@@ -101,16 +101,20 @@ namespace WebCorePy.Controllers
             }
 
             CleanUp(env.WebRootPath, userId);
-            DirectoryInfo di = new DirectoryInfo(GetUserUploadFolder(env.WebRootPath, userId));
-            foreach (FileInfo file in di.GetFiles())
-            {
-                if (file.Extension != ".exe") {
-                    file.Delete();
+            var path = GetUserUploadFolder(env.WebRootPath, userId);
+            if (Directory.Exists(path)) {
+                DirectoryInfo di = new DirectoryInfo(path);
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    if (file.Extension != ".exe")
+                    {
+                        file.Delete();
+                    }
                 }
-            }
-            foreach (DirectoryInfo dir in di.GetDirectories())
-            {
-                dir.Delete(true);
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
             }
             return Redirect("~/calc/");
         }
@@ -287,6 +291,7 @@ namespace WebCorePy.Controllers
                 .Replace("#ALGORITHMS#", algorithmsJson)
                 .Replace("#UserUpload#", GetUserUploadFolder(env.WebRootPath, userId).Replace("\\", "\\\\"))
                 .Replace("#ROOT#", env.WebRootPath.Replace("\\", "\\\\"))
+                .Replace("#ROOT2#", env.WebRootPath.Replace("\\", "\\\\\\\\"))
                 .Replace("#ROOTRightSlash#", env.WebRootPath.Replace("\\", "/"))
                 .Replace("#fileTrain#", HttpContext.Session.GetString("fileTrain"))
                 .Replace("#filePredict#", HttpContext.Session.GetString("filePredict"))
@@ -392,17 +397,31 @@ namespace WebCorePy.Controllers
         {
             lock (lockObj)
             {
-                System.IO.File.AppendAllText($@"{GetUserUploadFolder(env.WebRootPath, userId)}\!.txt", message + Environment.NewLine, encoding: Encoding.GetEncoding(1251));
+                var folder = GetUserUploadFolder(env.WebRootPath, userId);
+                if (!Directory.Exists(folder)) { 
+                    Directory.CreateDirectory(folder);
+                }
+                System.IO.File.AppendAllText($@"{folder}\!.txt", message + Environment.NewLine, encoding: Encoding.UTF8);
             }
         }
 
         private void CleanUp(string WebRootPath, int userId)
         {
-            if (Directory.Exists(GetUserUploadFolder(WebRootPath, userId) + @"\TestData"))
-                Directory.Delete(GetUserUploadFolder(WebRootPath, userId) + @"\TestData", true);
-            System.IO.File.Delete(GetUserUploadFolder(WebRootPath, userId) + @"\!.txt");
-            System.IO.File.Delete(GetUserUploadFolder(WebRootPath, userId) + @"\log.txt");
-            Array.ForEach(ext, x => {
+            var path = GetUserUploadFolder(WebRootPath, userId) + @"\TestData";
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, true);
+            }
+            if (System.IO.File.Exists(GetUserUploadFolder(WebRootPath, userId) + @"\!.txt"))
+            {
+                System.IO.File.Delete(GetUserUploadFolder(WebRootPath, userId) + @"\!.txt");
+            }
+            if (System.IO.File.Exists(GetUserUploadFolder(WebRootPath, userId) + @"\log.txt"))
+            {
+                System.IO.File.Delete(GetUserUploadFolder(WebRootPath, userId) + @"\log.txt");
+            }
+            Array.ForEach(ext, x =>
+            {
                 System.IO.File.Delete(GetUserUploadFolder(WebRootPath, userId) + @"\result." + x);
                 System.IO.File.Delete(GetUserUploadFolder(WebRootPath, userId) + @"\resulеScore." + x);
             });
@@ -531,10 +550,10 @@ namespace WebCorePy.Controllers
             process = null;
             ViewBag.ShowResults = true;
             string path = $@"{GetUserUploadFolder(env.WebRootPath, userId)}\log.txt";
-            // надо использовать кодировку 1251
+            // надо использовать кодировку utf-8
             ViewBag.Log =
                 (System.IO.File.Exists(path)
-                ? System.IO.File.ReadAllText($@"{GetUserUploadFolder(env.WebRootPath, userId)}\log.txt", encoding: Encoding.GetEncoding(1251)) 
+                ? System.IO.File.ReadAllText(path, encoding: Encoding.UTF8) 
                 : $"file log.txt was not found in the user directory [userId={userId}]")
                 .Replace("\r\n", "<br>")
                 // + "<hr><b>отладочная информация</b><hr>"

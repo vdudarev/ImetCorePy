@@ -76,15 +76,17 @@ import traceback
 def write(input_text):
     print(input_text)
     # stdout is saved
-    save_stdout = sys.stdout
+    # save_stdout = sys.stdout
 
-    fh = open(logFilePath, "a") # "w" - перезаписывает, "a" - дописывает
-    sys.stdout = fh
-    print(input_text)
+    with open(logFilePath, "a", encoding="utf-8") as fh:
+        fh.write(input_text + "\n")
+    # fh = open(logFilePath, "a") # "w" - перезаписывает, "a" - дописывает
+    # sys.stdout = fh
+    # print(input_text)
 
-    # return to normal:
-    sys.stdout = save_stdout
-    fh.close()
+    # # return to normal:
+    # sys.stdout = save_stdout
+    # fh.close()
 
 
 # =====================================================================
@@ -516,6 +518,9 @@ def GetClassifierList(X_learn):
             #print(f" 1. {key} = {value}")
         #print(f"classifier = {classifier}")
         classifierList.append((classifier, algorithm['name'], algorithm['mode']))
+        if algorithm['name']=="-- FRAGMENT_regressor":
+            print("FRAGMENT_regressor.path = " + classifier.path)
+            print("FRAGMENT_regressor._full_path = " + classifier._full_path)
     #print("=== END LOOP ===")
     return classifierList
 

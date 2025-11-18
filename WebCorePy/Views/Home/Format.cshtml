@@ -11,31 +11,6 @@
         Формат зависит от назначения файла:
     </p>
     <ul>
-        <li>for training (mandatory);</li>
-        <li>for predictions (optional).</li>
-    </ul>
-
-    <h2>File format for training</h2>
-    <p>The first row contains column names (and is not processed). The second and subsequent rows contain data (one object per row).</p>
-    <p>The first column contains the object name (usually a composition formula).</p>
-    <p>The second column contains the value of the objective function (a real number).</p>
-    <p>The third and subsequent columns contain a feature description of the object, interpreted as a vector of real numbers. The length of the vector must be the same for all objects.</p>
-
-    <h2>File format for predictions</h2>
-    <p>The first row contains column names (and is not processed).</p>
-    <p>The second column is empty (the values of the objective function are unknown).</p>
-    <p>The third and subsequent columns contain a feature description of the object, interpreted as a vector of real numbers. The length of the vector must be the same for all objects and must match the length of the vector in the training sample. The order of properties in the vector must be the same as in the training sample.</p>
-
-    <h2>Examples of Excel (XLS/XLSX) and CSV files</h2>
-}
-else
-{
-    <p>
-        To use the information system, you need to prepare data in the form of Microsoft Excel (xls or xlsx) 
-        or CSV files (the first row contains column names, the field separator is ";", the separator between the integer and fractional parts is ".", and the encoding is UTF-8 with BOM). 
-        The format depends on the usage type of the file:
-    </p>
-    <ul>
         <li>для обучения (обязательно);</li>
         <li>для прогнозирования (опционально).</li>
     </ul>
@@ -52,6 +27,31 @@ else
     <p>Третий и последующие столбцы содержат признаковое описание объекта, трактуемое как вектор вещественных чисел. Длина вектора для всех объектов должа быть одинакова и совпадать с длиной вектора в обучаюей выборке. Порядок следования свойств в векторе - как в обучающей выборке.</p>
 
     <h2>Примеры файлов Excel (XLS / XLSX) и CSV</h2>
+}
+else
+{
+    <p>
+        To use the information system, you need to prepare data in the form of Microsoft Excel (xls or xlsx) 
+        or CSV files (the first row contains column names, the field separator is ";", the separator between the integer and fractional parts is ".", and the encoding is UTF-8 with BOM). 
+        The format depends on the usage type of the file:
+    </p>
+    <ul>
+        <li>for training (mandatory);</li>
+        <li>for predictions (optional).</li>
+    </ul>
+
+    <h2>File format for training</h2>
+    <p>The first row contains column names (and is not processed). The second and subsequent rows contain data (one object per row).</p>
+    <p>The first column contains the object name (usually a composition formula).</p>
+    <p>The second column contains the value of the objective function (a real number).</p>
+    <p>The third and subsequent columns contain a feature description of the object, interpreted as a vector of real numbers. The length of the vector must be the same for all objects.</p>
+
+    <h2>File format for predictions</h2>
+    <p>The first row contains column names (and is not processed).</p>
+    <p>The second column is empty (the values of the objective function are unknown).</p>
+    <p>The third and subsequent columns contain a feature description of the object, interpreted as a vector of real numbers. The length of the vector must be the same for all objects and must match the length of the vector in the training sample. The order of properties in the vector must be the same as in the training sample.</p>
+
+    <h2>Examples of Excel (XLS/XLSX) and CSV files</h2>
 }
 <ul>
     <li><a href="~/Example/TrainingSet.xls">XLS</a> / <a href="~/Example/TrainingSet.xlsx">XLSX</a> / <a href="~/Example/TrainingSet.csv">CSV</a> @(lang == "ru" ? "для обучения" : "for training");</li>
