@@ -26,7 +26,7 @@ class DecorrelatedConvexForestRegressor(BaseEstimator, RegressorMixin):
             'generation_threshold': 0.99
         },
         elnet_params={
-            'normalize':True,
+            #'normalize':True,
             'max_iter':100000
         }):
         

@@ -7,7 +7,8 @@
 forest_params = dict(min_samples_leaf=3, n_estimators=50, random_state=6)
 convex_combinations_params_loop = dict(n_combinations=400, generation_threshold=0.999, decorrelation_type='loop')
 convex_combinations_params_final = dict(n_combinations=400, generation_threshold=0.999, decorrelation_type='final')
-elnet_params=dict(normalize=True, max_iter=100000, l1_ratio=0.4)
+#elnet_params=dict(normalize=True, max_iter=100000, l1_ratio=0.4)
+elnet_params=dict(max_iter=100000, l1_ratio=0.4)
 # DOKUKIN params - end
 
 
@@ -519,9 +520,9 @@ def GetClassifierList(X_learn):
             #print(f" 1. {key} = {value}")
         #print(f"classifier = {classifier}")
         classifierList.append((classifier, algorithm['name'], algorithm['mode']))
-        if algorithm['name']=="-- FRAGMENT_regressor":
-            print("FRAGMENT_regressor.path = " + classifier.path)
-            print("FRAGMENT_regressor._full_path = " + classifier._full_path)
+        #if algorithm['name']=="-- FRAGMENT_regressor":
+            #print("FRAGMENT_regressor.path = " + classifier.path)
+            #print("FRAGMENT_regressor._full_path = " + classifier._full_path)
     #print("=== END LOOP ===")
     return classifierList
 
