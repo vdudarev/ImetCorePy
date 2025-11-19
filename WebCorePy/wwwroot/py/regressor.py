@@ -184,9 +184,10 @@ def get_features_and_labels(frameLearn, framePredict):
 # =====================================================================
 def DoCrossValidation(classifier, classifierName, sample_X, sample_y, CVscMode):
     global writer, cvFolds
-    from sklearn.model_selection import cross_validate
+    from sklearn.model_selection import cross_validate, KFold
     if cvFolds!=0:
-        scores = cross_validate(classifier, sample_X, sample_y, cv=abs(cvFolds), scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
+        cv = KFold(n_splits=abs(cvFolds), shuffle=True, random_state=15)
+        scores = cross_validate(classifier, sample_X, sample_y, cv=cv, scoring=CVscMode)        # scoring='f1_macro' - continuous is not supported        scoring='r2' (Dokukin)      'explained_variance'
     else:
         scores = None
     # 2022 - new BEGIN
